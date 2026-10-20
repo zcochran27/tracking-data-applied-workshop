@@ -21,11 +21,7 @@ Read each notebook from top to bottom: inputs and assumptions, helper functions,
 | [Arrival-time pitch-control baseline](11_arrival_time_control.ipynb) | Reaction; projected position; travel time; earliest arrival; bounded comparison |
 | [Pass-interception survival model](12_pass_completion.ipynb) | Ball path and timing; player arrival; interception hazard; survival integration |
 | [Accessible and dangerous space proxies](13_space_and_danger.ipynb) | Control surface; grid-cell area; danger weight; per-cell contributions; totals |
-| [Off-ball run option-value proxy](14_run_threat.ipynb) | Completion component; destination value; product; before/after comparison |
-| [Action-decomposed possession value](15_epv_decomposition.ipynb) | Selection probabilities; success/failure values; expected contribution; sum |
 | [Graph-based EPV modeling pipeline](16_graph_epv.ipynb) | Real SkillCorner training; audited ten-second labels; match-level holdout; calibration; actual possession predictions; synchronized EPV animation |
-| [Temporal graph modeling](17_temporal_graph_models.ipynb) | Lagged features; identity edges; graph embeddings; recurrent, convolutional and masked-attention alternatives |
 
-The original presenter notebook and avenue notebooks remain available. Browser-readable copies of this set are in `outputs/methods/`.
 
-Teaching boundaries: fixed-template formation fitting does not reproduce elastic EFPI. Gaussian, arrival-time, AS/DAS and run-threat examples are explicit proxies/baselines. Synthetic checks verify derivatives; the graph notebook then trains a separate real-data teaching GNN and shows its held-out results. Its reconstructed labels, few matches and sparse positive states limit reliability. It is not Bekkers' released model or a production system. The temporal notebook compares encoder choices inside the same modeling pipeline.
+Teaching boundaries: fixed-template formation fitting does not reproduce elastic EFPI. Gaussian, arrival-time, AS/DAS and run-threat examples are explicit proxies/baselines. Synthetic checks verify derivatives; the graph notebook then trains a separate real-data teaching GNN and shows its held-out results. Its reconstructed labels, few matches and sparse positive states limit reliability. It is not Bekkers' released model or a production system.

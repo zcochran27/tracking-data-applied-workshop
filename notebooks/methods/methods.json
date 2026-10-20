@@ -9,7 +9,7 @@
     "notebook": "02_event_detection.ipynb",
     "title": "Possession and pass-event detection",
     "question": "Recover candidate on-ball events",
-    "stages": "Player\u2013ball vectors; proximity; stable possession; release/transit/reception; timing evaluation"
+    "stages": "Player–ball vectors; proximity; stable possession; release/transit/reception; timing evaluation"
   },
   {
     "notebook": "03_formation_analysis.ipynb",
@@ -78,27 +78,9 @@
     "stages": "Control surface; grid-cell area; danger weight; per-cell contributions; totals"
   },
   {
-    "notebook": "14_run_threat.ipynb",
-    "title": "Off-ball run option-value proxy",
-    "question": "Explain how a run may improve an option",
-    "stages": "Completion component; destination value; product; before/after comparison"
-  },
-  {
-    "notebook": "15_epv_decomposition.ipynb",
-    "title": "Action-decomposed possession value",
-    "question": "Combine action choices and outcome values",
-    "stages": "Selection probabilities; success/failure values; expected contribution; sum"
-  },
-  {
     "notebook": "16_graph_epv.ipynb",
     "title": "Graph-based EPV modeling pipeline",
     "question": "Construct and train a graph scoring model",
     "stages": "Real SkillCorner graph training; audited goal labels; match-level train/validation/test; calibration; held-out metrics; actual possession EPV curves and synchronized animation"
-  },
-  {
-    "notebook": "17_temporal_graph_models.ipynb",
-    "title": "Temporal graph modeling",
-    "question": "Represent changing player interactions",
-    "stages": "Lagged features; identity edges; graph embeddings; recurrent, convolutional and masked-attention alternatives"
   }
 ]

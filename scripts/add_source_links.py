@@ -27,9 +27,12 @@ for i,s in enumerate(content,1):
             if i==2:
                 for prefix,k in [('SkillCorner/opendata','skillcorner'),('kloppy:','kloppy'),('DataBallPy:','distance')]:
                     if t.text.startswith(prefix):key=k
-            if not key:continue
+            target=sources[key][1] if key else None
+            if s.get("notebook") and t.text == s.get("cue"):
+                target="https://github.com/zcochran27/tracking-data-applied-workshop/blob/main/"+s["notebook"]
+            if not target:continue
             rid='rIdWorkshop'+str(len(rels)+1)
-            E.SubElement(rels,f'{{{REL}}}Relationship',{'Id':rid,'Type':R+'/hyperlink','Target':sources[key][1],'TargetMode':'External'})
+            E.SubElement(rels,f'{{{REL}}}Relationship',{'Id':rid,'Type':R+'/hyperlink','Target':target,'TargetMode':'External'})
             props=run.find(f'{{{A}}}rPr')
             if props is None:props=E.Element(f'{{{A}}}rPr');run.insert(0,props)
             E.SubElement(props,f'{{{A}}}hlinkClick',{f'{{{R}}}id':rid})

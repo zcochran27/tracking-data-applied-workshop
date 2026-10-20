@@ -27,7 +27,8 @@
       "distance"
     ],
     "notes": "The opening entries are linked. Full sources are in the reading list. Real sample: Brisbane vs Perth, 21 December 2024, match 1925299.",
-    "cue": ""
+    "cue": "NOTEBOOK · 01_data_exploration.ipynb",
+    "notebook": "notebooks/methods/01_data_exploration.ipynb"
   },
   {
     "title": "Loading tracking data",
@@ -41,7 +42,8 @@
       "kloppy"
     ],
     "notes": "The figure contains actual dataframe values; velocity columns are derived after loading.",
-    "cue": "NOTEBOOK \u00b7 load and inspect"
+    "cue": "NOTEBOOK · 01_data_exploration.ipynb",
+    "notebook": "notebooks/methods/01_data_exploration.ipynb"
   },
   {
     "title": "Tracking quality and visibility",
@@ -56,12 +58,13 @@
       "preprocess"
     ],
     "notes": "Red rings mark extrapolated players according to raw is_detected. Coordinates can exist without a direct camera observation. All subsequent models inherit this uncertainty.",
-    "cue": ""
+    "cue": "NOTEBOOK · 01_data_exploration.ipynb",
+    "notebook": "notebooks/methods/01_data_exploration.ipynb"
   },
   {
     "title": "Plotting a tracking frame",
     "body": [
-      "Draw the pitch in the data\u2019s coordinate system",
+      "Draw the pitch in the data’s coordinate system",
       "Color by team and identify the ball",
       "Check direction before calculating goal-related features"
     ],
@@ -70,7 +73,8 @@
       "skillcorner"
     ],
     "notes": "Use actual pitch dimensions. A visually plausible frame is a useful first check, but does not prove identity or position accuracy.",
-    "cue": ""
+    "cue": "NOTEBOOK · 01_data_exploration.ipynb",
+    "notebook": "notebooks/methods/01_data_exploration.ipynb"
   },
   {
     "title": "Animating a sequence",
@@ -85,7 +89,8 @@
       "fot"
     ],
     "notes": "Three snapshots are from the real selected clip. The notebook contains a full embedded animation.",
-    "cue": "NOTEBOOK \u00b7 play the sequence"
+    "cue": "NOTEBOOK · 01_data_exploration.ipynb",
+    "notebook": "notebooks/methods/01_data_exploration.ipynb"
   },
   {
     "title": "Possession detection",
@@ -100,7 +105,8 @@
       "pathcrf"
     ],
     "notes": "Figure is an actual 2 m proximity heuristic, not the full Vidal-Codina or PathCRF method. Pros: transparent and quick. Cons: aerial balls, duels and tracking uncertainty. Compare with supplied possession labels; evaluate timing-aware accuracy.",
-    "cue": "NOTEBOOK \u00b7 inspect the candidate detector"
+    "cue": "NOTEBOOK · 02_event_detection.ipynb",
+    "notebook": "notebooks/methods/02_event_detection.ipynb"
   },
   {
     "title": "Pass-event detection",
@@ -115,7 +121,8 @@
       "preprocess"
     ],
     "notes": "The real ball path is annotated at supplied possession endpoints. This is an explanatory candidate sequence, not a validated recovered pass. Pros: converts continuous signals to actionable events. Cons: missing ball data and multi-touch ambiguity.",
-    "cue": ""
+    "cue": "NOTEBOOK · 02_event_detection.ipynb",
+    "notebook": "notebooks/methods/02_event_detection.ipynb"
   },
   {
     "title": "Guess the current player roles",
@@ -129,7 +136,8 @@
       "pleuler"
     ],
     "notes": "Audience prompt inspired by the supplied reference. These are actual SkillCorner frames, with identities hidden. A single snapshot is ambiguous; metadata positions are not frame-level role truth.",
-    "cue": ""
+    "cue": "NOTEBOOK · 03_formation_analysis.ipynb",
+    "notebook": "notebooks/methods/03_formation_analysis.ipynb"
   },
   {
     "title": "Position distributions and centering",
@@ -144,7 +152,8 @@
       "formation"
     ],
     "notes": "Independently generated from SkillCorner. Two-standard-deviation covariance ellipses, not confidence regions. Labels are metadata roles. Pros: removes team translation. Cons: averaging still mixes phases and rotations; covariance can hide multimodal behavior. Use identical qualifying samples in both panels.",
-    "cue": ""
+    "cue": "NOTEBOOK · 03_formation_analysis.ipynb",
+    "notebook": "notebooks/methods/03_formation_analysis.ipynb"
   },
   {
     "title": "Pleuler: rotating player viewpoints",
@@ -158,7 +167,8 @@
       "pleuler"
     ],
     "notes": "Pleuler (June 2024), independently implemented. Our choices: 24 headings and overlapping 90-degree sectors. This is geometric context, not observed head orientation, actual sight or occlusion. Attack-normalize both axes. Opponent-count channel is our extension. Pros: translation-invariant and intuitive. Cons: angular resolution, orientation and missing players affect features.",
-    "cue": "NOTEBOOK \u00b7 inspect angular count features"
+    "cue": "NOTEBOOK · 04_role_classification.ipynb",
+    "notebook": "notebooks/methods/04_role_classification.ipynb"
   },
   {
     "title": "From angular features to role labels",
@@ -172,7 +182,8 @@
       "pleuler"
     ],
     "notes": "Pleuler used XGBoost. This notebook manufactures features but does not train or claim accuracy from a single match. Assigned-position metadata gives weak labels during rotations. For credible evaluation use manually reviewed frame roles and held-out matches/players. Add opponent counts as a separate tested extension. Pros: flexible nonlinear classification. Cons: label noise and domain shift.",
-    "cue": ""
+    "cue": "NOTEBOOK · 04_role_classification.ipynb",
+    "notebook": "notebooks/methods/04_role_classification.ipynb"
   },
   {
     "title": "Formation prediction by assignment",
@@ -187,7 +198,8 @@
       "efpidocs"
     ],
     "notes": "Teaching baseline: four fixed templates, Hungarian minimum squared-distance assignment, attack-right orientation. RMS residual is not a probability. Unlike EFPI, this implementation has no elastic template optimization. Pros: interpretable assignments and no player-order dependence. Cons: template inventory, scale and asymmetry determine results.",
-    "cue": "NOTEBOOK \u00b7 inspect template scores and assignments"
+    "cue": "NOTEBOOK · 03_formation_analysis.ipynb",
+    "notebook": "notebooks/methods/03_formation_analysis.ipynb"
   },
   {
     "title": "Bekkers: elastic formation identification",
@@ -217,7 +229,8 @@
       "efpi"
     ],
     "notes": "Plot uses real defensive-context windows with at least 50 qualifying frames. Three consecutive available 30-second bins confirm a label; missing bins reset the candidate count. Existing confirmed state is retained through missing bins, not evidence of ongoing stability. This is an educational rule, not EFPI change logic. Pleuler explicitly proposed change detection without testing it. No tactical ground truth is available here. Role swaps alone need not imply formation changes.",
-    "cue": "NOTEBOOK \u00b7 candidate timeline and persistence"
+    "cue": "NOTEBOOK · 03_formation_analysis.ipynb",
+    "notebook": "notebooks/methods/03_formation_analysis.ipynb"
   },
   {
     "title": "Formation detection",
@@ -231,7 +244,8 @@
       "formation"
     ],
     "notes": "Real median outfield positions are shown separately by possession. Pros: summarizes organization beyond a team sheet. Cons: averaging mixes roles and game states; these are not asserted formation labels.",
-    "cue": ""
+    "cue": "NOTEBOOK · 03_formation_analysis.ipynb",
+    "notebook": "notebooks/methods/03_formation_analysis.ipynb"
   },
   {
     "title": "Player-role and line detection",
@@ -245,7 +259,8 @@
       "formation"
     ],
     "notes": "Ward clustering of real centered x positions into three groups is a teaching baseline. It is not a validated named-formation classifier. Pros: interpretable. Cons: fixed line counts, overlaps and rotations.",
-    "cue": ""
+    "cue": "NOTEBOOK · 03_formation_analysis.ipynb",
+    "notebook": "notebooks/methods/03_formation_analysis.ipynb"
   },
   {
     "title": "Phase-of-play segmentation",
@@ -260,7 +275,8 @@
       "phases"
     ],
     "notes": "The plot shows supplied SkillCorner labels, not predictions from a classifier trained here. Pros: makes context explicit. Cons: taxonomy-dependent and sensitive to boundary definitions.",
-    "cue": "NOTEBOOK \u00b7 join phase intervals"
+    "cue": "NOTEBOOK · 05_match_segmentation.ipynb",
+    "notebook": "notebooks/methods/05_match_segmentation.ipynb"
   },
   {
     "title": "Estimating player speed",
@@ -274,13 +290,14 @@
       "preprocess"
     ],
     "notes": "Actual speed curves are shown. Pros: foundation for physical and tactical features. Cons: derivatives amplify noise; smoothing removes some short peaks.",
-    "cue": ""
+    "cue": "NOTEBOOK · 06_physical_metrics.ipynb",
+    "notebook": "notebooks/methods/06_physical_metrics.ipynb"
   },
   {
     "title": "Distance covered",
     "body": [
       "Integrate speed across valid intervals",
-      "Distance \u2248 \u03a3 speed \u00d7 \u0394t",
+      "Distance ≈ Σ speed × Δt",
       "Report coverage alongside the total"
     ],
     "image": "methods/distance.png",
@@ -288,13 +305,14 @@
       "distance",
       "physical"
     ],
-    "notes": "The real sample\u2019s cumulative distance excludes missing derivatives. No full-match extrapolation. Pros: simple workload volume measure. Cons: incomplete and extrapolated tracking affect accuracy.",
-    "cue": ""
+    "notes": "The real sample’s cumulative distance excludes missing derivatives. No full-match extrapolation. Pros: simple workload volume measure. Cons: incomplete and extrapolated tracking affect accuracy.",
+    "cue": "NOTEBOOK · 06_physical_metrics.ipynb",
+    "notebook": "notebooks/methods/06_physical_metrics.ipynb"
   },
   {
     "title": "High-speed and sprint distance",
     "body": [
-      "HSR: documented men\u2019s band 20\u201325 km/h",
+      "HSR: documented men’s band 20–25 km/h",
       "Sprint: above 25 km/h",
       "Accumulate distance separately in each band"
     ],
@@ -304,7 +322,8 @@
       "distance"
     ],
     "notes": "Our code uses [20,25) and [25,infinity) to avoid overlap; exact equality handling is a teaching convention. Pros: distinguishes intensity from volume. Cons: thresholds and exposure affect comparisons.",
-    "cue": ""
+    "cue": "NOTEBOOK · 06_physical_metrics.ipynb",
+    "notebook": "notebooks/methods/06_physical_metrics.ipynb"
   },
   {
     "title": "Sprint-effort counts",
@@ -318,7 +337,8 @@
       "physical"
     ],
     "notes": "Shaded segments are our >=1 s, no-merging teaching rule. They are not exact SkillCorner production sprint counts. Pros: repeated-effort view. Cons: sensitive to thresholds, smoothing and merging rules.",
-    "cue": ""
+    "cue": "NOTEBOOK · 06_physical_metrics.ipynb",
+    "notebook": "notebooks/methods/06_physical_metrics.ipynb"
   },
   {
     "title": "Acceleration and deceleration",
@@ -333,12 +353,13 @@
       "explosive"
     ],
     "notes": "The plot uses real signed speed derivatives. A direction change can produce acceleration-vector magnitude without increasing scalar speed. Pros: captures bursts and braking. Cons: highly noise-sensitive; threshold crossing alone does not qualify a production explosive effort.",
-    "cue": ""
+    "cue": "NOTEBOOK · 06_physical_metrics.ipynb",
+    "notebook": "notebooks/methods/06_physical_metrics.ipynb"
   },
   {
     "title": "Time to high-speed running",
     "body": [
-      "SkillCorner measures the 9 \u2192 20 km/h interval",
+      "SkillCorner measures the 9 → 20 km/h interval",
       "Use a qualifying explosive acceleration",
       "Compare the speed trajectory, not just peak speed"
     ],
@@ -347,12 +368,13 @@
       "explosive"
     ],
     "notes": "The real crossing is illustrative, not production-qualified. The published metric is the minimum interval within qualifying explosive accelerations. Start detection, >0.7 s high-acceleration qualification and filtering matter.",
-    "cue": ""
+    "cue": "NOTEBOOK · 06_physical_metrics.ipynb",
+    "notebook": "notebooks/methods/06_physical_metrics.ipynb"
   },
   {
     "title": "Time to sprint",
     "body": [
-      "SkillCorner measures the 9 \u2192 25 km/h interval",
+      "SkillCorner measures the 9 → 25 km/h interval",
       "A quick top speed does not imply a quick acceleration",
       "Check the qualifying effort before reporting the metric"
     ],
@@ -361,12 +383,13 @@
       "explosive"
     ],
     "notes": "Real observed crossing shown. No official Time to Sprint or Top 3 value is reconstructed. Pros: explosiveness/capacity. Cons: limited opportunities, sample size and qualification rules.",
-    "cue": ""
+    "cue": "NOTEBOOK · 06_physical_metrics.ipynb",
+    "notebook": "notebooks/methods/06_physical_metrics.ipynb"
   },
   {
     "title": "PSV-99: activity-based speed capacity",
     "body": [
-      "Use SkillCorner\u2019s defined activity population",
+      "Use SkillCorner’s defined activity population",
       "Summarize high-speed activity rather than all frames",
       "Do not substitute an all-frame percentile"
     ],
@@ -375,7 +398,8 @@
       "peak"
     ],
     "notes": "The real frame-speed distribution illustrates why populations matter. SkillCorner describes PSV-99 over physical activities above 15 km/h. This histogram is not the official PSV-99 calculation.",
-    "cue": ""
+    "cue": "NOTEBOOK · 06_physical_metrics.ipynb",
+    "notebook": "notebooks/methods/06_physical_metrics.ipynb"
   },
   {
     "title": "Peak Velocity: absolute top speed",
@@ -388,8 +412,9 @@
     "sources": [
       "peak"
     ],
-    "notes": "The figure uses our smoothed sample-speed estimates. It does not reproduce SkillCorner\u2019s validated production Peak Velocity. Pros: interpretable capacity measure. Cons: noisy spikes, short exposure and preprocessing dependence.",
-    "cue": ""
+    "notes": "The figure uses our smoothed sample-speed estimates. It does not reproduce SkillCorner’s validated production Peak Velocity. Pros: interpretable capacity measure. Cons: noisy spikes, short exposure and preprocessing dependence.",
+    "cue": "NOTEBOOK · 06_physical_metrics.ipynb",
+    "notebook": "notebooks/methods/06_physical_metrics.ipynb"
   },
   {
     "title": "Expected goals: shot quality",
@@ -403,7 +428,8 @@
       "xg"
     ],
     "notes": "Hypothetical shot rays at a real ball location; no xG prediction is invented. Pros: familiar target and interpretable features. Cons: sparse shots, outcome imbalance and contextual bias.",
-    "cue": ""
+    "cue": "NOTEBOOK · 07_expected_goals.ipynb",
+    "notebook": "notebooks/methods/07_expected_goals.ipynb"
   },
   {
     "title": "Expected Threat: location value",
@@ -418,13 +444,14 @@
       "dbxt"
     ],
     "notes": "Actual fitted DataBallPy open-play grid, not trained on this small sample. V(s)=P(shot|s)P(goal|shot,s)+sum P(successful move to s'|s)V(s'). Classic location xT does not use defender positions. State the model target and training domain.",
-    "cue": ""
+    "cue": "NOTEBOOK · 08_expected_threat.ipynb",
+    "notebook": "notebooks/methods/08_expected_threat.ipynb"
   },
   {
     "title": "Expected Threat gained",
     "body": [
       "Look up the value at both endpoints",
-      "Completed-action value: V(end) \u2212 V(start)",
+      "Completed-action value: V(end) − V(start)",
       "Use tracking context to explain what location-only xT misses"
     ],
     "image": "methods/xt_gain.png",
@@ -432,8 +459,9 @@
       "xt",
       "dbxt"
     ],
-    "notes": "The arrow is real ball displacement in the selected clip, not an assertion of a single completed pass. Attack direction is normalized and 105 m scaled to the model\u2019s 106 m convention. Pros: simple action valuation. Cons: path-independent, no defender context or causal attribution.",
-    "cue": "NOTEBOOK \u00b7 xT lookup and endpoint difference"
+    "notes": "The arrow is real ball displacement in the selected clip, not an assertion of a single completed pass. Attack direction is normalized and 105 m scaled to the model’s 106 m convention. Pros: simple action valuation. Cons: path-independent, no defender context or causal attribution.",
+    "cue": "NOTEBOOK · 08_expected_threat.ipynb",
+    "notebook": "notebooks/methods/08_expected_threat.ipynb"
   },
   {
     "title": "Voronoi space control",
@@ -447,12 +475,13 @@
       "space"
     ],
     "notes": "Actual frame, grid approximation to a Voronoi partition. Pros: quick and interpretable. Cons: hard boundaries and no movement, ball-flight or uncertainty.",
-    "cue": ""
+    "cue": "NOTEBOOK · 09_voronoi_control.ipynb",
+    "notebook": "notebooks/methods/09_voronoi_control.ipynb"
   },
   {
     "title": "Gaussian player influence",
     "body": [
-      "Project influence in the player\u2019s movement direction",
+      "Project influence in the player’s movement direction",
       "Let covariance describe directional reach",
       "Inspect the individual surface before aggregating"
     ],
@@ -461,8 +490,9 @@
       "gaussian",
       "movement"
     ],
-    "notes": "Real player velocity with an illustrative ellipse. The covariance is not the exact Fern\u00e1ndez/Bornn parameterization. Pros: smooth and motion-aware. Cons: hand-set influence scale and simplified movement ability.",
-    "cue": ""
+    "notes": "Real player velocity with an illustrative ellipse. The covariance is not the exact Fernández/Bornn parameterization. Pros: smooth and motion-aware. Cons: hand-set influence scale and simplified movement ability.",
+    "cue": "NOTEBOOK · 10_gaussian_control.ipynb",
+    "notebook": "notebooks/methods/10_gaussian_control.ipynb"
   },
   {
     "title": "Gaussian team control",
@@ -477,7 +507,8 @@
       "space"
     ],
     "notes": "Our logistic transformation bounds the team difference; it is not a calibrated possession probability. Pros: contested-space view. Cons: aggregation and covariance assumptions affect the surface.",
-    "cue": ""
+    "cue": "NOTEBOOK · 10_gaussian_control.ipynb",
+    "notebook": "notebooks/methods/10_gaussian_control.ipynb"
   },
   {
     "title": "Arrival-time control",
@@ -491,8 +522,9 @@
       "movement",
       "spearman"
     ],
-    "notes": "Actual frame with a simple 0.7 s projection and 5 m/s travel speed baseline. Pros: interpretable timing. Cons: no ball flight, acceleration optimization or interception-rate integration; not Spearman\u2019s full model.",
-    "cue": ""
+    "notes": "Actual frame with a simple 0.7 s projection and 5 m/s travel speed baseline. Pros: interpretable timing. Cons: no ball flight, acceleration optimization or interception-rate integration; not Spearman’s full model.",
+    "cue": "NOTEBOOK · 11_arrival_time_control.ipynb",
+    "notebook": "notebooks/methods/11_arrival_time_control.ipynb"
   },
   {
     "title": "Ball-aware pitch control",
@@ -521,7 +553,8 @@
       "accessible"
     ],
     "notes": "Actual accessible-space xC inference on hypothetical endpoints at real teammate positions. Pros: interpretable risk. Cons: model calibration, ball speed and offside conventions; candidates are not observed choices.",
-    "cue": "NOTEBOOK \u00b7 candidate-pass risk"
+    "cue": "NOTEBOOK · 12_pass_completion.ipynb",
+    "notebook": "notebooks/methods/12_pass_completion.ipynb"
   },
   {
     "title": "Accessible space",
@@ -536,7 +569,8 @@
       "das"
     ],
     "notes": "Actual public-model output. Pros: incorporates ball and player movement. Cons: simulation assumptions and resolution; individual access can overlap.",
-    "cue": ""
+    "cue": "NOTEBOOK · 13_space_and_danger.ipynb",
+    "notebook": "notebooks/methods/13_space_and_danger.ipynb"
   },
   {
     "title": "Dangerous accessible space",
@@ -551,7 +585,8 @@
       "das"
     ],
     "notes": "Actual public-model dangerous surface. Pros: links access and useful territory. Cons: danger definition and physical assumptions; DAS units are danger-weighted square metres.",
-    "cue": ""
+    "cue": "NOTEBOOK · 13_space_and_danger.ipynb",
+    "notebook": "notebooks/methods/13_space_and_danger.ipynb"
   },
   {
     "title": "Changes in dangerous space",
@@ -565,13 +600,14 @@
       "accessible"
     ],
     "notes": "Actual model values on three frames. Pros: connects movement to changing opportunity. Cons: different team possession states and model noise must be checked; before/after changes alone are not causal credit.",
-    "cue": ""
+    "cue": "NOTEBOOK · 13_space_and_danger.ipynb",
+    "notebook": "notebooks/methods/13_space_and_danger.ipynb"
   },
   {
     "title": "Off-ball run threat",
     "body": [
       "Evaluate a run even when no pass is made",
-      "SkillCorner\u2019s target considers a run being served",
+      "SkillCorner’s target considers a run being served",
       "Separate run threat from location-based event xT"
     ],
     "image": "methods/run_threat.png",
@@ -595,7 +631,8 @@
       "tacticai"
     ],
     "notes": "Real radius graph. Pros: models relationships directly. Cons: radius edges miss distant tactical relationships; fully connected and learned connectivity are alternatives.",
-    "cue": ""
+    "cue": "NOTEBOOK · 16_graph_epv.ipynb",
+    "notebook": "notebooks/methods/16_graph_epv.ipynb"
   },
   {
     "title": "Node and edge features",
@@ -609,7 +646,8 @@
       "ussf"
     ],
     "notes": "Actual edge-feature rows. Edge direction controls the sign of relative position. Team IDs should be encoded meaningfully rather than treated as numeric magnitudes.",
-    "cue": ""
+    "cue": "NOTEBOOK · 16_graph_epv.ipynb",
+    "notebook": "notebooks/methods/16_graph_epv.ipynb"
   },
   {
     "title": "Graph neural message passing",
@@ -624,7 +662,8 @@
       "defcon"
     ],
     "notes": "Architecture schematic, not a trained result. Pros: relational inductive bias and shared updates. Cons: oversmoothing, connectivity choices and training requirements. Attention alone is not causal importance.",
-    "cue": ""
+    "cue": "NOTEBOOK · 16_graph_epv.ipynb",
+    "notebook": "notebooks/methods/16_graph_epv.ipynb"
   },
   {
     "title": "Temporal node features",
@@ -639,7 +678,7 @@
       "preprocess"
     ],
     "notes": "Actual one-second lag and speed change on a real player. Explicit lag frame checks prevent bridging gaps. Instantaneous velocity adds motion information but is not a substitute for full history.",
-    "cue": "NOTEBOOK \u00b7 lagged features and masks"
+    "cue": ""
   },
   {
     "title": "Dynamic graphs over time",
@@ -681,7 +720,7 @@
     "sources": [
       "temporal"
     ],
-    "notes": "Architecture schematic rather than a claim about a specific cited model\u2019s GRU implementation. Pros: sequential processing with a compact state. Cons: long-history retention and sequence alignment. No trained inference is shown.",
+    "notes": "Architecture schematic rather than a claim about a specific cited model’s GRU implementation. Pros: sequential processing with a compact state. Cons: long-history retention and sequence alignment. No trained inference is shown.",
     "cue": ""
   },
   {
@@ -769,8 +808,9 @@
       "graphepv",
       "unravel"
     ],
-    "notes": "PyData London, 7 June 2025. Talk uses World Cup 2022 PFF data across 64 matches, with labels respecting team and period. This is a ten-second scoring target, not automatically the complete action-decomposed Fern\u00e1ndez EPV framework. Schematic only: no pretrained model inference here. Strength: includes off-ball context. Limitation: rare correlated labels, calibration and transfer to another competition.",
-    "cue": ""
+    "notes": "PyData London, 7 June 2025. Talk uses World Cup 2022 PFF data across 64 matches, with labels respecting team and period. This is a ten-second scoring target, not automatically the complete action-decomposed Fernández EPV framework. Schematic only: no pretrained model inference here. Strength: includes off-ball context. Limitation: rare correlated labels, calibration and transfer to another competition.",
+    "cue": "NOTEBOOK · 16_graph_epv.ipynb",
+    "notebook": "notebooks/methods/16_graph_epv.ipynb"
   },
   {
     "title": "GraphEPV and temporal extensions",
@@ -814,15 +854,15 @@
       "skillcorner",
       "epv"
     ],
-    "notes": "Actual pass_epv_delta_for fields in SkillCorner dynamic events. This is the provider\u2019s model output; not a reconstructed Fern\u00e1ndez or DEFCON prediction. The field name is shown rather than assuming undocumented equivalence.",
-    "cue": "NOTEBOOK \u00b7 supplied event-value fields"
+    "notes": "Actual pass_epv_delta_for fields in SkillCorner dynamic events. This is the provider’s model output; not a reconstructed Fernández or DEFCON prediction. The field name is shown rather than assuming undocumented equivalence.",
+    "cue": ""
   },
   {
     "title": "DEFCON: defensive contribution",
     "body": [
       "Use graph-based models for action components",
-      "Estimate the opponent\u2019s possession value",
-      "Account for defenders\u2019 contribution to reducing danger"
+      "Estimate the opponent’s possession value",
+      "Account for defenders’ contribution to reducing danger"
     ],
     "image": "methods/defcon.png",
     "sources": [
@@ -842,7 +882,7 @@
     "sources": [
       "ussf"
     ],
-    "notes": "Architecture schematic. The published balanced event-frame study uses reaching the penalty area as success; the repository\u2019s additional all-frame dataset has different goal labels. Do not mix those datasets or quote them as equivalent.",
+    "notes": "Architecture schematic. The published balanced event-frame study uses reaching the penalty area as success; the repository’s additional all-frame dataset has different goal labels. Do not mix those datasets or quote them as equivalent.",
     "cue": ""
   },
   {

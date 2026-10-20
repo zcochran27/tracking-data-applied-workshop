@@ -65,18 +65,8 @@
     "errors": 0
   },
   {
-    "notebook": "15_epv_decomposition.ipynb",
-    "code_cells": 7,
-    "errors": 0
-  },
-  {
     "notebook": "16_graph_epv.ipynb",
     "code_cells": 33,
-    "errors": 0
-  },
-  {
-    "notebook": "17_temporal_graph_models.ipynb",
-    "code_cells": 11,
     "errors": 0
   }
 ]

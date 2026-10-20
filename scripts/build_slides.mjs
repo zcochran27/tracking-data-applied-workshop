@@ -33,7 +33,7 @@ for(let i=0;i<content.length;i++){
  if(c.cue){rect(s,60,600,1160,43,'#e0eee8');text(s,c.cue,78,608,1120,34,22,accent,true);}
  c.sources.forEach((k,j)=>text(s,sources[k][0],60+j*(1080/c.sources.length),657,1060/c.sources.length,40,12,'#51645c'));
  text(s,`${i+1} / ${content.length}`,1165,657,90,30,14,'#51645c');
- s.speakerNotes.text=c.notes+'\n\n'+c.cue+'\n\nSources:\n'+c.sources.map(k=>sources[k].join('\n')).join('\n\n');
+ s.speakerNotes.text=c.notes+'\n\n'+(c.cue||'')+(c.notebook?'\nhttps://github.com/zcochran27/tracking-data-applied-workshop/blob/main/'+c.notebook:'')+'\n\nSources:\n'+c.sources.map(k=>sources[k].join('\n')).join('\n\n');
 }
 await fs.mkdir(path.join(root,'.build'),{recursive:true});
 await fs.mkdir(path.join(root,'slides/previews'),{recursive:true});

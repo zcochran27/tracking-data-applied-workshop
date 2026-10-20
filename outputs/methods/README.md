@@ -15,8 +15,5 @@ Download an HTML file and open it in a browser to view figures and embedded anim
 - [Arrival-time pitch-control baseline](11_arrival_time_control.html)
 - [Pass-interception survival model](12_pass_completion.html)
 - [Accessible and dangerous space proxies](13_space_and_danger.html)
-- [Off-ball run option-value proxy](14_run_threat.html)
-- [Action-decomposed possession value](15_epv_decomposition.html)
 - [Graph-based EPV modeling pipeline](16_graph_epv.html)
 - [Actual trained-model EPV animation on an unseen possession](graph_epv_goal_animation.html)
-- [Temporal graph modeling](17_temporal_graph_models.html)
