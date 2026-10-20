@@ -4,6 +4,8 @@ An illustrated soccer analytics workshop using SkillCorner open tracking data, w
 
 The standalone xG notebook additionally uses StatsBomb Open Data shot freeze frames to compare a distance/angle model with a model adding goalkeeper and defender context. It includes real match-held-out ROC/AUC results and uncertainty intervals; the other tracking walkthroughs continue to use SkillCorner.
 
+The standalone graph-EPV notebook trains a small real-data GNN on SkillCorner tracking, evaluates unseen matches, and ends with actual model predictions over possessions. It includes a synchronized [EPV animation](outputs/methods/graph_epv_goal_animation.html), a [GIF](assets/methods/graph_epv_real_goal.gif), training code, a saved teaching checkpoint and a `RETRAIN` switch. The model is exploratory and has sparse positive labels; the notebook reports precision–recall and probability metrics alongside ROC/AUC.
+
 ## Materials
 
 - [PowerPoint deck](slides/tracking-data-applied.pptx)
@@ -64,4 +66,4 @@ The 17 method notebooks under `notebooks/methods/` each cover a complete analyti
 
 `assets/methods/` contains generated method illustrations. `resources/visual_manifest.json` describes their provenance. Real tracking and supplied provider values are distinguished from architecture schematics and teaching baselines. The DataBallPy fitted open-play xT grid is retained with its license and SHA-256 provenance in `resources/models/`. It is an external event-trained model, not a grid fitted on this tracking sample.
 
-Role and formation walkthroughs include centroid-normalized covariance ellipses, Devin Pleuler's angular teammate-count idea (with an explicitly added opponent channel), fixed-template assignment and persistence-filtered change candidates. Joris Bekkers' GraphEPV talk anchors the graph-model discussion, including its ten-second scoring target. The notebook does not train a role classifier or GraphEPV model. Our fixed-template example is distinct from Bekkers' elastic EFPI algorithm. See `resources/ROLE_AND_GRAPHEPV.md` for sources and limitations.
+Role and formation walkthroughs include centroid-normalized covariance ellipses, Devin Pleuler's angular teammate-count idea (with an explicitly added opponent channel), fixed-template assignment and persistence-filtered change candidates. Joris Bekkers' GraphEPV talk anchors the graph-model discussion, including its ten-second scoring target. The standalone graph notebook now trains an independent teaching GNN on real SkillCorner data; it does not reproduce Bekkers' architecture or weights. Our fixed-template formation example is distinct from Bekkers' elastic EFPI algorithm. See `resources/ROLE_AND_GRAPHEPV.md` for sources and limitations.

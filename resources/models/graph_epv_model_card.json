@@ -1,0 +1,72 @@
+{
+  "purpose": "Educational real-data frame GNN, not production GraphEPV",
+  "source": "SkillCorner Open Data",
+  "source_revision": "4340d274572876239c154c90bc507a9b3250a656",
+  "goal_label": "same-team goal-shot within next 10 seconds, period-censored; aligned goal markers/shot labels reconciled to final score",
+  "label_limitations": "Four source matches excluded by score audit. Goal timing and shot identity not video-verified. Positive states overlap in goal windows.",
+  "architecture": "23 nodes; 9 current-frame features; radius 20m plus ball links/self loops; row-normalized adjacency; tanh(A X W + X U + b); separate attack/defense/ball mean pools; logistic head",
+  "features": [
+    "normalized_x",
+    "normalized_y",
+    "absolute_lateral_position",
+    "distance_to_goal",
+    "distance_to_ball",
+    "attacking_defending_indicator",
+    "ball_indicator",
+    "current_ball_x",
+    "current_ball_y"
+  ],
+  "hidden_channels": 16,
+  "parameter_count": 353,
+  "optimizer": "Adam, unweighted BCE, L2=1e-5, batch512, learning_rate0.003, max150 epochs, validation log-loss patience20",
+  "seed": 27,
+  "epochs_completed": 109,
+  "best_validation_epoch": 89,
+  "calibration": "positive-slope affine logit calibration fitted to validation matches only, recomputed by notebook",
+  "checkpoint_sha256": "ffb1fee51e5f9192255df30658214a34c7253cd278d4261a0986fe397b2d0af4",
+  "sampling": "training/evaluation snapshots every20 native10Hz frames; animation applies frozen model to denser held-out states",
+  "splits": {
+    "train_matches": [
+      2010085,
+      1927964,
+      1996436,
+      2007721,
+      1996435,
+      2017461,
+      1959846,
+      1986691,
+      2006363,
+      2015213
+    ],
+    "validation_matches": [
+      2013725,
+      2011166,
+      1874553
+    ],
+    "test_matches": [
+      1925299,
+      1953632,
+      2007448
+    ]
+  },
+  "test_metrics": [
+    {
+      "model": "Real trained frame GNN",
+      "ROC_AUC": 0.8425465838509316,
+      "average_precision": 0.020142776812677992,
+      "log_loss": 0.02158324455262788,
+      "Brier_score": 0.003334554896689892,
+      "mean_prediction": 0.008584681729048338
+    },
+    {
+      "model": "Training-prevalence baseline",
+      "ROC_AUC": 0.5,
+      "average_precision": 0.0033016921172100704,
+      "log_loss": 0.023632560009720627,
+      "Brier_score": 0.003308037618303845,
+      "mean_prediction": 0.007454603376871615
+    }
+  ],
+  "limitation": "Three test matches, 16 positive states; not a benchmark or proof of graph advantage. Brier score is worse than prevalence baseline.",
+  "retraining": "Set RETRAIN=True in notebooks/methods/16_graph_epv.ipynb. All training code is inline."
+}

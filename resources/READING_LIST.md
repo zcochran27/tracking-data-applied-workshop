@@ -47,7 +47,7 @@ References checked during workshop preparation, 19 October 2026. Foundational me
 | TacticAI | Corner tracking context and architecture schematic | Intuitive prediction and intervention example | Task-specific code/data not public; corners only |
 | SkillCorner run threat | Definition and supplied event fields | Values unserved movement | Provider model is not reproduced |
 
-DataBallPy is a methodological reference; the live DAS cells call `accessible-space` directly. GNN examples are references, not trained workshop models. Read source licenses before reusing project code.
+DataBallPy is a methodological reference; the live DAS cells call `accessible-space` directly. The slides' cited GNN systems remain research references. The standalone graph-EPV notebook additionally trains its own small real-data GNN, with held-out possession predictions and an animation; it is not a reproduction of those published systems. Read source licenses before reusing project code.
 - **temporal** — [PyTorch Geometric Temporal architectures](https://pytorch-geometric-temporal.readthedocs.io/en/latest/modules/root.html)
 
 - **tcn** — [Temporal convolution for sequence modeling](https://arxiv.org/abs/1803.01271)

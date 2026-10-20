@@ -93,7 +93,7 @@
     "notebook": "16_graph_epv.ipynb",
     "title": "Graph-based EPV modeling pipeline",
     "question": "Construct and train a graph scoring model",
-    "stages": "Features; distances; adjacency; normalization; messages; pooling; gradients; training; ten-second labels"
+    "stages": "Real SkillCorner graph training; audited goal labels; match-level train/validation/test; calibration; held-out metrics; actual possession EPV curves and synchronized animation"
   },
   {
     "notebook": "17_temporal_graph_models.ipynb",

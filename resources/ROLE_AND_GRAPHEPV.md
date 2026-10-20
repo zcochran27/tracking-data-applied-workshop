@@ -17,6 +17,10 @@ Formation prediction uses four fixed outfield templates and minimum squared-dist
 
 The graph topology illustration independently builds team subgraphs linked through the ball, one documented UnravelSports option. The GraphEPV diagram explains its target and general workflow without claiming trained inference or an exact layer-by-layer implementation. Temporal features, identity edges, recurrent models, convolutions and attention are additional architecture choices. They are not attributed as tested additions in the 2025 frame-model talk.
 
+The standalone graph notebook now extends that explanation with an independent real-trained GNN: normalized 20 m edges plus ball links, self-feature and neighborhood transforms, and separate attacking/defending/ball readouts. It trains on ten SkillCorner matches, uses three validation matches for checkpoint selection/calibration, and reserves three test matches including the animated example. The input is current geometry, not future outcomes or supplied provider EPV. Its target is a same-team goal-shot event in the next ten seconds, reconstructed by aligning goal markers to nearby shots and reconciling final scores. Four of twenty source matches fail that audit and are excluded. Timing is not video-verified.
+
+Final notebook curves and animation are actual predictions from this teaching model, with missing possession/coverage left as gaps. The saved checkpoint is for quick playback; `RETRAIN=True` executes the included real-data training loop. The held-out set has only sixteen positive sampled states, so it does not demonstrate production reliability or an advantage over a strong location baseline. It is not the provider's thirty-second EPV model or Bekkers' CrystalGraph implementation. See `outputs/methods/graph_epv_real_results.json` and `resources/models/graph_epv_model_card.json`.
+
 ## Walkthrough tradeoffs
 
 | Walkthrough | Benefit | Limitation |

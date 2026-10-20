@@ -23,9 +23,9 @@ Read each notebook from top to bottom: inputs and assumptions, helper functions,
 | [Accessible and dangerous space proxies](13_space_and_danger.ipynb) | Control surface; grid-cell area; danger weight; per-cell contributions; totals |
 | [Off-ball run option-value proxy](14_run_threat.ipynb) | Completion component; destination value; product; before/after comparison |
 | [Action-decomposed possession value](15_epv_decomposition.ipynb) | Selection probabilities; success/failure values; expected contribution; sum |
-| [Graph-based EPV modeling pipeline](16_graph_epv.ipynb) | Features; distances; adjacency; normalization; messages; pooling; gradients; training; ten-second labels |
+| [Graph-based EPV modeling pipeline](16_graph_epv.ipynb) | Real SkillCorner training; audited ten-second labels; match-level holdout; calibration; actual possession predictions; synchronized EPV animation |
 | [Temporal graph modeling](17_temporal_graph_models.ipynb) | Lagged features; identity edges; graph embeddings; recurrent, convolutional and masked-attention alternatives |
 
 The original presenter notebook and avenue notebooks remain available. Browser-readable copies of this set are in `outputs/methods/`.
 
-Teaching boundaries: fixed-template formation fitting does not reproduce elastic EFPI. Gaussian, arrival-time, AS/DAS and run-threat examples are explicit proxies/baselines. Synthetic classifier/GNN checks verify calculations rather than establish soccer accuracy. The graph workflow includes a scoring-label function and training implementation, but does not claim a trained real GraphEPV model. The temporal notebook compares encoder choices inside the same modeling pipeline.
+Teaching boundaries: fixed-template formation fitting does not reproduce elastic EFPI. Gaussian, arrival-time, AS/DAS and run-threat examples are explicit proxies/baselines. Synthetic checks verify derivatives; the graph notebook then trains a separate real-data teaching GNN and shows its held-out results. Its reconstructed labels, few matches and sparse positive states limit reliability. It is not Bekkers' released model or a production system. The temporal notebook compares encoder choices inside the same modeling pipeline.

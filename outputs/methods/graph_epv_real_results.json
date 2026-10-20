@@ -1,0 +1,90 @@
+{
+  "source": "SkillCorner open tracking",
+  "revision": "4340d274572876239c154c90bc507a9b3250a656",
+  "target": "Goal-shot event by current possession team within next 100 frames (10 seconds), same period",
+  "label_caveat": "Goal-marker/shot alignment reconciles final scores but is not video-verified timing",
+  "samples": 25047,
+  "positive_states": 169,
+  "split": [
+    {
+      "split": "train",
+      "matches": 10,
+      "states": 15695,
+      "positive_states": 117,
+      "prevalence": 0.007454603376871615
+    },
+    {
+      "split": "validation",
+      "matches": 3,
+      "states": 4506,
+      "positive_states": 36,
+      "prevalence": 0.007989347536617843
+    },
+    {
+      "split": "test",
+      "matches": 3,
+      "states": 4846,
+      "positive_states": 16,
+      "prevalence": 0.0033016921172100704
+    }
+  ],
+  "train_matches": [
+    2010085,
+    1927964,
+    1996436,
+    2007721,
+    1996435,
+    2017461,
+    1959846,
+    1986691,
+    2006363,
+    2015213
+  ],
+  "validation_matches": [
+    2013725,
+    2011166,
+    1874553
+  ],
+  "test_matches": [
+    1925299,
+    1953632,
+    2007448
+  ],
+  "calibration": [
+    0.8969451447125867,
+    -0.24880945229957627
+  ],
+  "test_metrics": [
+    {
+      "model": "Real trained frame GNN",
+      "ROC_AUC": 0.8425465838509316,
+      "average_precision": 0.020142776812677992,
+      "log_loss": 0.02158324455262788,
+      "Brier_score": 0.003334554896689892,
+      "mean_prediction": 0.008584681729048338
+    },
+    {
+      "model": "Training-prevalence baseline",
+      "ROC_AUC": 0.5,
+      "average_precision": 0.0033016921172100704,
+      "log_loss": 0.023632560009720627,
+      "Brier_score": 0.003308037618303845,
+      "mean_prediction": 0.007454603376871615
+    }
+  ],
+  "own_real_gnn_inference": true,
+  "examples": [
+    {
+      "case": "goal build-up",
+      "frames": 231,
+      "scored_frames": 207,
+      "peak_prediction": 0.04970665049940979
+    },
+    {
+      "case": "non-goal possession",
+      "frames": 287,
+      "scored_frames": 237,
+      "peak_prediction": 0.0417676953339576
+    }
+  ]
+}
