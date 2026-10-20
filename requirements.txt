@@ -1,0 +1,13 @@
+# Tested on Python 3.13; Python 3.11+ recommended.
+kloppy==3.18.0
+numpy==2.2.6
+pandas==2.3.1
+matplotlib==3.10.3
+scipy==1.15.3
+accessible-space==2.0.13
+ipywidgets==8.1.8
+ipykernel==6.29.5
+nbformat==5.10.4
+nbclient==0.10.2
+nbconvert>=7.16,<8
+jupyterlab>=4,<5

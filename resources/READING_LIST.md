@@ -1,0 +1,44 @@
+# Reading list and project choices
+
+References checked during workshop preparation, 19 October 2026. Foundational methods remain useful alongside recent work.
+
+- **skillcorner** — [SkillCorner open data and schema](https://github.com/SkillCorner/opendata)
+- **kloppy** — [kloppy SkillCorner loader](https://kloppy.pysport.org/reference/providers/skillcorner/)
+- **physical** — [SkillCorner physical thresholds and time-to metrics](https://skillcorner.com/us/articles/scouted-brazilian-centre-backs)
+- **peak** — [SkillCorner PSV-99 and Peak Velocity](https://skillcorner.com/articles/skillcorner-releases-new-peak-velocity-metric)
+- **distance** — [DataBallPy covered distance](https://databallpy.readthedocs.io/en/main/features/covered_distance_page.html)
+- **preprocess** — [DataBallPy preprocessing](https://databallpy.readthedocs.io/en/main/getting_started/preprocessing_options.html)
+- **space** — [DataBallPy space occupation](https://databallpy.readthedocs.io/en/main/features/space_occupation.html)
+- **pressure** — [DataBallPy pressure](https://databallpy.readthedocs.io/en/main/features/pressure_page.html)
+- **das** — [DataBallPy DAS and expected completion](https://databallpy.readthedocs.io/en/main/features/dangerous_accessible_space.html)
+- **accessible** — [Dangerous Accessible Space: paper and implementation](https://github.com/jonas-bischofberger/accessible-space)
+- **gaussian** — [Wide Open Spaces, Fernández & Bornn (2018)](https://static.capabiliaserver.com/frontend/clients/barca/wp_prod/wp-content/uploads/2018/05/Wide-Open-Spaces.pdf)
+- **movement** — [Space and Control in Soccer (2021)](https://www.frontiersin.org/journals/sports-and-active-living/articles/10.3389/fspor.2021.676179/full)
+- **spearman** — [Beyond Expected Goals, Spearman (2018)](https://static.hudl.com/craft/downloads/SSAC2018_Beyond_Expected_Goals.pdf?mtime=20180327111214)
+- **epv** — [Fine-grained expected possession value (2021)](https://pmc.ncbi.nlm.nih.gov/articles/PMC8570314/)
+- **soccermap** — [SoccerMap (2020)](https://arxiv.org/abs/2010.10202)
+- **xg** — [StatsBomb: Upgrading Expected Goals](https://blogarchive.statsbomb.com/articles/soccer/upgrading-expected-goals/)
+- **runs** — [SkillCorner: Expected Threat for off-ball runs](https://www.linkedin.com/posts/skillcorner_game-intelligence-expected-threat-activity-7057009275247689728-NVPh)
+- **formation** — [Shaw & Glickman: Dynamic Analysis of Team Strategy](https://static.capabiliaserver.com/frontend/clients/barca/wp_prod/wp-content/uploads/2020/01/83c87dfe-barca_poster_shaw.pdf)
+- **pathcrf** — [PathCRF: player trajectories to events (2026)](https://github.com/hyunsungkim-ds/pathcrf)
+- **phases** — [Augmented possession and phases framework (2025)](https://doi.org/10.1177/22150218241290988)
+- **defcon** — [DEFCON: GNN-based defensive EPV (2026)](https://github.com/hyunsungkim-ds/defcon)
+- **ussf** — [U.S. Soccer: counterattack GNNs with SkillCorner (2023)](https://github.com/USSoccerFederation/ussf_ssac_23_soccer_gnn)
+- **tacticai** — [TacticAI (2024)](https://www.nature.com/articles/s41467-024-45965-x)
+- **gat** — [Graph attention for defensive influence](https://github.com/Sentient-Sports/EvaluatingDefensiveInfluenceUsingGATs)
+- **gentac** — [GenTac: trajectory forecasting (2026 preprint)](https://arxiv.org/abs/2604.11786)
+- **fot** — [Friends of Tracking: pitch control and EPV tutorials](https://github.com/Friends-of-Tracking-Data-FoTD/LaurieOnTracking)
+
+## Which projects to walk through?
+| Project | What to show | Advantage | Limitation |
+|---|---|---|---|
+| DataBallPy physical metrics | Speed and distance calculation | Readable pandas foundation | Must handle gaps and define thresholds |
+| Gaussian space influence | One player and team surfaces | Visual link from velocity to space | Influence is not calibrated completion |
+| Accessible Space / DAS | Actual package inference and three options | Connects risk and danger without training | Physical assumptions and calibration matter |
+| Fernández EPV / SoccerMap | Component diagram and research figures | Explains full decision value | Large training pipeline; no pretrained artifact supplied here |
+| DEFCON | GNN components and opponent EPV | Direct defensive value connection | Research model and attribution assumptions |
+| U.S. Soccer GNN | Tracking graph and counterattack target | Uses SkillCorner data | Training task differs from general EPV |
+| TacticAI | Published graph diagram and corner use case | Intuitive prediction and intervention example | Task-specific code/data not public; corners only |
+| SkillCorner run threat | Definition and supplied event fields | Values unserved movement | Provider model is not reproduced |
+
+DataBallPy is a methodological reference; the live DAS cells call `accessible-space` directly. GNN examples are references, not trained workshop models. Read source licenses before reusing project code.

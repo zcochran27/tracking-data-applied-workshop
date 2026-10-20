@@ -1,0 +1,344 @@
+[
+  {
+    "title": "Tracking Data Applied",
+    "body": [
+      "Soccer analytics with SkillCorner",
+      "Load \u2022 inspect \u2022 visualize \u2022 model",
+      "60-minute workshop | basic pandas"
+    ],
+    "notes": "Open with the football problem: who has a useful passing option, and what created it? Ask students to watch the same sequence before looking at model outputs.",
+    "sources": [
+      "skillcorner"
+    ],
+    "image": "frame.png",
+    "cue": "",
+    "minutes": 1
+  },
+  {
+    "title": "Data and documentation",
+    "body": [
+      "SkillCorner/opendata: match metadata, tracking, dynamic events, phases",
+      "kloppy: standardize the tracking loader",
+      "DataBallPy: metric explanations and implementation references"
+    ],
+    "notes": "Open the links in resources/READING_LIST.md. Tracking and derived labels are different products. The sample is Brisbane vs Perth, match 1925299; do not imply all files in the current manifest are downloaded.",
+    "sources": [
+      "skillcorner",
+      "kloppy",
+      "distance"
+    ],
+    "image": null,
+    "cue": "",
+    "minutes": 2
+  },
+  {
+    "title": "The hour",
+    "body": [
+      "0\u201313: data, loading, plotting and animation",
+      "13\u201326: applications and physical metrics",
+      "26\u201350: space, graphs, passing and value",
+      "50\u201360: off-ball applications, interpretation and questions"
+    ],
+    "notes": "Timing includes notebook visits: A=7, B=4, C=5, graph=1, D=7 minutes. Slides total 31 minutes; questions 5 minutes. Avoid running full-match simulations live.",
+    "sources": [],
+    "image": null,
+    "cue": "",
+    "minutes": 1
+  },
+  {
+    "title": "Coordinates are measurements",
+    "body": [
+      "Frames + player identities + x/y positions + ball",
+      "Check units, pitch size, clock and attacking direction",
+      "Missing or extrapolated positions affect every downstream metric"
+    ],
+    "notes": "Native sample is 10 Hz. Inspect raw is_detected fields where present. Keep contiguous segments; never differentiate across a half or a gap. Dynamic-event coordinates may use different orientation from tracking.",
+    "sources": [
+      "skillcorner",
+      "preprocess"
+    ],
+    "image": "frame.png",
+    "cue": "NOTEBOOK A \u00b7 load \u2192 inspect \u2192 animate \u00b7 7 min",
+    "minutes": 2
+  },
+  {
+    "title": "Five avenues for tracking analysis",
+    "body": [
+      "Events: what happened?  |  Roles: who played where?",
+      "Phases: what was the tactical context?",
+      "Physical output: how did players move?",
+      "Game modeling: which options were available and valuable?",
+      "Defense and off-ball movement connect all five"
+    ],
+    "notes": "Defense/off-ball movement are cross-cutting applications. Keep the core taxonomy of five avenues while making those questions visible.",
+    "sources": [],
+    "image": null,
+    "cue": "",
+    "minutes": 1
+  },
+  {
+    "title": "Event detection",
+    "body": [
+      "Start with possession zones and changes in ball motion",
+      "Extend to passes, receptions, runs and pressure",
+      "PathCRF: infer possession paths from player trajectories"
+    ],
+    "notes": "Simple proximity is a candidate detector, not ground truth. Loose balls, aerial passes and duels create ambiguity. PathCRF (2026) models dynamic graphs and possession-path inference. Validate event precision/recall with timing tolerances and hand-reviewed clips.",
+    "sources": [
+      "pathcrf",
+      "preprocess"
+    ],
+    "image": null,
+    "cue": "",
+    "minutes": 2
+  },
+  {
+    "title": "Formation, roles and phases",
+    "body": [
+      "Compare shape separately in and out of possession",
+      "Normalize location before grouping players into roles",
+      "Join supplied phase intervals to frames before summarizing"
+    ],
+    "notes": "Shaw & Glickman show dynamic formations by game state. Mean positions alone hide role switches and transition periods. Phase definitions depend on the taxonomy. Notebook appendix demonstrates interval joins and shape summaries, not a trained formation classifier.",
+    "sources": [
+      "formation",
+      "phases",
+      "skillcorner"
+    ],
+    "image": null,
+    "cue": "",
+    "minutes": 3
+  },
+  {
+    "title": "SkillCorner physical metrics",
+    "body": [
+      "Volume: distance, HSR distance, sprint distance",
+      "Intensity: HSR 20\u201325 km/h; sprint above 25 km/h",
+      "Explosiveness: time to HSR or sprint from a qualifying start",
+      "Capacity: PSV-99 differs from absolute Peak Velocity"
+    ],
+    "notes": "Thresholds here refer to the documented men\u2019s context. Use half-open bins [20,25) and [25,\u221e) in our teaching code to avoid overlap; this boundary convention is ours. SkillCorner describes PSV-99 over physical activities above 15 km/h; do not replace it with a percentile of all frames. Exact production smoothing and effort rules are not fully reproduced.",
+    "sources": [
+      "physical",
+      "peak"
+    ],
+    "image": null,
+    "cue": "",
+    "minutes": 2
+  },
+  {
+    "title": "From positions to physical output",
+    "body": [
+      "Clean positions \u2192 speed \u2192 speed bands \u2192 distance",
+      "Count efforts using an explicit duration and merging rule",
+      "Report valid coverage and the time denominator"
+    ],
+    "notes": "Distance estimate = sum(speed in m/s \u00d7 dt). Our effort rule uses >=1 second and no merging. It is an educational approximation, not an exact SkillCorner count. Do not extrapolate the 15-minute sample into a full-match total or compare it directly with player-season aggregates.",
+    "sources": [
+      "distance",
+      "preprocess",
+      "physical"
+    ],
+    "image": "speed.png",
+    "cue": "NOTEBOOK B \u00b7 speed \u2192 efforts \u2192 distance \u00b7 4 min",
+    "minutes": 1
+  },
+  {
+    "title": "Pitch control: three assumptions",
+    "body": [
+      "Voronoi: the nearest player owns the location",
+      "Gaussian: smooth influence depends on position and motion",
+      "Arrival time: compare who can reach a location sooner"
+    ],
+    "notes": "Ask which model notices a player running away from the ball. Gaussian does not automatically mean calibrated probability. Our arrival-time baseline is not Spearman\u2019s ball-aware control model.",
+    "sources": [
+      "gaussian",
+      "movement",
+      "spearman"
+    ],
+    "image": "control.png",
+    "cue": "",
+    "minutes": 2
+  },
+  {
+    "title": "Choosing a control model",
+    "body": [
+      "Voronoi: fast and clear; ignores movement and contested space",
+      "Gaussian: smooth and directional; sensitive to influence parameters",
+      "Physics-based: ball/player timing; more assumptions and validation"
+    ],
+    "notes": "Use the same frame across panels. Our Gaussian uses a transparent illustrative covariance rather than exactly reproducing Fern\u00e1ndez/Bornn. Control is not value: safe space behind your goal need not be valuable. Transition to pass simulation later.",
+    "sources": [
+      "space",
+      "gaussian",
+      "spearman"
+    ],
+    "image": null,
+    "cue": "NOTEBOOK C \u00b7 compare surfaces \u00b7 5 min",
+    "minutes": 1
+  },
+  {
+    "title": "Tracking as a graph",
+    "body": [
+      "Nodes: players, with position, velocity, team and possession",
+      "Edges: relative position, distance and team relationship",
+      "A sequence becomes a dynamic graph as players move"
+    ],
+    "notes": "Distinguish a frame-level interaction graph from an aggregate passing network. The radius graph is an example, not a claim that only nearby players interact. Fully connected graphs can capture distant tactical relationships.",
+    "sources": [
+      "ussf",
+      "tacticai"
+    ],
+    "image": "graph.png",
+    "cue": "",
+    "minutes": 1
+  },
+  {
+    "title": "What a graph neural network learns",
+    "body": [
+      "Messages combine a player with surrounding players",
+      "Shared updates learn interactions without depending on row order",
+      "Readouts predict a receiver, a pass outcome or a situation value"
+    ],
+    "notes": "Explain message passing verbally: the receiver representation changes when a defender closes the lane. Permutation-aware architectures avoid arbitrary player ordering. Temporal context needs a recurrent, temporal-attention or spatiotemporal design. Graph construction, data quality and calibration still matter.",
+    "sources": [
+      "tacticai",
+      "defcon"
+    ],
+    "image": null,
+    "cue": "NOTEBOOK \u00b7 inspect node and edge features \u00b7 1 min",
+    "minutes": 2
+  },
+  {
+    "title": "Graph models in soccer",
+    "body": [
+      "U.S. Soccer: counterattack success with SkillCorner tracking",
+      "DEFCON: defensive contribution through opponent EPV",
+      "TacticAI: corner receivers, shots and position suggestions",
+      "Graph attention: reception prediction and defensive influence"
+    ],
+    "notes": "Open the project comparison in resources/READING_LIST.md. TacticAI is a set-piece study, not a general open-play EPV model. Its task-specific code and licensed tracking data were not released. Do not interpret attention weights as causal defensive credit.",
+    "sources": [
+      "ussf",
+      "defcon",
+      "tacticai",
+      "gat"
+    ],
+    "image": null,
+    "cue": "",
+    "minutes": 2
+  },
+  {
+    "title": "EPV: value the situation",
+    "body": [
+      "Define the target and horizon before building the model",
+      "Estimate action selection, success and resulting value",
+      "Combine those components into expected possession value"
+    ],
+    "notes": "A schematic decomposition is sum over actions P(action|state) \u00d7 E(value after action|state,action). Include failure/turnover branches. EPV definitions vary: expected net next-goal outcome, possession scoring probability, or fixed-horizon scoring are not interchangeable. GNNs can estimate components; EPV does not require GNNs. Fern\u00e1ndez et al use convolutional pass surfaces.",
+    "sources": [
+      "epv",
+      "defcon",
+      "soccermap"
+    ],
+    "image": null,
+    "cue": "",
+    "minutes": 2
+  },
+  {
+    "title": "Passing risk and dangerous space",
+    "body": [
+      "Completion: how likely is this pass to succeed?",
+      "Accessible space: where can a pass reach teammates?",
+      "Dangerous accessible space: weight access by goal threat"
+    ],
+    "notes": "DAS uses physical pass simulation. The notebook calls the public accessible-space implementation and plots its actual output; it does not relabel a Gaussian map as pass completion. Ball speed assumptions, direction and offside treatment affect results. DAS is danger-weighted area, not calibrated goal probability.",
+    "sources": [
+      "das",
+      "accessible"
+    ],
+    "image": null,
+    "cue": "NOTEBOOK D \u00b7 options \u2192 AS/DAS \u00b7 7 min",
+    "minutes": 1
+  },
+  {
+    "title": "xG and off-ball scoring opportunities",
+    "body": [
+      "Tracking-informed xG adds keeper and defender context",
+      "Off-ball scoring opportunity combines access and scoring potential",
+      "Full EPV also accounts for continuation and turnover risk"
+    ],
+    "notes": "Use StatsBomb\u2019s xG discussion for features and Spearman for OBSO. Never train an xG model on a handful of shots from this sample. A location-danger heuristic is not a fitted xG model.",
+    "sources": [
+      "xg",
+      "spearman",
+      "epv"
+    ],
+    "image": null,
+    "cue": "",
+    "minutes": 1
+  },
+  {
+    "title": "Value runs that never receive the ball",
+    "body": [
+      "Run threat asks what could happen if the runner were served",
+      "Space creation can benefit a different teammate",
+      "Compare changing options without claiming causal attribution"
+    ],
+    "notes": "SkillCorner describes run xT as the chance of a goal within 10 seconds if the run is served. Distinguish this counterfactual target from location-based event xT and observed EPV change. Supplied provider values may be explored without claiming to reproduce the model.",
+    "sources": [
+      "runs",
+      "gaussian"
+    ],
+    "image": "frame.png",
+    "cue": "",
+    "minutes": 1
+  },
+  {
+    "title": "Where research goes next",
+    "body": [
+      "Defense: suppress valuable passing options",
+      "Trajectory models: forecast possible team movements",
+      "Counterfactuals: evaluate alternative actions or positions"
+    ],
+    "notes": "DEFCON is a direct defense/EPV example. GenTac is recent preprint research: present it as emerging work, not settled operational evidence. More realistic simulated outcomes still require out-of-sample validation.",
+    "sources": [
+      "defcon",
+      "gentac",
+      "tacticai"
+    ],
+    "image": null,
+    "cue": "",
+    "minutes": 1
+  },
+  {
+    "title": "Validate the football answer",
+    "body": [
+      "Check clips and labels before trusting metrics",
+      "Split evaluation by match; prevent nearby-frame leakage",
+      "Test calibration, model assumptions and missing-data sensitivity",
+      "Use the result to explain a football decision"
+    ],
+    "notes": "Close on the same sequence. Ask: which option became available, which player helped create it, and what would you need to establish that contribution reliably? Save 5 minutes for questions.",
+    "sources": [
+      "epv",
+      "accessible"
+    ],
+    "image": null,
+    "cue": "",
+    "minutes": 1
+  },
+  {
+    "title": "Questions and next steps",
+    "body": [
+      "What changes when defenders move?",
+      "Which assumptions are useful for your football question?",
+      "Resources: reading list, methodology notes and full notebook"
+    ],
+    "notes": "Questions: 5 minutes. Optional appendix code is for after the workshop. All research references are in slide notes and resources/READING_LIST.md.",
+    "sources": [],
+    "image": null,
+    "cue": "",
+    "minutes": 5
+  }
+]
