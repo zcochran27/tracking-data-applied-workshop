@@ -1,0 +1,56 @@
+[
+  {
+    "file": "assets/videos/tracking_playback.mp4",
+    "poster": "methods/video_tracking_playback.png",
+    "frames": 150,
+    "fps": 10,
+    "source": "SkillCorner match 1925299",
+    "description": "Real SkillCorner coordinates \u00b7 native 10 Hz \u00b7 no inferred future motion"
+  },
+  {
+    "file": "assets/videos/event_detection.mp4",
+    "poster": "methods/video_event_detection.png",
+    "frames": 76,
+    "fps": 10,
+    "source": "SkillCorner match 1925299",
+    "description": "Heuristic candidate: distance \u22642 m, ball height \u22642 m, stable control \u22650.3 s \u00b7 not a verified pass"
+  },
+  {
+    "file": "assets/videos/formation_centering.mp4",
+    "poster": "methods/video_formation_centering.png",
+    "frames": 150,
+    "fps": 10,
+    "source": "SkillCorner match 1925299",
+    "description": "Same players and frames in both panels \u00b7 centering removes translation, not rotations or phase changes"
+  },
+  {
+    "file": "assets/videos/formation_candidates.mp4",
+    "poster": "methods/video_formation_candidates.png",
+    "frames": 87,
+    "fps": 6,
+    "source": "SkillCorner match 1925299",
+    "description": "30-second defensive windows \u00b7 fixed templates \u00b7 3-bin confirmation \u00b7 missing bins reset evidence \u00b7 60\u00d7 playback"
+  },
+  {
+    "file": "assets/videos/control_comparison.mp4",
+    "poster": "methods/video_control_comparison.png",
+    "frames": 75,
+    "fps": 5,
+    "source": "SkillCorner match 1925299",
+    "description": "Teaching baselines \u00b7 Gaussian and arrival scores are not calibrated possession probabilities"
+  },
+  {
+    "file": "assets/videos/dynamic_graph.mp4",
+    "poster": "methods/video_dynamic_graph.png",
+    "frames": 150,
+    "fps": 10,
+    "source": "SkillCorner match 1925299",
+    "description": "Actual moving players \u00b7 edges are recomputed each frame \u00b7 topology illustration, not learned attention"
+  },
+  {
+    "file": "assets/videos/graph_epv_possession.mp4",
+    "poster": "methods/video_graph_epv_possession.png",
+    "source": "Notebook 16 held-out SkillCorner match 1925299",
+    "description": "Actual frozen-model ten-second scoring predictions, synchronized with real tracking; independent workshop GNN, not Bekkers weights"
+  }
+]

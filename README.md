@@ -1,6 +1,6 @@
 # Tracking Data Applied
 
-Illustrated soccer analytics methods using SkillCorner open tracking data. The slide deck links directly to the corresponding standalone method notebooks.
+Illustrated soccer analytics methods using SkillCorner open tracking data. The slide deck links directly to the corresponding standalone method notebooks and embeds seven playable MP4 tracking/model videos. Click a video in PowerPoint slideshow view to play it. [Standalone video files](assets/videos/README.md) are also included.
 
 ## Materials
 
@@ -42,6 +42,6 @@ The xG notebook additionally uses [StatsBomb Open Data](https://github.com/hudl/
 
 ## Slide source and assets
 
-Edit `slides/content.json` for slide text and notebook mappings. `scripts/build_slides.mjs` builds the deck using OpenAI's bundled artifact-tool runtime; `scripts/add_source_links.py` adds source and notebook hyperlinks, and `scripts/publish_previews.py` publishes rendered previews. These three scripts support the slide deck only.
+Edit `slides/content.json` for slide text and notebook mappings. `scripts/build_slides.mjs` builds the deck using OpenAI's bundled artifact-tool runtime; `scripts/add_source_links.py` adds source and notebook hyperlinks, and `scripts/publish_previews.py` publishes rendered previews. These scripts support the slide deck only. `scripts/render_slide_videos.py` renders MP4 assets using cached tracking data, NumPy/SciPy/Matplotlib and an installed ffmpeg executable; it does not supply code to any notebook.
 
 `assets/methods/` retains slide illustrations. `resources/visual_manifest.json` records provenance. `resources/models/` retains the graph teaching checkpoint/history/model card and the licensed external DataBallPy xT grid used by slide illustrations. Method HTML exports are under `outputs/methods/`.

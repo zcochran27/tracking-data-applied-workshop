@@ -29,11 +29,12 @@ for(let i=0;i<content.length;i++){
  });
  if(!c.image)throw new Error(`Missing method visual: ${c.title}`);
  const bytes=await fs.readFile(path.join(root,'assets',c.image));
- s.images.add({blob:bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),contentType:'image/png',alt:c.title,fit:'contain',position:{left:430,top:140,width:800,height:455}});
+ s.images.add({blob:bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),contentType:'image/png',alt:c.title,fit:'contain',position:{left:430,top:c.video?145:140,width:800,height:c.video?420:455}});
  if(c.cue){rect(s,60,600,1160,43,'#e0eee8');text(s,c.cue,78,608,1120,34,22,accent,true);}
+ if(c.video)text(s,'▶ Click the video to play · embedded MP4',450,574,760,24,15,accent,true);
  c.sources.forEach((k,j)=>text(s,sources[k][0],60+j*(1080/c.sources.length),657,1060/c.sources.length,40,12,'#51645c'));
  text(s,`${i+1} / ${content.length}`,1165,657,90,30,14,'#51645c');
- s.speakerNotes.text=c.notes+'\n\n'+(c.cue||'')+(c.notebook?'\nhttps://github.com/zcochran27/tracking-data-applied-workshop/blob/main/'+c.notebook:'')+'\n\nSources:\n'+c.sources.map(k=>sources[k].join('\n')).join('\n\n');
+ s.speakerNotes.text=c.notes+'\n\n'+(c.cue||'')+(c.notebook?'\nhttps://github.com/zcochran27/tracking-data-applied-workshop/blob/main/'+c.notebook:'')+(c.video?'\nEmbedded video (click to play): '+c.video+'\n'+(c.videoDescription||''):'')+'\n\nSources:\n'+c.sources.map(k=>sources[k].join('\n')).join('\n\n');
 }
 await fs.mkdir(path.join(root,'.build'),{recursive:true});
 await fs.mkdir(path.join(root,'slides/previews'),{recursive:true});

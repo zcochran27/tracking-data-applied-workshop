@@ -79,18 +79,20 @@
   {
     "title": "Animating a sequence",
     "body": [
+      "Follow actual player and ball movement",
       "Keep player identities consistent across frames",
-      "Use playback to inspect motion and tactical context",
-      "Overlay model outputs on the same sequence"
+      "Inspect the sequence at native 10 Hz"
     ],
-    "image": "methods/animation.png",
+    "image": "methods/video_tracking_playback.png",
     "sources": [
       "kloppy",
       "fot"
     ],
-    "notes": "Three snapshots are from the real selected clip. The notebook contains a full embedded animation.",
+    "notes": "Embedded native-rate MP4 of actual SkillCorner player and ball positions with shirt numbers. Click the movie in slideshow view. Tracking visualization, not broadcast footage.",
     "cue": "NOTEBOOK · 01_data_exploration.ipynb",
-    "notebook": "notebooks/methods/01_data_exploration.ipynb"
+    "notebook": "notebooks/methods/01_data_exploration.ipynb",
+    "video": "assets/videos/tracking_playback.mp4",
+    "videoDescription": "Embedded native-rate MP4 of actual SkillCorner player and ball positions with shirt numbers. Click the movie in slideshow view. Tracking visualization, not broadcast footage."
   },
   {
     "title": "Possession detection",
@@ -111,18 +113,20 @@
   {
     "title": "Pass-event detection",
     "body": [
-      "Detect release, ball travel and reception cues",
-      "Track a change between plausible player possessions",
-      "Validate event timing against video or labels"
+      "Identify stable player-control segments",
+      "Connect release, ball transit and reception candidates",
+      "Treat detections as candidates until validated"
     ],
-    "image": "methods/pass_detection.png",
+    "image": "methods/video_event_detection.png",
     "sources": [
       "pathcrf",
       "preprocess"
     ],
-    "notes": "The real ball path is annotated at supplied possession endpoints. This is an explanatory candidate sequence, not a validated recovered pass. Pros: converts continuous signals to actionable events. Cons: missing ball data and multi-touch ambiguity.",
+    "notes": "Embedded MP4 uses computed heuristic candidates, not supplied event endpoints: nearest player within 2 m, ball height at most 2 m, stable control at least 0.3 seconds, same-team player change, transit 0.1–4 seconds and endpoint displacement at least 3 m. Playback is half speed. These are unverified pass candidates, not measured detection accuracy.",
     "cue": "NOTEBOOK · 02_event_detection.ipynb",
-    "notebook": "notebooks/methods/02_event_detection.ipynb"
+    "notebook": "notebooks/methods/02_event_detection.ipynb",
+    "video": "assets/videos/event_detection.mp4",
+    "videoDescription": "Embedded MP4 uses computed heuristic candidates, not supplied event endpoints: nearest player within 2 m, ball height at most 2 m, stable control at least 0.3 seconds, same-team player change, transit 0.1–4 seconds and endpoint displacement at least 3 m. Playback is half speed. These are unverified pass candidates, not measured detection accuracy."
   },
   {
     "title": "Guess the current player roles",
@@ -154,6 +158,24 @@
     "notes": "Independently generated from SkillCorner. Two-standard-deviation covariance ellipses, not confidence regions. Labels are metadata roles. Pros: removes team translation. Cons: averaging still mixes phases and rotations; covariance can hide multimodal behavior. Use identical qualifying samples in both panels.",
     "cue": "NOTEBOOK · 03_formation_analysis.ipynb",
     "notebook": "notebooks/methods/03_formation_analysis.ipynb"
+  },
+  {
+    "title": "Centering a moving team shape",
+    "body": [
+      "Track the same players in both panels",
+      "Subtract the current team centroid at every frame",
+      "Separate team translation from relative shape"
+    ],
+    "sources": [
+      "pleuler",
+      "formation"
+    ],
+    "notes": "Native-rate video of real coordinates. The left panel retains pitch position; the right shows team-centroid-relative coordinates. Includes all home players in this geometric illustration. Removing translation does not remove rotation, phase changes or individual role swaps.",
+    "notebook": "notebooks/methods/03_formation_analysis.ipynb",
+    "cue": "NOTEBOOK · 03_formation_analysis.ipynb",
+    "video": "assets/videos/formation_centering.mp4",
+    "image": "methods/video_formation_centering.png",
+    "videoDescription": "Native-rate video of real coordinates. The left panel retains pitch position; the right shows team-centroid-relative coordinates. Includes all home players in this geometric illustration. Removing translation does not remove rotation, phase changes or individual role swaps."
   },
   {
     "title": "Pleuler: rotating player viewpoints",
@@ -223,14 +245,16 @@
       "Require persistent evidence before switching",
       "Review changes alongside substitutions and video"
     ],
-    "image": "methods/formation_changes.png",
+    "image": "methods/video_formation_candidates.png",
     "sources": [
       "pleuler",
       "efpi"
     ],
-    "notes": "Plot uses real defensive-context windows with at least 50 qualifying frames. Three consecutive available 30-second bins confirm a label; missing bins reset the candidate count. Existing confirmed state is retained through missing bins, not evidence of ongoing stability. This is an educational rule, not EFPI change logic. Pleuler explicitly proposed change detection without testing it. No tactical ground truth is available here. Role swaps alone need not imply formation changes.",
+    "notes": "Embedded MP4 computes centered defensive-window medians, fixed-template Hungarian assignments and three-bin causal persistence. Uses 30-second bins with at least 50 qualifying frames per outfield player. Missing bins reset candidate evidence; the last confirmed state is retained through gaps. 60× playback. Shape labels are candidates without tactical ground truth, not elastic EFPI inference.",
     "cue": "NOTEBOOK · 03_formation_analysis.ipynb",
-    "notebook": "notebooks/methods/03_formation_analysis.ipynb"
+    "notebook": "notebooks/methods/03_formation_analysis.ipynb",
+    "video": "assets/videos/formation_candidates.mp4",
+    "videoDescription": "Embedded MP4 computes centered defensive-window medians, fixed-template Hungarian assignments and three-bin causal persistence. Uses 30-second bins with at least 50 qualifying frames per outfield player. Missing bins reset candidate evidence; the last confirmed state is retained through gaps. 60× playback. Shape labels are candidates without tactical ground truth, not elastic EFPI inference."
   },
   {
     "title": "Formation detection",
@@ -527,6 +551,24 @@
     "notebook": "notebooks/methods/11_arrival_time_control.ipynb"
   },
   {
+    "title": "Pitch control as players move",
+    "body": [
+      "Compare three models on identical moving frames",
+      "Watch boundaries respond to player movement",
+      "Distinguish spatial scores from calibrated probabilities"
+    ],
+    "sources": [
+      "gaussian",
+      "spearman"
+    ],
+    "notes": "Actual tracking, same frame/grid for Voronoi, directional Gaussian and simplified arrival-time scores. Gaussian influence uses projected centers and hand-set directional scales. Arrival time uses 0.7 s reaction/projection and 5 m/s travel speed. These are teaching baselines, not exact published production models. Video samples at 5 Hz with real-time playback. Orange denotes Brisbane, purple Perth.",
+    "notebook": "notebooks/methods/11_arrival_time_control.ipynb",
+    "cue": "NOTEBOOK · 11_arrival_time_control.ipynb",
+    "video": "assets/videos/control_comparison.mp4",
+    "image": "methods/video_control_comparison.png",
+    "videoDescription": "Actual tracking, same frame/grid for Voronoi, directional Gaussian and simplified arrival-time scores. Gaussian influence uses projected centers and hand-set directional scales. Arrival time uses 0.7 s reaction/projection and 5 m/s travel speed. These are teaching baselines, not exact published production models. Video samples at 5 Hz with real-time playback. Orange denotes Brisbane, purple Perth."
+  },
+  {
     "title": "Ball-aware pitch control",
     "body": [
       "Simulate how long the ball takes to reach a target",
@@ -687,13 +729,15 @@
       "Maintain player identities across snapshots",
       "Model changing passing lanes and defensive relationships"
     ],
-    "image": "methods/dynamic_graph.png",
+    "image": "methods/video_dynamic_graph.png",
     "sources": [
       "ussf",
       "pathcrf"
     ],
-    "notes": "Actual snapshots and a player trail. A sequence of spatial graphs retains team interactions that change with time; a static aggregate passing network does not.",
-    "cue": ""
+    "notes": "Embedded MP4 of real player motion and 20 m radius edges, recomputed at native 10 Hz. This player-only topology illustration differs from the workshop trained model, which adds a ball node and ball connections. No learned edge importance is displayed.",
+    "cue": "",
+    "video": "assets/videos/dynamic_graph.mp4",
+    "videoDescription": "Embedded MP4 of real player motion and 20 m radius edges, recomputed at native 10 Hz. This player-only topology illustration differs from the workshop trained model, which adds a ball node and ball connections. No learned edge importance is displayed."
   },
   {
     "title": "Temporal edges between snapshots",
@@ -811,6 +855,24 @@
     "notes": "PyData London, 7 June 2025. Talk uses World Cup 2022 PFF data across 64 matches, with labels respecting team and period. This is a ten-second scoring target, not automatically the complete action-decomposed Fernández EPV framework. Schematic only: no pretrained model inference here. Strength: includes off-ball context. Limitation: rare correlated labels, calibration and transfer to another competition.",
     "cue": "NOTEBOOK · 16_graph_epv.ipynb",
     "notebook": "notebooks/methods/16_graph_epv.ipynb"
+  },
+  {
+    "title": "Our graph model: an unseen possession",
+    "body": [
+      "Predict scoring within the next ten seconds",
+      "Follow real held-out tracking and frozen-model predictions",
+      "Compare the goal buildup with the non-goal notebook example"
+    ],
+    "sources": [
+      "skillcorner",
+      "graphepv"
+    ],
+    "notes": "Embedded MP4 re-encodes the actual animation generated by notebook 16. Independent 353-parameter frame GNN trained on ten SkillCorner matches, calibrated on three and evaluated on three unseen matches. Not Bekkers CrystalGraph architecture or weights; not supplied SkillCorner EPV. Test ROC AUC 0.843, AP 0.020 versus prevalence 0.0033; Brier score does not improve over the constant baseline. Goal markers are score-reconciled but not video-verified. This display case was selected by event context, not high predictions; it is not a performance sample. The model uses only the current frame, even though playback reveals successive predictions.",
+    "notebook": "notebooks/methods/16_graph_epv.ipynb",
+    "cue": "NOTEBOOK · 16_graph_epv.ipynb",
+    "video": "assets/videos/graph_epv_possession.mp4",
+    "image": "methods/video_graph_epv_possession.png",
+    "videoDescription": "Embedded MP4 re-encodes the actual animation generated by notebook 16. Independent 353-parameter frame GNN trained on ten SkillCorner matches, calibrated on three and evaluated on three unseen matches. Not Bekkers CrystalGraph architecture or weights; not supplied SkillCorner EPV. Test ROC AUC 0.843, AP 0.020 versus prevalence 0.0033; Brier score does not improve over the constant baseline. Goal markers are score-reconciled but not video-verified. This display case was selected by event context, not high predictions; it is not a performance sample. The model uses only the current frame, even though playback reveals successive predictions."
   },
   {
     "title": "GraphEPV and temporal extensions",
