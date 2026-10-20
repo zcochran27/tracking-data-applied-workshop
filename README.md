@@ -6,9 +6,10 @@ An illustrated soccer analytics workshop using SkillCorner open tracking data, w
 
 - [PowerPoint deck](slides/tracking-data-applied.pptx)
 - [Interactive notebook with saved outputs](notebooks/tracking_data_applied.ipynb)
+- [From-scratch notebooks for every avenue](notebooks/avenues/README.md)
 - [Browser-readable notebook with animation](outputs/tracking-data-applied.html)
 - [Reading list and research projects](resources/READING_LIST.md)
-- [Presenter guide and timings](resources/PRESENTER_GUIDE.md)
+- [Presenter guide](resources/PRESENTER_GUIDE.md)
 - [Methodology and approximation boundaries](resources/METHODOLOGY.md)
 - [Readable Python helpers](workshop.py)
 
@@ -49,6 +50,8 @@ python scripts/illustrate_roles.py
 python scripts/execute_notebook.py
 python -m unittest discover -s tests
 ```
+
+For the independent method notebooks, run `python scripts/build_avenue_notebooks.py`, then `python scripts/execute_avenue_notebooks.py`. This creates seven notebooks (foundations plus six avenues) with code, explanations and saved results, and standalone HTML copies under `outputs/avenues/`. Each notebook implements its calculations directly; shared helpers only load data and draw the pitch. Training code uses explicitly labeled synthetic checks when the partial match lacks reliable training labels.
 
 The slide authoring source is `scripts/build_slides.mjs`; it uses OpenAI's bundled artifact-tool runtime (not a public npm dependency). Edit `slides/content.json` or the authoring script for slide content and layout. The exported PPTX is editable in PowerPoint. `build_materials.py` regenerates an unexecuted notebook, so execute it afterward.
 

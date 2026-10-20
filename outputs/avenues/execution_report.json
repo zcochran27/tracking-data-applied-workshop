@@ -1,0 +1,37 @@
+[
+  {
+    "notebook": "00_data_foundations.ipynb",
+    "code_cells": 3,
+    "errors": 0
+  },
+  {
+    "notebook": "01_event_detection.ipynb",
+    "code_cells": 4,
+    "errors": 0
+  },
+  {
+    "notebook": "02_formations_and_roles.ipynb",
+    "code_cells": 6,
+    "errors": 0
+  },
+  {
+    "notebook": "03_match_segmentation.ipynb",
+    "code_cells": 4,
+    "errors": 0
+  },
+  {
+    "notebook": "04_physical_metrics.ipynb",
+    "code_cells": 5,
+    "errors": 0
+  },
+  {
+    "notebook": "05_game_modeling.ipynb",
+    "code_cells": 7,
+    "errors": 0
+  },
+  {
+    "notebook": "06_graphs_and_temporal_models.ipynb",
+    "code_cells": 7,
+    "errors": 0
+  }
+]
