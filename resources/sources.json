@@ -102,5 +102,33 @@
   "fot": [
     "Friends of Tracking: pitch control and EPV tutorials",
     "https://github.com/Friends-of-Tracking-Data-FoTD/LaurieOnTracking"
+  ],
+  "xt": [
+    "Karun Singh: Expected Threat",
+    "https://karun.in/blog/expected-threat.html"
+  ],
+  "dbxt": [
+    "DataBallPy fitted xT methodology",
+    "https://databallpy.readthedocs.io/en/main/features/xt_models.html"
+  ],
+  "explosive": [
+    "SkillCorner explosive accelerations",
+    "https://skillcorner.com/articles/new-feature-explosive-accelerations"
+  ],
+  "dbmodel": [
+    "DataBallPy source and fitted model",
+    "https://github.com/Alek050/databallpy"
+  ],
+  "temporal": [
+    "PyTorch Geometric Temporal architectures",
+    "https://pytorch-geometric-temporal.readthedocs.io/en/latest/modules/root.html"
+  ],
+  "tcn": [
+    "Temporal convolution for sequence modeling",
+    "https://arxiv.org/abs/1803.01271"
+  ],
+  "attention": [
+    "Attention Is All You Need",
+    "https://arxiv.org/abs/1706.03762"
   ]
 }

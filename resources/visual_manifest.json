@@ -1,0 +1,252 @@
+{
+  "coordinates": {
+    "description": "One real tracking frame in native metric coordinates",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "loading": {
+    "description": "Kloppy-derived rows and movement features",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "quality": {
+    "description": "Raw is_detected flags for selected frame",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "animation": {
+    "description": "Three real snapshots from the embedded animation",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "possession": {
+    "description": "Nearest-player possession heuristic: candidate zones and unassigned frames",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "pass_detection": {
+    "description": "Real ball trajectory around supplied possession changes; event detection cues",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "formation": {
+    "description": "Median team-centred positions split by possession, not a named formation prediction",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "role_lines": {
+    "description": "Hierarchical clustering of real outfield positions into illustrative longitudinal lines",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "phases": {
+    "description": "SkillCorner supplied phase intervals within the cached source range",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "speed": {
+    "description": "Real player raw and smoothed speed",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "distance": {
+    "description": "Integral of real estimated speed over valid 0.1 second intervals",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "zones": {
+    "description": "Real sample distances split using documented men\u2019s speed bands",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "efforts": {
+    "description": "Real threshold crossing and illustrative duration-based sprint segmentation",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "acceleration": {
+    "description": "Signed speed derivative, distinct from acceleration-vector magnitude",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "time_hsr": {
+    "description": "Real speed threshold interval; qualification and filtering explicitly not reproduced",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "time_sprint": {
+    "description": "Real speed threshold interval; qualification and filtering explicitly not reproduced",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "peak": {
+    "description": "Real frame-speed distribution; no false reconstruction of official activity-level PSV-99",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "peak_velocity": {
+    "description": "Real sample-speed maximum over time, explicitly not official production Peak Velocity",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "xg": {
+    "description": "Hypothetical shot geometry using real ball and player positions",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "xt": {
+    "description": "Actual fitted DataBallPy open-play xT grid, rescaled from 106 to 105 m for display",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "xt_gain": {
+    "description": "Fitted xT lookup on real normalized ball endpoints",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "voronoi": {
+    "description": "Voronoi on a real common frame; see methodology assumptions",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "gaussian": {
+    "description": "Gaussian influence on a real common frame; see methodology assumptions",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "arrival": {
+    "description": "Arrival-time baseline on a real common frame; see methodology assumptions",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "individual_gaussian": {
+    "description": "Directional influence ellipse anchored to a real moving player",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "physics": {
+    "description": "Schematic of Spearman-style model stages with real tracking context",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "accessible": {
+    "description": "Actual public accessible-space model output on the selected real frame",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "dangerous": {
+    "description": "Actual public accessible-space model output on the selected real frame",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "das_change": {
+    "description": "Actual AS and DAS values on three frames with separate unit axes",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "completion": {
+    "description": "Actual public model xC inference on hypothetical passes to real teammates",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "run_threat": {
+    "description": "Supplied SkillCorner xthreat values for real off-ball runs, not reconstructed predictions",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "graph": {
+    "description": "15 m radius graph from actual player coordinates",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "edge_features": {
+    "description": "Real graph edge attributes",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "message": {
+    "description": "GNN message-passing architecture schematic with actual tracking context",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "temporal_features": {
+    "description": "Causal lagged features from real contiguous player trajectories",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "dynamic_graph": {
+    "description": "Actual tracking snapshots and a player trail illustrate time-varying graphs",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "temporal_edges": {
+    "description": "Spatial links within time and identity links across time; schematic topology",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "temporal_model": {
+    "description": "Temporal GNN architecture alternatives; no trained output or future leakage",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "gru": {
+    "description": "Recurrent GNN architecture schematic; no trained predictions",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "tcn": {
+    "description": "Temporal convolution architecture schematic; no trained predictions",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "attention": {
+    "description": "Temporal attention architecture schematic; no trained predictions",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "spatiotemporal": {
+    "description": "Spatiotemporal message-passing schematic, distinct from frame encoders followed by sequence models",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "soccermap": {
+    "description": "SoccerMap architecture schematic, not an implemented pretrained prediction",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "epv": {
+    "description": "EPV decomposition with turnover branches; architecture schematic",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "provider_epv": {
+    "description": "Actual supplied pass EPV change values",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "defcon": {
+    "description": "DEFCON conceptual pipeline; not a reproduced defensive-credit model",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "counterattack": {
+    "description": "Counterattack project architecture; not model inference from published weights",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "tacticai": {
+    "description": "TacticAI architecture schematic with real corner-reception context, not trained predictions",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "forecast": {
+    "description": "Generative forecasting schematic; no invented future tracks presented as predictions",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "validation": {
+    "description": "Schematic match-level data split, not measured validation performance",
+    "match_id": 1925299,
+    "kind": "derived from tracking / supplied events unless labeled schematic"
+  }
+}

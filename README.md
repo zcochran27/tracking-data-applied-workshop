@@ -1,6 +1,6 @@
 # Tracking Data Applied
 
-A one-hour soccer analytics workshop using SkillCorner open tracking data. Designed for students with basic pandas, watching a presenter walkthrough.
+An illustrated soccer analytics workshop using SkillCorner open tracking data, with a dedicated slide for each method and reproducible visual examples.
 
 ## Materials
 
@@ -27,9 +27,9 @@ Run all cells in order. Internet is required to install packages and fetch the i
 
 ## Workshop flow
 
-Data and visualization → events, roles and phases → SkillCorner physical metrics → Voronoi/Gaussian/arrival-time control → graph representations and GNN research → passing risk and dangerous accessible space → EPV, xG and off-ball value.
+Data and visualization → event and formation detection → phases → physical metrics → xG and xThreat → pitch control → passing risk and dangerous space → off-ball threat → spatial and temporal graphs → neural models and EPV.
 
-Notebook visits take 24 minutes, slide delivery about 30 minutes, and questions 5 minutes, leaving a small transition buffer. Optional phase/shape cells are for after the hour. No training of full EPV, xG or GNN models is implied.
+Each method has its own visual, assumptions and interpretation. Temporal graph examples include lagged features, dynamic spatial edges and forward identity edges. No training of full EPV, xG or GNN models is implied.
 
 ## Data and credit
 
@@ -44,8 +44,13 @@ SkillCorner definitions anchor the physical metrics; DataBallPy documentation su
 ```sh
 python scripts/build_materials.py
 python scripts/render_figures.py
+python scripts/illustrate_methods.py
 python scripts/execute_notebook.py
 python -m unittest discover -s tests
 ```
 
 The slide authoring source is `scripts/build_slides.mjs`; it uses OpenAI's bundled artifact-tool runtime (not a public npm dependency). Edit `slides/content.json` or the authoring script for slide content and layout. The exported PPTX is editable in PowerPoint. `build_materials.py` regenerates an unexecuted notebook, so execute it afterward.
+
+## Figure and model provenance
+
+`assets/methods/` contains generated method illustrations. `resources/visual_manifest.json` describes their provenance. Real tracking and supplied provider values are distinguished from architecture schematics and teaching baselines. The DataBallPy fitted open-play xT grid is retained with its license and SHA-256 provenance in `resources/models/`. It is an external event-trained model, not a grid fitted on this tracking sample.

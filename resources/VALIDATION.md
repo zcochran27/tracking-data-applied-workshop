@@ -1,9 +1,9 @@
 # Validation
 
-- Executed all 13 notebook code cells in order on the real SkillCorner sample; no error outputs.
+- Executed all 17 notebook code cells in order on the real SkillCorner sample; no error outputs.
 - Saved player plots, embedded animation, widget state, pitch-control comparisons, graph features, AS/DAS summaries and hypothetical-pass completion estimates.
-- Ran three numerical tests covering constant velocity and missing-data gaps, effort segmentation, and control-surface bounds/symmetry plus graph-edge construction.
-- Rendered and visually inspected all 21 slides; corrected diagram text fit and section naming.
+- Ran six numerical tests covering motion/gap handling, effort segmentation, control bounds, graph construction, temporal-edge direction and continuity, lag masking, and fitted xT lookup orientation.
+- Rendered and visually inspected all 51 slides. Every method has a dedicated visual. No duration, audience-skill or agenda slide is included.
 - PowerPoint package integrity, slide geometry/font policy and first-party import checks completed through the presentation finalizer.
 - Exported the executed notebook as standalone HTML for browser viewing. Jupyter is required for live Python widgets.
 

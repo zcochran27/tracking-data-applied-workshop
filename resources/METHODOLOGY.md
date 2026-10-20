@@ -19,5 +19,20 @@ Actual `accessible-space` package inference is used. Explicit first-half directi
 ## Graphs and value models
 The radius graph is directed, with distance, dx/dy and same-team features. No GNN is trained. Graph construction is not evidence of learned tactical relationships. Full EPV, xG, run-threat and counterfactual models are explained using cited research. A model's prediction target, horizon, calibration and failure/turnover branches must be stated. Attention weights and before/after value differences are not causal attribution by themselves.
 
+## Illustrated event and structure methods
+The nearest-player detector uses a 2 m zone and leaves other frames unassigned. It is not a validated possession or pass detector. A real ball path illustrates release/travel/reception cues around supplied event endpoints. Outfield role locations are team-centered medians split by possession. Ward clustering into three longitudinal lines is an exploratory baseline, not an asserted named formation. Phase figures display supplied SkillCorner intervals.
+
+## Physical threshold intervals
+SkillCorner's published explosive-acceleration description defines Time to HSR and Time to Sprint using the intervals from 9 to 20 and 9 to 25 km/h within qualifying explosive efforts. The slide plots use real continuous threshold crossings, selecting an observed sub-9 km/h sample as the illustrative start; they do not reconstruct official qualification, interpolation, Top 3 aggregation or production filtering. The acceleration slide differentiates scalar speed, not the magnitude of the acceleration vector.
+
+## Fitted event-location xThreat
+The external DataBallPy open-play grid is retained in resources/models with package-version and SHA-256 provenance and the upstream license. It is not fitted on this tracking sample. Its lookup convention uses a centered 106 x 68 m pitch attacking right. Our fixed-match example rotates first-half Brisbane coordinates into attack-right orientation and rescales longitudinal coordinates from 105 to 106 m. The arrow illustrates an observed ball displacement; no single completed pass or causal player contribution is asserted for that segment. This event-location xT is distinct from SkillCorner's supplied off-ball-run xthreat.
+
+## Temporal graph inputs
+The notebook builds one-second historical features only where the lag spans exactly ten native frame steps within the same player and period. Missing histories remain masked. Spatial edges are rebuilt at each frame; identity edges connect the same player only across consecutive observed frames and point forward. Recurrent, temporal-convolution, causal-attention and joint spatiotemporal models are explained separately with architecture schematics; no trained forecasts are supplied. The example's symmetric coordinate smoothing is suitable for offline retrospective analysis. For a live predictor, use causal preprocessing or account explicitly for smoothing latency before claiming leakage-free inference.
+
+## Visual provenance
+Every method slide has a code-generated visual. resources/visual_manifest.json documents the figures. Provider run-threat and pass-EPV fields are plotted as supplied values. Physics-aware control, neural models and research projects use labeled architecture schematics where weights or task data are unavailable. The TacticAI illustration uses real corner-reception context, not original TacticAI training input or inference.
+
 ## Evaluation
 Use held-out matches or sequences, not random neighboring frames. Validate preprocessing with clips; evaluate event detection with timing tolerances, probabilities with calibration/proper scores, and tactical labels with explicit taxonomies. Test sensitivity to missing/extrapolated positions, smoothing, thresholds, directions and physical parameters. The notebook is an educational analysis, not a production scouting or medical/load-monitoring system.

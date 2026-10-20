@@ -1,0 +1,8 @@
+{
+  "package": "databallpy",
+  "version": "0.7.2",
+  "path": "databallpy/models/open_play_xT.npy",
+  "sha256": "5579f29389f27af1f22ad2922e1c03a9490b12854ce0e9d363b0dbe71af1cbbc",
+  "coordinate_convention": "106 x 68 metres, centered, attack right",
+  "source": "https://github.com/Alek050/databallpy"
+}

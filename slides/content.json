@@ -3,342 +3,742 @@
     "title": "Tracking Data Applied",
     "body": [
       "Soccer analytics with SkillCorner",
-      "Load \u2022 inspect \u2022 visualize \u2022 model",
-      "60-minute workshop | basic pandas"
+      "From coordinates to football questions",
+      "Methods, assumptions and interpretation"
     ],
-    "notes": "Open with the football problem: who has a useful passing option, and what created it? Ask students to watch the same sequence before looking at model outputs.",
+    "image": "methods/coordinates.png",
     "sources": [
       "skillcorner"
     ],
-    "image": "frame.png",
-    "cue": "",
-    "minutes": 1
+    "notes": "Introduce the match and the distinction between observed tracking, extrapolated tracking and derived labels.",
+    "cue": ""
   },
   {
     "title": "Data and documentation",
     "body": [
-      "SkillCorner/opendata: match metadata, tracking, dynamic events, phases",
-      "kloppy: standardize the tracking loader",
-      "DataBallPy: metric explanations and implementation references"
+      "SkillCorner/opendata: tracking and supplied labels",
+      "kloppy: load and standardize",
+      "DataBallPy: metric explanations and models"
     ],
-    "notes": "Open the links in resources/READING_LIST.md. Tracking and derived labels are different products. The sample is Brisbane vs Perth, match 1925299; do not imply all files in the current manifest are downloaded.",
+    "image": "methods/loading.png",
     "sources": [
       "skillcorner",
       "kloppy",
       "distance"
     ],
-    "image": null,
-    "cue": "",
-    "minutes": 2
+    "notes": "The opening entries are linked. Full sources are in the reading list. Real sample: Brisbane vs Perth, 21 December 2024, match 1925299.",
+    "cue": ""
   },
   {
-    "title": "The hour",
+    "title": "Loading tracking data",
     "body": [
-      "0\u201313: data, loading, plotting and animation",
-      "13\u201326: applications and physical metrics",
-      "26\u201350: space, graphs, passing and value",
-      "50\u201360: off-ball applications, interpretation and questions"
+      "Load match metadata and JSONL with kloppy",
+      "Retain frame IDs, periods and native metres",
+      "Convert to a dataframe for analysis"
     ],
-    "notes": "Timing includes notebook visits: A=7, B=4, C=5, graph=1, D=7 minutes. Slides total 31 minutes; questions 5 minutes. Avoid running full-match simulations live.",
-    "sources": [],
-    "image": null,
-    "cue": "",
-    "minutes": 1
+    "image": "methods/loading.png",
+    "sources": [
+      "kloppy"
+    ],
+    "notes": "The figure contains actual dataframe values; velocity columns are derived after loading.",
+    "cue": "NOTEBOOK \u00b7 load and inspect"
   },
   {
-    "title": "Coordinates are measurements",
+    "title": "Tracking quality and visibility",
     "body": [
-      "Frames + player identities + x/y positions + ball",
-      "Check units, pitch size, clock and attacking direction",
-      "Missing or extrapolated positions affect every downstream metric"
+      "Separate detected from extrapolated positions",
+      "Keep missingness and coverage visible",
+      "Avoid derivatives across gaps or periods"
     ],
-    "notes": "Native sample is 10 Hz. Inspect raw is_detected fields where present. Keep contiguous segments; never differentiate across a half or a gap. Dynamic-event coordinates may use different orientation from tracking.",
+    "image": "methods/quality.png",
     "sources": [
       "skillcorner",
       "preprocess"
     ],
-    "image": "frame.png",
-    "cue": "NOTEBOOK A \u00b7 load \u2192 inspect \u2192 animate \u00b7 7 min",
-    "minutes": 2
+    "notes": "Red rings mark extrapolated players according to raw is_detected. Coordinates can exist without a direct camera observation. All subsequent models inherit this uncertainty.",
+    "cue": ""
   },
   {
-    "title": "Five avenues for tracking analysis",
+    "title": "Plotting a tracking frame",
     "body": [
-      "Events: what happened?  |  Roles: who played where?",
-      "Phases: what was the tactical context?",
-      "Physical output: how did players move?",
-      "Game modeling: which options were available and valuable?",
-      "Defense and off-ball movement connect all five"
+      "Draw the pitch in the data\u2019s coordinate system",
+      "Color by team and identify the ball",
+      "Check direction before calculating goal-related features"
     ],
-    "notes": "Defense/off-ball movement are cross-cutting applications. Keep the core taxonomy of five avenues while making those questions visible.",
-    "sources": [],
-    "image": null,
-    "cue": "",
-    "minutes": 1
+    "image": "methods/coordinates.png",
+    "sources": [
+      "skillcorner"
+    ],
+    "notes": "Use actual pitch dimensions. A visually plausible frame is a useful first check, but does not prove identity or position accuracy.",
+    "cue": ""
   },
   {
-    "title": "Event detection",
+    "title": "Animating a sequence",
     "body": [
-      "Start with possession zones and changes in ball motion",
-      "Extend to passes, receptions, runs and pressure",
-      "PathCRF: infer possession paths from player trajectories"
+      "Keep player identities consistent across frames",
+      "Use playback to inspect motion and tactical context",
+      "Overlay model outputs on the same sequence"
     ],
-    "notes": "Simple proximity is a candidate detector, not ground truth. Loose balls, aerial passes and duels create ambiguity. PathCRF (2026) models dynamic graphs and possession-path inference. Validate event precision/recall with timing tolerances and hand-reviewed clips.",
+    "image": "methods/animation.png",
+    "sources": [
+      "kloppy",
+      "fot"
+    ],
+    "notes": "Three snapshots are from the real selected clip. The notebook contains a full embedded animation.",
+    "cue": "NOTEBOOK \u00b7 play the sequence"
+  },
+  {
+    "title": "Possession detection",
+    "body": [
+      "Find the nearest player inside a candidate zone",
+      "Use ball motion to distinguish touches from flyovers",
+      "Leave ambiguous frames unassigned"
+    ],
+    "image": "methods/possession.png",
+    "sources": [
+      "preprocess",
+      "pathcrf"
+    ],
+    "notes": "Figure is an actual 2 m proximity heuristic, not the full Vidal-Codina or PathCRF method. Pros: transparent and quick. Cons: aerial balls, duels and tracking uncertainty. Compare with supplied possession labels; evaluate timing-aware accuracy.",
+    "cue": "NOTEBOOK \u00b7 inspect the candidate detector"
+  },
+  {
+    "title": "Pass-event detection",
+    "body": [
+      "Detect release, ball travel and reception cues",
+      "Track a change between plausible player possessions",
+      "Validate event timing against video or labels"
+    ],
+    "image": "methods/pass_detection.png",
     "sources": [
       "pathcrf",
       "preprocess"
     ],
-    "image": null,
-    "cue": "",
-    "minutes": 2
+    "notes": "The real ball path is annotated at supplied possession endpoints. This is an explanatory candidate sequence, not a validated recovered pass. Pros: converts continuous signals to actionable events. Cons: missing ball data and multi-touch ambiguity.",
+    "cue": ""
   },
   {
-    "title": "Formation, roles and phases",
+    "title": "Formation detection",
     "body": [
-      "Compare shape separately in and out of possession",
-      "Normalize location before grouping players into roles",
-      "Join supplied phase intervals to frames before summarizing"
+      "Remove team translation with centered coordinates",
+      "Separate in-possession and defensive samples",
+      "Estimate stable role locations over a window"
     ],
-    "notes": "Shaw & Glickman show dynamic formations by game state. Mean positions alone hide role switches and transition periods. Phase definitions depend on the taxonomy. Notebook appendix demonstrates interval joins and shape summaries, not a trained formation classifier.",
+    "image": "methods/formation.png",
     "sources": [
-      "formation",
-      "phases",
-      "skillcorner"
+      "formation"
     ],
-    "image": null,
-    "cue": "",
-    "minutes": 3
+    "notes": "Real median outfield positions are shown separately by possession. Pros: summarizes organization beyond a team sheet. Cons: averaging mixes roles and game states; these are not asserted formation labels.",
+    "cue": ""
   },
   {
-    "title": "SkillCorner physical metrics",
+    "title": "Player-role and line detection",
     "body": [
-      "Volume: distance, HSR distance, sprint distance",
-      "Intensity: HSR 20\u201325 km/h; sprint above 25 km/h",
-      "Explosiveness: time to HSR or sprint from a qualifying start",
-      "Capacity: PSV-99 differs from absolute Peak Velocity"
+      "Group longitudinal positions into candidate lines",
+      "Assign roles consistently through player exchanges",
+      "Treat cluster count as a modeling choice"
     ],
-    "notes": "Thresholds here refer to the documented men\u2019s context. Use half-open bins [20,25) and [25,\u221e) in our teaching code to avoid overlap; this boundary convention is ours. SkillCorner describes PSV-99 over physical activities above 15 km/h; do not replace it with a percentile of all frames. Exact production smoothing and effort rules are not fully reproduced.",
+    "image": "methods/role_lines.png",
     "sources": [
-      "physical",
-      "peak"
+      "formation"
     ],
-    "image": null,
-    "cue": "",
-    "minutes": 2
+    "notes": "Ward clustering of real centered x positions into three groups is a teaching baseline. It is not a validated named-formation classifier. Pros: interpretable. Cons: fixed line counts, overlaps and rotations.",
+    "cue": ""
   },
   {
-    "title": "From positions to physical output",
+    "title": "Phase-of-play segmentation",
     "body": [
-      "Clean positions \u2192 speed \u2192 speed bands \u2192 distance",
-      "Count efforts using an explicit duration and merging rule",
-      "Report valid coverage and the time denominator"
+      "Represent phases as intervals rather than single events",
+      "Join intervals to tracking by period and frame",
+      "Compare structure and effort within tactical context"
     ],
-    "notes": "Distance estimate = sum(speed in m/s \u00d7 dt). Our effort rule uses >=1 second and no merging. It is an educational approximation, not an exact SkillCorner count. Do not extrapolate the 15-minute sample into a full-match total or compare it directly with player-season aggregates.",
+    "image": "methods/phases.png",
+    "sources": [
+      "skillcorner",
+      "phases"
+    ],
+    "notes": "The plot shows supplied SkillCorner labels, not predictions from a classifier trained here. Pros: makes context explicit. Cons: taxonomy-dependent and sensitive to boundary definitions.",
+    "cue": "NOTEBOOK \u00b7 join phase intervals"
+  },
+  {
+    "title": "Estimating player speed",
+    "body": [
+      "Smooth positions within valid continuous segments",
+      "Differentiate coordinates using elapsed time",
+      "Convert m/s to km/h for running bands"
+    ],
+    "image": "methods/speed.png",
+    "sources": [
+      "preprocess"
+    ],
+    "notes": "Actual speed curves are shown. Pros: foundation for physical and tactical features. Cons: derivatives amplify noise; smoothing removes some short peaks.",
+    "cue": ""
+  },
+  {
+    "title": "Distance covered",
+    "body": [
+      "Integrate speed across valid intervals",
+      "Distance \u2248 \u03a3 speed \u00d7 \u0394t",
+      "Report coverage alongside the total"
+    ],
+    "image": "methods/distance.png",
     "sources": [
       "distance",
-      "preprocess",
       "physical"
     ],
-    "image": "speed.png",
-    "cue": "NOTEBOOK B \u00b7 speed \u2192 efforts \u2192 distance \u00b7 4 min",
-    "minutes": 1
+    "notes": "The real sample\u2019s cumulative distance excludes missing derivatives. No full-match extrapolation. Pros: simple workload volume measure. Cons: incomplete and extrapolated tracking affect accuracy.",
+    "cue": ""
   },
   {
-    "title": "Pitch control: three assumptions",
+    "title": "High-speed and sprint distance",
     "body": [
-      "Voronoi: the nearest player owns the location",
-      "Gaussian: smooth influence depends on position and motion",
-      "Arrival time: compare who can reach a location sooner"
+      "HSR: documented men\u2019s band 20\u201325 km/h",
+      "Sprint: above 25 km/h",
+      "Accumulate distance separately in each band"
     ],
-    "notes": "Ask which model notices a player running away from the ball. Gaussian does not automatically mean calibrated probability. Our arrival-time baseline is not Spearman\u2019s ball-aware control model.",
+    "image": "methods/zones.png",
+    "sources": [
+      "physical",
+      "distance"
+    ],
+    "notes": "Our code uses [20,25) and [25,infinity) to avoid overlap; exact equality handling is a teaching convention. Pros: distinguishes intensity from volume. Cons: thresholds and exposure affect comparisons.",
+    "cue": ""
+  },
+  {
+    "title": "Sprint-effort counts",
+    "body": [
+      "Group consecutive threshold-exceeding frames",
+      "Require a stated minimum duration",
+      "Define whether brief gaps are merged"
+    ],
+    "image": "methods/efforts.png",
+    "sources": [
+      "physical"
+    ],
+    "notes": "Shaded segments are our >=1 s, no-merging teaching rule. They are not exact SkillCorner production sprint counts. Pros: repeated-effort view. Cons: sensitive to thresholds, smoothing and merging rules.",
+    "cue": ""
+  },
+  {
+    "title": "Acceleration and deceleration",
+    "body": [
+      "Differentiate scalar speed for speeding up or slowing down",
+      "Keep signed acceleration distinct from vector magnitude",
+      "Check duration as well as peak acceleration"
+    ],
+    "image": "methods/acceleration.png",
+    "sources": [
+      "preprocess",
+      "explosive"
+    ],
+    "notes": "The plot uses real signed speed derivatives. A direction change can produce acceleration-vector magnitude without increasing scalar speed. Pros: captures bursts and braking. Cons: highly noise-sensitive; threshold crossing alone does not qualify a production explosive effort.",
+    "cue": ""
+  },
+  {
+    "title": "Time to high-speed running",
+    "body": [
+      "SkillCorner measures the 9 \u2192 20 km/h interval",
+      "Use a qualifying explosive acceleration",
+      "Compare the speed trajectory, not just peak speed"
+    ],
+    "image": "methods/time_hsr.png",
+    "sources": [
+      "explosive"
+    ],
+    "notes": "The real crossing is illustrative, not production-qualified. The published metric is the minimum interval within qualifying explosive accelerations. Start detection, >0.7 s high-acceleration qualification and filtering matter.",
+    "cue": ""
+  },
+  {
+    "title": "Time to sprint",
+    "body": [
+      "SkillCorner measures the 9 \u2192 25 km/h interval",
+      "A quick top speed does not imply a quick acceleration",
+      "Check the qualifying effort before reporting the metric"
+    ],
+    "image": "methods/time_sprint.png",
+    "sources": [
+      "explosive"
+    ],
+    "notes": "Real observed crossing shown. No official Time to Sprint or Top 3 value is reconstructed. Pros: explosiveness/capacity. Cons: limited opportunities, sample size and qualification rules.",
+    "cue": ""
+  },
+  {
+    "title": "PSV-99: activity-based speed capacity",
+    "body": [
+      "Use SkillCorner\u2019s defined activity population",
+      "Summarize high-speed activity rather than all frames",
+      "Do not substitute an all-frame percentile"
+    ],
+    "image": "methods/peak.png",
+    "sources": [
+      "peak"
+    ],
+    "notes": "The real frame-speed distribution illustrates why populations matter. SkillCorner describes PSV-99 over physical activities above 15 km/h. This histogram is not the official PSV-99 calculation.",
+    "cue": ""
+  },
+  {
+    "title": "Peak Velocity: absolute top speed",
+    "body": [
+      "Identify the highest reliably measured speed",
+      "Inspect the quality of the peak interval",
+      "Keep sample maxima separate from production metrics"
+    ],
+    "image": "methods/peak_velocity.png",
+    "sources": [
+      "peak"
+    ],
+    "notes": "The figure uses our smoothed sample-speed estimates. It does not reproduce SkillCorner\u2019s validated production Peak Velocity. Pros: interpretable capacity measure. Cons: noisy spikes, short exposure and preprocessing dependence.",
+    "cue": ""
+  },
+  {
+    "title": "Expected goals: shot quality",
+    "body": [
+      "Distance and angle form a simple feature baseline",
+      "Tracking adds keeper and defender context",
+      "Fit and calibrate on many labeled shots"
+    ],
+    "image": "methods/xg.png",
+    "sources": [
+      "xg"
+    ],
+    "notes": "Hypothetical shot rays at a real ball location; no xG prediction is invented. Pros: familiar target and interpretable features. Cons: sparse shots, outcome imbalance and contextual bias.",
+    "cue": ""
+  },
+  {
+    "title": "Expected Threat: location value",
+    "body": [
+      "Divide the pitch into states",
+      "Combine shooting reward with future movement value",
+      "Iterate the transition equation to value continuation"
+    ],
+    "image": "methods/xt.png",
+    "sources": [
+      "xt",
+      "dbxt"
+    ],
+    "notes": "Actual fitted DataBallPy open-play grid, not trained on this small sample. V(s)=P(shot|s)P(goal|shot,s)+sum P(successful move to s'|s)V(s'). Classic location xT does not use defender positions. State the model target and training domain.",
+    "cue": ""
+  },
+  {
+    "title": "Expected Threat gained",
+    "body": [
+      "Look up the value at both endpoints",
+      "Completed-action value: V(end) \u2212 V(start)",
+      "Use tracking context to explain what location-only xT misses"
+    ],
+    "image": "methods/xt_gain.png",
+    "sources": [
+      "xt",
+      "dbxt"
+    ],
+    "notes": "The arrow is real ball displacement in the selected clip, not an assertion of a single completed pass. Attack direction is normalized and 105 m scaled to the model\u2019s 106 m convention. Pros: simple action valuation. Cons: path-independent, no defender context or causal attribution.",
+    "cue": "NOTEBOOK \u00b7 xT lookup and endpoint difference"
+  },
+  {
+    "title": "Voronoi space control",
+    "body": [
+      "Assign every location to its closest player",
+      "Aggregate player regions by team",
+      "Use as a geometric baseline"
+    ],
+    "image": "methods/voronoi.png",
+    "sources": [
+      "space"
+    ],
+    "notes": "Actual frame, grid approximation to a Voronoi partition. Pros: quick and interpretable. Cons: hard boundaries and no movement, ball-flight or uncertainty.",
+    "cue": ""
+  },
+  {
+    "title": "Gaussian player influence",
+    "body": [
+      "Project influence in the player\u2019s movement direction",
+      "Let covariance describe directional reach",
+      "Inspect the individual surface before aggregating"
+    ],
+    "image": "methods/individual_gaussian.png",
     "sources": [
       "gaussian",
+      "movement"
+    ],
+    "notes": "Real player velocity with an illustrative ellipse. The covariance is not the exact Fern\u00e1ndez/Bornn parameterization. Pros: smooth and motion-aware. Cons: hand-set influence scale and simplified movement ability.",
+    "cue": ""
+  },
+  {
+    "title": "Gaussian team control",
+    "body": [
+      "Aggregate individual influence by team",
+      "Compare team influence continuously across the pitch",
+      "Interpret the result as an influence score"
+    ],
+    "image": "methods/gaussian.png",
+    "sources": [
+      "gaussian",
+      "space"
+    ],
+    "notes": "Our logistic transformation bounds the team difference; it is not a calibrated possession probability. Pros: contested-space view. Cons: aggregation and covariance assumptions affect the surface.",
+    "cue": ""
+  },
+  {
+    "title": "Arrival-time control",
+    "body": [
+      "Estimate reaction and travel time to each location",
+      "Compare the earliest arrival for each team",
+      "Test sensitivity to movement assumptions"
+    ],
+    "image": "methods/arrival.png",
+    "sources": [
       "movement",
       "spearman"
     ],
-    "image": "control.png",
-    "cue": "",
-    "minutes": 2
+    "notes": "Actual frame with a simple 0.7 s projection and 5 m/s travel speed baseline. Pros: interpretable timing. Cons: no ball flight, acceleration optimization or interception-rate integration; not Spearman\u2019s full model.",
+    "cue": ""
   },
   {
-    "title": "Choosing a control model",
+    "title": "Ball-aware pitch control",
     "body": [
-      "Voronoi: fast and clear; ignores movement and contested space",
-      "Gaussian: smooth and directional; sensitive to influence parameters",
-      "Physics-based: ball/player timing; more assumptions and validation"
+      "Simulate how long the ball takes to reach a target",
+      "Estimate player interception and control over that interval",
+      "Combine competing control rates"
     ],
-    "notes": "Use the same frame across panels. Our Gaussian uses a transparent illustrative covariance rather than exactly reproducing Fern\u00e1ndez/Bornn. Control is not value: safe space behind your goal need not be valuable. Transition to pass simulation later.",
+    "image": "methods/physics.png",
     "sources": [
-      "space",
-      "gaussian",
       "spearman"
     ],
-    "image": null,
-    "cue": "NOTEBOOK C \u00b7 compare surfaces \u00b7 5 min",
-    "minutes": 1
+    "notes": "Architecture schematic on actual tracking context, not a computed Spearman surface. Pros: physical link to passing. Cons: uncertain reactions, speed and ball parameters. Separate from the arrival-time teaching baseline.",
+    "cue": ""
   },
   {
-    "title": "Tracking as a graph",
+    "title": "Expected pass completion",
     "body": [
-      "Nodes: players, with position, velocity, team and possession",
-      "Edges: relative position, distance and team relationship",
-      "A sequence becomes a dynamic graph as players move"
+      "Specify a passer and candidate destination",
+      "Simulate ball travel and interception opportunities",
+      "Evaluate reliability on labeled attempts"
     ],
-    "notes": "Distinguish a frame-level interaction graph from an aggregate passing network. The radius graph is an example, not a claim that only nearby players interact. Fully connected graphs can capture distant tactical relationships.",
-    "sources": [
-      "ussf",
-      "tacticai"
-    ],
-    "image": "graph.png",
-    "cue": "",
-    "minutes": 1
-  },
-  {
-    "title": "What a graph neural network learns",
-    "body": [
-      "Messages combine a player with surrounding players",
-      "Shared updates learn interactions without depending on row order",
-      "Readouts predict a receiver, a pass outcome or a situation value"
-    ],
-    "notes": "Explain message passing verbally: the receiver representation changes when a defender closes the lane. Permutation-aware architectures avoid arbitrary player ordering. Temporal context needs a recurrent, temporal-attention or spatiotemporal design. Graph construction, data quality and calibration still matter.",
-    "sources": [
-      "tacticai",
-      "defcon"
-    ],
-    "image": null,
-    "cue": "NOTEBOOK \u00b7 inspect node and edge features \u00b7 1 min",
-    "minutes": 2
-  },
-  {
-    "title": "Graph models in soccer",
-    "body": [
-      "U.S. Soccer: counterattack success with SkillCorner tracking",
-      "DEFCON: defensive contribution through opponent EPV",
-      "TacticAI: corner receivers, shots and position suggestions",
-      "Graph attention: reception prediction and defensive influence"
-    ],
-    "notes": "Open the project comparison in resources/READING_LIST.md. TacticAI is a set-piece study, not a general open-play EPV model. Its task-specific code and licensed tracking data were not released. Do not interpret attention weights as causal defensive credit.",
-    "sources": [
-      "ussf",
-      "defcon",
-      "tacticai",
-      "gat"
-    ],
-    "image": null,
-    "cue": "",
-    "minutes": 2
-  },
-  {
-    "title": "EPV: value the situation",
-    "body": [
-      "Define the target and horizon before building the model",
-      "Estimate action selection, success and resulting value",
-      "Combine those components into expected possession value"
-    ],
-    "notes": "A schematic decomposition is sum over actions P(action|state) \u00d7 E(value after action|state,action). Include failure/turnover branches. EPV definitions vary: expected net next-goal outcome, possession scoring probability, or fixed-horizon scoring are not interchangeable. GNNs can estimate components; EPV does not require GNNs. Fern\u00e1ndez et al use convolutional pass surfaces.",
-    "sources": [
-      "epv",
-      "defcon",
-      "soccermap"
-    ],
-    "image": null,
-    "cue": "",
-    "minutes": 2
-  },
-  {
-    "title": "Passing risk and dangerous space",
-    "body": [
-      "Completion: how likely is this pass to succeed?",
-      "Accessible space: where can a pass reach teammates?",
-      "Dangerous accessible space: weight access by goal threat"
-    ],
-    "notes": "DAS uses physical pass simulation. The notebook calls the public accessible-space implementation and plots its actual output; it does not relabel a Gaussian map as pass completion. Ball speed assumptions, direction and offside treatment affect results. DAS is danger-weighted area, not calibrated goal probability.",
+    "image": "methods/completion.png",
     "sources": [
       "das",
       "accessible"
     ],
-    "image": null,
-    "cue": "NOTEBOOK D \u00b7 options \u2192 AS/DAS \u00b7 7 min",
-    "minutes": 1
+    "notes": "Actual accessible-space xC inference on hypothetical endpoints at real teammate positions. Pros: interpretable risk. Cons: model calibration, ball speed and offside conventions; candidates are not observed choices.",
+    "cue": "NOTEBOOK \u00b7 candidate-pass risk"
   },
   {
-    "title": "xG and off-ball scoring opportunities",
+    "title": "Accessible space",
     "body": [
-      "Tracking-informed xG adds keeper and defender context",
-      "Off-ball scoring opportunity combines access and scoring potential",
-      "Full EPV also accounts for continuation and turnover risk"
+      "Simulate passes across directions and speeds",
+      "Estimate where the attacking team can receive",
+      "Integrate accessibility across the pitch"
     ],
-    "notes": "Use StatsBomb\u2019s xG discussion for features and Spearman for OBSO. Never train an xG model on a handful of shots from this sample. A location-danger heuristic is not a fitted xG model.",
+    "image": "methods/accessible.png",
     "sources": [
-      "xg",
-      "spearman",
-      "epv"
+      "accessible",
+      "das"
     ],
-    "image": null,
-    "cue": "",
-    "minutes": 1
+    "notes": "Actual public-model output. Pros: incorporates ball and player movement. Cons: simulation assumptions and resolution; individual access can overlap.",
+    "cue": ""
   },
   {
-    "title": "Value runs that never receive the ball",
+    "title": "Dangerous accessible space",
     "body": [
-      "Run threat asks what could happen if the runner were served",
-      "Space creation can benefit a different teammate",
-      "Compare changing options without claiming causal attribution"
+      "Weight accessible locations by goal danger",
+      "Integrate to obtain danger-weighted space",
+      "Keep danger-weighted area distinct from scoring probability"
     ],
-    "notes": "SkillCorner describes run xT as the chance of a goal within 10 seconds if the run is served. Distinguish this counterfactual target from location-based event xT and observed EPV change. Supplied provider values may be explored without claiming to reproduce the model.",
+    "image": "methods/dangerous.png",
+    "sources": [
+      "accessible",
+      "das"
+    ],
+    "notes": "Actual public-model dangerous surface. Pros: links access and useful territory. Cons: danger definition and physical assumptions; DAS units are danger-weighted square metres.",
+    "cue": ""
+  },
+  {
+    "title": "Changes in dangerous space",
+    "body": [
+      "Compare the model on successive real frames",
+      "Report AS and DAS on their own scales",
+      "Inspect the movements that change available options"
+    ],
+    "image": "methods/das_change.png",
+    "sources": [
+      "accessible"
+    ],
+    "notes": "Actual model values on three frames. Pros: connects movement to changing opportunity. Cons: different team possession states and model noise must be checked; before/after changes alone are not causal credit.",
+    "cue": ""
+  },
+  {
+    "title": "Off-ball run threat",
+    "body": [
+      "Evaluate a run even when no pass is made",
+      "SkillCorner\u2019s target considers a run being served",
+      "Separate run threat from location-based event xT"
+    ],
+    "image": "methods/run_threat.png",
     "sources": [
       "runs",
-      "gaussian"
+      "skillcorner"
     ],
-    "image": "frame.png",
-    "cue": "",
-    "minutes": 1
+    "notes": "Actual supplied xthreat values for off-ball runs. The provider model is not reconstructed. Pros: visible unserved contributions. Cons: counterfactual assumptions, context and selection bias.",
+    "cue": ""
   },
   {
-    "title": "Where research goes next",
+    "title": "Tracking as a spatial graph",
     "body": [
-      "Defense: suppress valuable passing options",
-      "Trajectory models: forecast possible team movements",
-      "Counterfactuals: evaluate alternative actions or positions"
+      "Represent players as nodes",
+      "Choose relationships that define spatial edges",
+      "Preserve identities while avoiding arbitrary row-order effects"
     ],
-    "notes": "DEFCON is a direct defense/EPV example. GenTac is recent preprint research: present it as emerging work, not settled operational evidence. More realistic simulated outcomes still require out-of-sample validation.",
+    "image": "methods/graph.png",
     "sources": [
-      "defcon",
-      "gentac",
+      "ussf",
       "tacticai"
     ],
-    "image": null,
-    "cue": "",
-    "minutes": 1
+    "notes": "Real radius graph. Pros: models relationships directly. Cons: radius edges miss distant tactical relationships; fully connected and learned connectivity are alternatives.",
+    "cue": ""
   },
   {
-    "title": "Validate the football answer",
+    "title": "Node and edge features",
     "body": [
-      "Check clips and labels before trusting metrics",
-      "Split evaluation by match; prevent nearby-frame leakage",
-      "Test calibration, model assumptions and missing-data sensitivity",
-      "Use the result to explain a football decision"
+      "Nodes: position, velocity, team and possession",
+      "Edges: distance, relative position and team relation",
+      "Normalize and mask missing features explicitly"
     ],
-    "notes": "Close on the same sequence. Ask: which option became available, which player helped create it, and what would you need to establish that contribution reliably? Save 5 minutes for questions.",
+    "image": "methods/edge_features.png",
+    "sources": [
+      "ussf"
+    ],
+    "notes": "Actual edge-feature rows. Edge direction controls the sign of relative position. Team IDs should be encoded meaningfully rather than treated as numeric magnitudes.",
+    "cue": ""
+  },
+  {
+    "title": "Graph neural message passing",
+    "body": [
+      "Create messages from players and their relationships",
+      "Aggregate neighbour messages with shared functions",
+      "Update player representations for a prediction task"
+    ],
+    "image": "methods/message.png",
+    "sources": [
+      "tacticai",
+      "defcon"
+    ],
+    "notes": "Architecture schematic, not a trained result. Pros: relational inductive bias and shared updates. Cons: oversmoothing, connectivity choices and training requirements. Attention alone is not causal importance.",
+    "cue": ""
+  },
+  {
+    "title": "Temporal node features",
+    "body": [
+      "Add lagged speed, displacement and relative movement",
+      "Use rolling history only up to prediction time",
+      "Include elapsed time and missing-history masks"
+    ],
+    "image": "methods/temporal_features.png",
+    "sources": [
+      "ussf",
+      "preprocess"
+    ],
+    "notes": "Actual one-second lag and speed change on a real player. Explicit lag frame checks prevent bridging gaps. Instantaneous velocity adds motion information but is not a substitute for full history.",
+    "cue": "NOTEBOOK \u00b7 lagged features and masks"
+  },
+  {
+    "title": "Dynamic graphs over time",
+    "body": [
+      "Recompute spatial edges as players move",
+      "Maintain player identities across snapshots",
+      "Model changing passing lanes and defensive relationships"
+    ],
+    "image": "methods/dynamic_graph.png",
+    "sources": [
+      "ussf",
+      "pathcrf"
+    ],
+    "notes": "Actual snapshots and a player trail. A sequence of spatial graphs retains team interactions that change with time; a static aggregate passing network does not.",
+    "cue": ""
+  },
+  {
+    "title": "Temporal edges between snapshots",
+    "body": [
+      "Link each player to their previous observed state",
+      "Retain spatial edges within each frame",
+      "Direct historical connections toward the prediction time"
+    ],
+    "image": "methods/temporal_edges.png",
+    "sources": [
+      "pathcrf"
+    ],
+    "notes": "Schematic topology with real player IDs. The notebook creates actual spatial and temporal edge records. Do not connect across substitutions or tracking gaps without an explicit rule; labels cannot leak future frames.",
+    "cue": ""
+  },
+  {
+    "title": "Recurrent temporal graph models",
+    "body": [
+      "Encode each frame with a spatial GNN",
+      "Update a recurrent hidden state as frames arrive",
+      "Predict from the accumulated historical state"
+    ],
+    "image": "methods/gru.png",
+    "sources": [
+      "temporal"
+    ],
+    "notes": "Architecture schematic rather than a claim about a specific cited model\u2019s GRU implementation. Pros: sequential processing with a compact state. Cons: long-history retention and sequence alignment. No trained inference is shown.",
+    "cue": ""
+  },
+  {
+    "title": "Temporal convolution on graph history",
+    "body": [
+      "Stack frame-level graph embeddings over time",
+      "Apply causal filters across historical windows",
+      "Control the receptive field with layers and dilation"
+    ],
+    "image": "methods/tcn.png",
+    "sources": [
+      "tcn"
+    ],
+    "notes": "Architecture schematic. Pros: parallel computation and explicit receptive field. Cons: window length, dilation and sampling-rate choices. Filters must not access future frames at prediction time.",
+    "cue": ""
+  },
+  {
+    "title": "Causal temporal attention",
+    "body": [
+      "Add time information to historical graph embeddings",
+      "Attend to relevant earlier states",
+      "Mask future frames and missing observations"
+    ],
+    "image": "methods/attention.png",
+    "sources": [
+      "attention",
+      "temporal"
+    ],
+    "notes": "Architecture schematic. Pros: flexible history selection and long-range dependencies. Cons: data/computation requirements, masking and leakage; attention weights do not establish causal importance.",
+    "cue": ""
+  },
+  {
+    "title": "Spatiotemporal message passing",
+    "body": [
+      "Connect spatial neighbors within each frame",
+      "Connect player identities across observed time",
+      "Learn updates over both relationship types"
+    ],
+    "image": "methods/spatiotemporal.png",
+    "sources": [
+      "temporal",
+      "pathcrf"
+    ],
+    "notes": "General architecture schematic, not a reproduction of PathCRF. Pros: joint relational/time structure. Cons: graph size, identity errors and edge construction choices.",
+    "cue": ""
+  },
+  {
+    "title": "SoccerMap: spatial neural prediction",
+    "body": [
+      "Convert tracking into spatial feature channels",
+      "Learn field-wide surfaces with convolutional networks",
+      "Use distinct heads or models for distinct targets"
+    ],
+    "image": "methods/soccermap.png",
+    "sources": [
+      "soccermap"
+    ],
+    "notes": "Architecture schematic. SoccerMap is a convolutional approach, not a GNN. Pros: field-wide outputs. Cons: rasterization and training data requirements; no pretrained inference is claimed.",
+    "cue": ""
+  },
+  {
+    "title": "Expected possession value",
+    "body": [
+      "Specify what outcome and horizon value means",
+      "Combine action selection, success and continuation",
+      "Include the value of failure and turnovers"
+    ],
+    "image": "methods/epv.png",
+    "sources": [
+      "epv",
+      "defcon"
+    ],
+    "notes": "Conceptual decomposition: sum over actions P(action|state) times outcome-conditional value, including failure. EPV is a framework/target, not a synonym for GNN. Different EPV definitions must not be mixed.",
+    "cue": ""
+  },
+  {
+    "title": "Observed passes and supplied EPV",
+    "body": [
+      "Inspect value changes on actual pass events",
+      "Compare valuable actions with their tracking context",
+      "Keep supplied predictions separate from our calculations"
+    ],
+    "image": "methods/provider_epv.png",
+    "sources": [
+      "skillcorner",
+      "epv"
+    ],
+    "notes": "Actual pass_epv_delta_for fields in SkillCorner dynamic events. This is the provider\u2019s model output; not a reconstructed Fern\u00e1ndez or DEFCON prediction. The field name is shown rather than assuming undocumented equivalence.",
+    "cue": "NOTEBOOK \u00b7 supplied event-value fields"
+  },
+  {
+    "title": "DEFCON: defensive contribution",
+    "body": [
+      "Use graph-based models for action components",
+      "Estimate the opponent\u2019s possession value",
+      "Account for defenders\u2019 contribution to reducing danger"
+    ],
+    "image": "methods/defcon.png",
+    "sources": [
+      "defcon"
+    ],
+    "notes": "Architecture schematic only. Explain attribution assumptions before interpreting defensive credits. Actual frame is context, not DEFCON inference.",
+    "cue": ""
+  },
+  {
+    "title": "U.S. Soccer: counterattack graphs",
+    "body": [
+      "Build graphs from synchronized SkillCorner and events",
+      "Define counterattack success explicitly",
+      "Evaluate predictions on held-out sequences"
+    ],
+    "image": "methods/counterattack.png",
+    "sources": [
+      "ussf"
+    ],
+    "notes": "Architecture schematic. The published balanced event-frame study uses reaching the penalty area as success; the repository\u2019s additional all-frame dataset has different goal labels. Do not mix those datasets or quote them as equivalent.",
+    "cue": ""
+  },
+  {
+    "title": "TacticAI: corner-kick modeling",
+    "body": [
+      "Predict receiver and shot outcomes",
+      "Represent player interactions with graph networks",
+      "Suggest alternative positional configurations"
+    ],
+    "image": "methods/tacticai.png",
+    "sources": [
+      "tacticai"
+    ],
+    "notes": "Architecture schematic. The input illustration uses real tracking near a supplied corner-reception event; it is not the original TacticAI input or trained inference. Complete task-specific code/weights and licensed data are not released. Model-generated suggestions are not guarantees.",
+    "cue": ""
+  },
+  {
+    "title": "Trajectory forecasting",
+    "body": [
+      "Encode observed player and team history",
+      "Generate multiple plausible continuations",
+      "Evaluate geometry, tactical coherence and uncertainty"
+    ],
+    "image": "methods/forecast.png",
+    "sources": [
+      "gentac"
+    ],
+    "notes": "Architecture schematic; no invented future trajectories are shown as learned output. GenTac is a recent preprint example. Distinguish forecasting and causal intervention.",
+    "cue": ""
+  },
+  {
+    "title": "Validating tracking models",
+    "body": [
+      "Split data by matches or independent sequences",
+      "Evaluate calibration and task-specific outcomes",
+      "Stress-test missingness, direction and parameters"
+    ],
+    "image": "methods/validation.png",
     "sources": [
       "epv",
       "accessible"
     ],
-    "image": null,
-    "cue": "",
-    "minutes": 1
-  },
-  {
-    "title": "Questions and next steps",
-    "body": [
-      "What changes when defenders move?",
-      "Which assumptions are useful for your football question?",
-      "Resources: reading list, methodology notes and full notebook"
-    ],
-    "notes": "Questions: 5 minutes. Optional appendix code is for after the workshop. All research references are in slide notes and resources/READING_LIST.md.",
-    "sources": [],
-    "image": null,
-    "cue": "",
-    "minutes": 5
+    "notes": "Schematic split only, not measured performance. Event detection needs timing tolerances; probability models need calibration; tactical labels need a clear taxonomy.",
+    "cue": ""
   }
 ]

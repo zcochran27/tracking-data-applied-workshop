@@ -28,6 +28,10 @@ References checked during workshop preparation, 19 October 2026. Foundational me
 - **gat** — [Graph attention for defensive influence](https://github.com/Sentient-Sports/EvaluatingDefensiveInfluenceUsingGATs)
 - **gentac** — [GenTac: trajectory forecasting (2026 preprint)](https://arxiv.org/abs/2604.11786)
 - **fot** — [Friends of Tracking: pitch control and EPV tutorials](https://github.com/Friends-of-Tracking-Data-FoTD/LaurieOnTracking)
+- **xt** — [Karun Singh: Expected Threat](https://karun.in/blog/expected-threat.html)
+- **dbxt** — [DataBallPy fitted xT methodology](https://databallpy.readthedocs.io/en/main/features/xt_models.html)
+- **explosive** — [SkillCorner explosive accelerations](https://skillcorner.com/articles/new-feature-explosive-accelerations)
+- **dbmodel** — [DataBallPy source and fitted model](https://github.com/Alek050/databallpy)
 
 ## Which projects to walk through?
 | Project | What to show | Advantage | Limitation |
@@ -35,10 +39,15 @@ References checked during workshop preparation, 19 October 2026. Foundational me
 | DataBallPy physical metrics | Speed and distance calculation | Readable pandas foundation | Must handle gaps and define thresholds |
 | Gaussian space influence | One player and team surfaces | Visual link from velocity to space | Influence is not calibrated completion |
 | Accessible Space / DAS | Actual package inference and three options | Connects risk and danger without training | Physical assumptions and calibration matter |
-| Fernández EPV / SoccerMap | Component diagram and research figures | Explains full decision value | Large training pipeline; no pretrained artifact supplied here |
+| Fernández EPV / SoccerMap | Component diagram and supplied value examples | Explains full decision value | Large training pipeline; no pretrained artifact supplied here |
 | DEFCON | GNN components and opponent EPV | Direct defensive value connection | Research model and attribution assumptions |
 | U.S. Soccer GNN | Tracking graph and counterattack target | Uses SkillCorner data | Training task differs from general EPV |
-| TacticAI | Published graph diagram and corner use case | Intuitive prediction and intervention example | Task-specific code/data not public; corners only |
+| TacticAI | Corner tracking context and architecture schematic | Intuitive prediction and intervention example | Task-specific code/data not public; corners only |
 | SkillCorner run threat | Definition and supplied event fields | Values unserved movement | Provider model is not reproduced |
 
 DataBallPy is a methodological reference; the live DAS cells call `accessible-space` directly. GNN examples are references, not trained workshop models. Read source licenses before reusing project code.
+- **temporal** — [PyTorch Geometric Temporal architectures](https://pytorch-geometric-temporal.readthedocs.io/en/latest/modules/root.html)
+
+- **tcn** — [Temporal convolution for sequence modeling](https://arxiv.org/abs/1803.01271)
+
+- **attention** — [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
