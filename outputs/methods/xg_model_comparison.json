@@ -1,0 +1,53 @@
+{
+  "data_source": "StatsBomb Open Data",
+  "revision": "4b73468fc5b0f1950f9f66fada70ad3a4f9327cb",
+  "seasons": [
+    "World Cup 2018",
+    "World Cup 2022"
+  ],
+  "shots": 3066,
+  "goals": 287,
+  "matches": 128,
+  "location_features": [
+    "distance_units",
+    "opening_angle_rad"
+  ],
+  "context_features": [
+    "distance_units",
+    "opening_angle_rad",
+    "gk_shooter_distance_units",
+    "gk_goal_distance_units",
+    "gk_off_shot_line_units",
+    "defenders_in_triangle",
+    "nearest_defender_units",
+    "defenders_within_3_units"
+  ],
+  "l2": 0.01,
+  "folds": 5,
+  "fold_seed": 27,
+  "evaluation": "pooled match-grouped out-of-fold predictions",
+  "bootstrap": "1000 paired match resamples of existing predictions; no retraining",
+  "results": [
+    {
+      "model": "Location only",
+      "ROC_AUC": 0.7438792436554397,
+      "AUC_95_lower": 0.7138954134668097,
+      "AUC_95_upper": 0.7741654671158942,
+      "log_loss": 0.2755408425484743,
+      "Brier_score": 0.07731519589582674
+    },
+    {
+      "model": "Location + GK/defenders",
+      "ROC_AUC": 0.7798696796406097,
+      "AUC_95_lower": 0.7494114123237944,
+      "AUC_95_upper": 0.8090656637800923,
+      "log_loss": 0.2611027852286485,
+      "Brier_score": 0.07346078524216268
+    }
+  ],
+  "auc_difference": 0.035990435985170044,
+  "auc_difference_95": [
+    0.021778448463259773,
+    0.05110449189288059
+  ]
+}

@@ -37,9 +37,9 @@
   },
   {
     "notebook": "07_expected_goals.ipynb",
-    "title": "Expected goals: shot geometry and training",
+    "title": "xG: location only versus goalkeeper/defender context",
     "question": "Estimate shot-outcome probability",
-    "stages": "Distance and opening angle; logistic link; gradient-based optimizer; synthetic check"
+    "stages": "StatsBomb shot freeze frames; location and context features; same match-held-out folds; ROC/AUC and paired match-bootstrap intervals"
   },
   {
     "notebook": "08_expected_threat.ipynb",

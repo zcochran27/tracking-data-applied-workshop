@@ -1,5 +1,7 @@
 # Reading list and project choices
 
+The standalone xG comparison uses [StatsBomb Open Data](https://github.com/hudl/open-data), with [official event specifications](https://github.com/hudl/open-data/tree/master/doc) and [StatsBomb's discussion of goalkeeper/defender context](https://statsbomb.com/articles/soccer/upgrading-expected-goals/). It fits two transparent workshop models rather than reproducing the provider's production xG model. The data source and logo are credited in the notebook and ROC export.
+
 References checked during workshop preparation, 19 October 2026. Foundational methods remain useful alongside recent work.
 
 - **skillcorner** — [SkillCorner open data and schema](https://github.com/SkillCorner/opendata)

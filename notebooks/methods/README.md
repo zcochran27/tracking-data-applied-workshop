@@ -2,7 +2,7 @@
 
 A notebook covers a complete analytical question, not each helper operation. For example, graph features, adjacency, message passing, pooling, labels and training live together in the graph-EPV workflow. Formation centering, assignment and change detection likewise form one notebook.
 
-Every notebook includes **all code inline**, including data loading and drawing helpers, and runs in a fresh kernel. No local `.py` imports or previous notebook session are required. Intermediate tables and staged plots explain each transformation. Set `DATA_ROOT` to reuse a cache. Install the repository requirements before running.
+Every notebook includes **all code inline**, including data loading and drawing helpers, and runs in a fresh kernel. No local `.py` imports or previous notebook session are required. Intermediate tables and staged plots explain each transformation. Set `DATA_ROOT` to reuse a SkillCorner cache; the xG comparison uses its own StatsBomb `CACHE`. Install the repository requirements before running.
 
 Read each notebook from top to bottom: inputs and assumptions, helper functions, intermediate calculations and visuals, final results, then interpretation. Diagnostics appear at the point where the calculation is introduced. The final pipeline reuses the inspected helpers rather than adding a separate explanation after its output.
 
@@ -14,7 +14,7 @@ Read each notebook from top to bottom: inputs and assumptions, helper functions,
 | [Player-viewpoint role classification](04_role_classification.ipynb) | Relative bearings; sector membership; teammate/opponent counts; softmax training |
 | [Phase-of-play segmentation](05_match_segmentation.ipynb) | Features; rule gates; confirmation; interval construction; provider-label joins |
 | [Physical-metric calculation pipeline](06_physical_metrics.ipynb) | Smooth positions; velocity; acceleration; distance integration; intensity bands; efforts; crossing times; sample peaks |
-| [Expected goals: shot geometry and training](07_expected_goals.ipynb) | Distance and opening angle; logistic link; gradient-based optimizer; synthetic check |
+| [xG: location only versus goalkeeper/defender context](07_expected_goals.ipynb) | Real StatsBomb shots; two nested models; identical match-held-out folds; ROC/AUC for each; paired match-bootstrap intervals |
 | [Expected Threat: fitting and action valuation](08_expected_threat.ipynb) | Action counts; reward; transition matrix; iterative solution; endpoint gain |
 | [Voronoi pitch-control baseline](09_voronoi_control.ipynb) | Pairwise distance; nearest-player regions; team aggregation |
 | [Gaussian influence and team control](10_gaussian_control.ipynb) | Projected centers; directional coordinates; covariance scale; player influence; team aggregation |

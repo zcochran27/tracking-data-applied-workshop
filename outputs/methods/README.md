@@ -8,7 +8,7 @@ Download an HTML file and open it in a browser to view figures and embedded anim
 - [Player-viewpoint role classification](04_role_classification.html)
 - [Phase-of-play segmentation](05_match_segmentation.html)
 - [Physical-metric calculation pipeline](06_physical_metrics.html)
-- [Expected goals: shot geometry and training](07_expected_goals.html)
+- [xG: location only versus goalkeeper/defender context, with held-out ROC/AUC](07_expected_goals.html)
 - [Expected Threat: fitting and action valuation](08_expected_threat.html)
 - [Voronoi pitch-control baseline](09_voronoi_control.html)
 - [Gaussian influence and team control](10_gaussian_control.html)

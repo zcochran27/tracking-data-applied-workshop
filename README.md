@@ -2,6 +2,8 @@
 
 An illustrated soccer analytics workshop using SkillCorner open tracking data, with a dedicated slide for each method and reproducible visual examples.
 
+The standalone xG notebook additionally uses StatsBomb Open Data shot freeze frames to compare a distance/angle model with a model adding goalkeeper and defender context. It includes real match-held-out ROC/AUC results and uncertainty intervals; the other tracking walkthroughs continue to use SkillCorner.
+
 ## Materials
 
 - [PowerPoint deck](slides/tracking-data-applied.pptx)
@@ -31,7 +33,7 @@ Run all cells in order. Internet is required to install packages and fetch the i
 
 Data and visualization → event and formation detection → phases → physical metrics → xG and xThreat → pitch control → passing risk and dangerous space → off-ball threat → spatial and temporal graphs → neural models and EPV.
 
-Each method has its own visual, assumptions and interpretation. Temporal graph examples include lagged features, dynamic spatial edges and forward identity edges. No training of full EPV, xG or GNN models is implied.
+Each method has its own visual, assumptions and interpretation. Temporal graph examples include lagged features, dynamic spatial edges and forward identity edges. The standalone xG notebook trains two explicit logistic models on StatsBomb shots. Full production EPV/GNN models are not trained.
 
 ## Data and credit
 
