@@ -40,215 +40,265 @@ The real ball path is annotated at supplied possession endpoints. This is an exp
 
 
 
-## 9. Formation detection
+## 9. Guess the current player roles
+Audience prompt inspired by the supplied reference. These are actual SkillCorner frames, with identities hidden. A single snapshot is ambiguous; metadata positions are not frame-level role truth.
+
+
+
+## 10. Position distributions and centering
+Independently generated from SkillCorner. Two-standard-deviation covariance ellipses, not confidence regions. Labels are metadata roles. Pros: removes team translation. Cons: averaging still mixes phases and rotations; covariance can hide multimodal behavior. Use identical qualifying samples in both panels.
+
+
+
+## 11. Pleuler: rotating player viewpoints
+Pleuler (June 2024), independently implemented. Our choices: 24 headings and overlapping 90-degree sectors. This is geometric context, not observed head orientation, actual sight or occlusion. Attack-normalize both axes. Opponent-count channel is our extension. Pros: translation-invariant and intuitive. Cons: angular resolution, orientation and missing players affect features.
+
+NOTEBOOK · inspect angular count features
+
+## 12. From angular features to role labels
+Pleuler used XGBoost. This notebook manufactures features but does not train or claim accuracy from a single match. Assigned-position metadata gives weak labels during rotations. For credible evaluation use manually reviewed frame roles and held-out matches/players. Add opponent counts as a separate tested extension. Pros: flexible nonlinear classification. Cons: label noise and domain shift.
+
+
+
+## 13. Formation prediction by assignment
+Teaching baseline: four fixed templates, Hungarian minimum squared-distance assignment, attack-right orientation. RMS residual is not a probability. Unlike EFPI, this implementation has no elastic template optimization. Pros: interpretable assignments and no player-order dependence. Cons: template inventory, scale and asymmetry determine results.
+
+NOTEBOOK · inspect template scores and assignments
+
+## 14. Bekkers: elastic formation identification
+EFPI is the published extension using elastic templates and linear assignment. The displayed visualization is our simpler fixed-template baseline, not an EFPI result. Follow the linked tutorial for package inference. Pros: formation and role assignment together. Cons: parameter choices, substitutions, partial tracking and tactical ambiguity. Compare output to video-reviewed labels.
+
+
+
+## 15. Detecting formation-change candidates
+Plot uses real defensive-context windows with at least 50 qualifying frames. Three consecutive available 30-second bins confirm a label; missing bins reset the candidate count. Existing confirmed state is retained through missing bins, not evidence of ongoing stability. This is an educational rule, not EFPI change logic. Pleuler explicitly proposed change detection without testing it. No tactical ground truth is available here. Role swaps alone need not imply formation changes.
+
+NOTEBOOK · candidate timeline and persistence
+
+## 16. Formation detection
 Real median outfield positions are shown separately by possession. Pros: summarizes organization beyond a team sheet. Cons: averaging mixes roles and game states; these are not asserted formation labels.
 
 
 
-## 10. Player-role and line detection
+## 17. Player-role and line detection
 Ward clustering of real centered x positions into three groups is a teaching baseline. It is not a validated named-formation classifier. Pros: interpretable. Cons: fixed line counts, overlaps and rotations.
 
 
 
-## 11. Phase-of-play segmentation
+## 18. Phase-of-play segmentation
 The plot shows supplied SkillCorner labels, not predictions from a classifier trained here. Pros: makes context explicit. Cons: taxonomy-dependent and sensitive to boundary definitions.
 
 NOTEBOOK · join phase intervals
 
-## 12. Estimating player speed
+## 19. Estimating player speed
 Actual speed curves are shown. Pros: foundation for physical and tactical features. Cons: derivatives amplify noise; smoothing removes some short peaks.
 
 
 
-## 13. Distance covered
+## 20. Distance covered
 The real sample’s cumulative distance excludes missing derivatives. No full-match extrapolation. Pros: simple workload volume measure. Cons: incomplete and extrapolated tracking affect accuracy.
 
 
 
-## 14. High-speed and sprint distance
+## 21. High-speed and sprint distance
 Our code uses [20,25) and [25,infinity) to avoid overlap; exact equality handling is a teaching convention. Pros: distinguishes intensity from volume. Cons: thresholds and exposure affect comparisons.
 
 
 
-## 15. Sprint-effort counts
+## 22. Sprint-effort counts
 Shaded segments are our >=1 s, no-merging teaching rule. They are not exact SkillCorner production sprint counts. Pros: repeated-effort view. Cons: sensitive to thresholds, smoothing and merging rules.
 
 
 
-## 16. Acceleration and deceleration
+## 23. Acceleration and deceleration
 The plot uses real signed speed derivatives. A direction change can produce acceleration-vector magnitude without increasing scalar speed. Pros: captures bursts and braking. Cons: highly noise-sensitive; threshold crossing alone does not qualify a production explosive effort.
 
 
 
-## 17. Time to high-speed running
+## 24. Time to high-speed running
 The real crossing is illustrative, not production-qualified. The published metric is the minimum interval within qualifying explosive accelerations. Start detection, >0.7 s high-acceleration qualification and filtering matter.
 
 
 
-## 18. Time to sprint
+## 25. Time to sprint
 Real observed crossing shown. No official Time to Sprint or Top 3 value is reconstructed. Pros: explosiveness/capacity. Cons: limited opportunities, sample size and qualification rules.
 
 
 
-## 19. PSV-99: activity-based speed capacity
+## 26. PSV-99: activity-based speed capacity
 The real frame-speed distribution illustrates why populations matter. SkillCorner describes PSV-99 over physical activities above 15 km/h. This histogram is not the official PSV-99 calculation.
 
 
 
-## 20. Peak Velocity: absolute top speed
+## 27. Peak Velocity: absolute top speed
 The figure uses our smoothed sample-speed estimates. It does not reproduce SkillCorner’s validated production Peak Velocity. Pros: interpretable capacity measure. Cons: noisy spikes, short exposure and preprocessing dependence.
 
 
 
-## 21. Expected goals: shot quality
+## 28. Expected goals: shot quality
 Hypothetical shot rays at a real ball location; no xG prediction is invented. Pros: familiar target and interpretable features. Cons: sparse shots, outcome imbalance and contextual bias.
 
 
 
-## 22. Expected Threat: location value
+## 29. Expected Threat: location value
 Actual fitted DataBallPy open-play grid, not trained on this small sample. V(s)=P(shot|s)P(goal|shot,s)+sum P(successful move to s'|s)V(s'). Classic location xT does not use defender positions. State the model target and training domain.
 
 
 
-## 23. Expected Threat gained
+## 30. Expected Threat gained
 The arrow is real ball displacement in the selected clip, not an assertion of a single completed pass. Attack direction is normalized and 105 m scaled to the model’s 106 m convention. Pros: simple action valuation. Cons: path-independent, no defender context or causal attribution.
 
 NOTEBOOK · xT lookup and endpoint difference
 
-## 24. Voronoi space control
+## 31. Voronoi space control
 Actual frame, grid approximation to a Voronoi partition. Pros: quick and interpretable. Cons: hard boundaries and no movement, ball-flight or uncertainty.
 
 
 
-## 25. Gaussian player influence
+## 32. Gaussian player influence
 Real player velocity with an illustrative ellipse. The covariance is not the exact Fernández/Bornn parameterization. Pros: smooth and motion-aware. Cons: hand-set influence scale and simplified movement ability.
 
 
 
-## 26. Gaussian team control
+## 33. Gaussian team control
 Our logistic transformation bounds the team difference; it is not a calibrated possession probability. Pros: contested-space view. Cons: aggregation and covariance assumptions affect the surface.
 
 
 
-## 27. Arrival-time control
+## 34. Arrival-time control
 Actual frame with a simple 0.7 s projection and 5 m/s travel speed baseline. Pros: interpretable timing. Cons: no ball flight, acceleration optimization or interception-rate integration; not Spearman’s full model.
 
 
 
-## 28. Ball-aware pitch control
+## 35. Ball-aware pitch control
 Architecture schematic on actual tracking context, not a computed Spearman surface. Pros: physical link to passing. Cons: uncertain reactions, speed and ball parameters. Separate from the arrival-time teaching baseline.
 
 
 
-## 29. Expected pass completion
+## 36. Expected pass completion
 Actual accessible-space xC inference on hypothetical endpoints at real teammate positions. Pros: interpretable risk. Cons: model calibration, ball speed and offside conventions; candidates are not observed choices.
 
 NOTEBOOK · candidate-pass risk
 
-## 30. Accessible space
+## 37. Accessible space
 Actual public-model output. Pros: incorporates ball and player movement. Cons: simulation assumptions and resolution; individual access can overlap.
 
 
 
-## 31. Dangerous accessible space
+## 38. Dangerous accessible space
 Actual public-model dangerous surface. Pros: links access and useful territory. Cons: danger definition and physical assumptions; DAS units are danger-weighted square metres.
 
 
 
-## 32. Changes in dangerous space
+## 39. Changes in dangerous space
 Actual model values on three frames. Pros: connects movement to changing opportunity. Cons: different team possession states and model noise must be checked; before/after changes alone are not causal credit.
 
 
 
-## 33. Off-ball run threat
+## 40. Off-ball run threat
 Actual supplied xthreat values for off-ball runs. The provider model is not reconstructed. Pros: visible unserved contributions. Cons: counterfactual assumptions, context and selection bias.
 
 
 
-## 34. Tracking as a spatial graph
+## 41. Tracking as a spatial graph
 Real radius graph. Pros: models relationships directly. Cons: radius edges miss distant tactical relationships; fully connected and learned connectivity are alternatives.
 
 
 
-## 35. Node and edge features
+## 42. Node and edge features
 Actual edge-feature rows. Edge direction controls the sign of relative position. Team IDs should be encoded meaningfully rather than treated as numeric magnitudes.
 
 
 
-## 36. Graph neural message passing
+## 43. Graph neural message passing
 Architecture schematic, not a trained result. Pros: relational inductive bias and shared updates. Cons: oversmoothing, connectivity choices and training requirements. Attention alone is not causal importance.
 
 
 
-## 37. Temporal node features
+## 44. Temporal node features
 Actual one-second lag and speed change on a real player. Explicit lag frame checks prevent bridging gaps. Instantaneous velocity adds motion information but is not a substitute for full history.
 
 NOTEBOOK · lagged features and masks
 
-## 38. Dynamic graphs over time
+## 45. Dynamic graphs over time
 Actual snapshots and a player trail. A sequence of spatial graphs retains team interactions that change with time; a static aggregate passing network does not.
 
 
 
-## 39. Temporal edges between snapshots
+## 46. Temporal edges between snapshots
 Schematic topology with real player IDs. The notebook creates actual spatial and temporal edge records. Do not connect across substitutions or tracking gaps without an explicit rule; labels cannot leak future frames.
 
 
 
-## 40. Recurrent temporal graph models
+## 47. Recurrent temporal graph models
 Architecture schematic rather than a claim about a specific cited model’s GRU implementation. Pros: sequential processing with a compact state. Cons: long-history retention and sequence alignment. No trained inference is shown.
 
 
 
-## 41. Temporal convolution on graph history
+## 48. Temporal convolution on graph history
 Architecture schematic. Pros: parallel computation and explicit receptive field. Cons: window length, dilation and sampling-rate choices. Filters must not access future frames at prediction time.
 
 
 
-## 42. Causal temporal attention
+## 49. Causal temporal attention
 Architecture schematic. Pros: flexible history selection and long-range dependencies. Cons: data/computation requirements, masking and leakage; attention weights do not establish causal importance.
 
 
 
-## 43. Spatiotemporal message passing
+## 50. Spatiotemporal message passing
 General architecture schematic, not a reproduction of PathCRF. Pros: joint relational/time structure. Cons: graph size, identity errors and edge construction choices.
 
 
 
-## 44. SoccerMap: spatial neural prediction
+## 51. SoccerMap: spatial neural prediction
 Architecture schematic. SoccerMap is a convolutional approach, not a GNN. Pros: field-wide outputs. Cons: rasterization and training data requirements; no pretrained inference is claimed.
 
 
 
-## 45. Expected possession value
+## 52. Bekkers: building a football graph
+Real SkillCorner frame with one documented UnravelSports configuration: split-by-team connections plus ball links. This is not asserted as the unique GraphEPV topology. Pros: permutation-invariant aggregation and relational features. Cons: edges determine which interactions can be learned. Current documentation recommends PyTorch Geometric; the 2025 talk used Keras/Spektral.
+
+
+
+## 53. Bekkers: GraphEPV scoring target
+PyData London, 7 June 2025. Talk uses World Cup 2022 PFF data across 64 matches, with labels respecting team and period. This is a ten-second scoring target, not automatically the complete action-decomposed Fernández EPV framework. Schematic only: no pretrained model inference here. Strength: includes off-ball context. Limitation: rare correlated labels, calibration and transfer to another competition.
+
+
+
+## 54. GraphEPV and temporal extensions
+Our extension discussion, not a claim that the 2025 GraphEPV presentation trained a temporal GNN. Use the existing lagged features, GRU, TCN and attention slides as alternative temporal encoders. Keep whole matches/possessions together when splitting; account for the ten-second outcome window. Compare against location xT and non-graph models on the same target.
+
+
+
+## 55. Expected possession value
 Conceptual decomposition: sum over actions P(action|state) times outcome-conditional value, including failure. EPV is a framework/target, not a synonym for GNN. Different EPV definitions must not be mixed.
 
 
 
-## 46. Observed passes and supplied EPV
+## 56. Observed passes and supplied EPV
 Actual pass_epv_delta_for fields in SkillCorner dynamic events. This is the provider’s model output; not a reconstructed Fernández or DEFCON prediction. The field name is shown rather than assuming undocumented equivalence.
 
 NOTEBOOK · supplied event-value fields
 
-## 47. DEFCON: defensive contribution
+## 57. DEFCON: defensive contribution
 Architecture schematic only. Explain attribution assumptions before interpreting defensive credits. Actual frame is context, not DEFCON inference.
 
 
 
-## 48. U.S. Soccer: counterattack graphs
+## 58. U.S. Soccer: counterattack graphs
 Architecture schematic. The published balanced event-frame study uses reaching the penalty area as success; the repository’s additional all-frame dataset has different goal labels. Do not mix those datasets or quote them as equivalent.
 
 
 
-## 49. TacticAI: corner-kick modeling
+## 59. TacticAI: corner-kick modeling
 Architecture schematic. The input illustration uses real tracking near a supplied corner-reception event; it is not the original TacticAI input or trained inference. Complete task-specific code/weights and licensed data are not released. Model-generated suggestions are not guarantees.
 
 
 
-## 50. Trajectory forecasting
+## 60. Trajectory forecasting
 Architecture schematic; no invented future trajectories are shown as learned output. GenTac is a recent preprint example. Distinguish forecasting and causal intervention.
 
 
 
-## 51. Validating tracking models
+## 61. Validating tracking models
 Schematic split only, not measured performance. Event detection needs timing tolerances; probability models need calibration; tactical labels need a clear taxonomy.

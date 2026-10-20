@@ -130,5 +130,25 @@
   "attention": [
     "Attention Is All You Need",
     "https://arxiv.org/abs/1706.03762"
+  ],
+  "pleuler": [
+    "Devin Pleuler: Fixed to Fluid (2024)",
+    "https://github.com/devinpleuler/research/blob/master/frame-by-frame-position.md"
+  ],
+  "efpi": [
+    "Joris Bekkers: Elastic Formation and Position Identification",
+    "https://arxiv.org/abs/2506.23843"
+  ],
+  "efpidocs": [
+    "UnravelSports EFPI tutorial",
+    "https://unravelsports.readthedocs.io/en/latest/tutorials/formation_detection.html"
+  ],
+  "graphepv": [
+    "Joris Bekkers: GraphEPV, PyData London 2025",
+    "https://rawcdn.githack.com/UnravelSports/keynotes/main/html/20250607-PyData-London.html"
+  ],
+  "unravel": [
+    "UnravelSports soccer GNN tutorial",
+    "https://unravelsports.readthedocs.io/en/latest/tutorials/soccer_gnn.html"
   ]
 }

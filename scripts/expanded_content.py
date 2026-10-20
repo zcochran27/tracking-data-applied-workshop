@@ -3,6 +3,11 @@ import nbformat as nbf
 import textwrap
 
 EXTRA_SOURCES={
+ 'pleuler':('Devin Pleuler: Fixed to Fluid (2024)','https://github.com/devinpleuler/research/blob/master/frame-by-frame-position.md'),
+ 'efpi':('Joris Bekkers: Elastic Formation and Position Identification','https://arxiv.org/abs/2506.23843'),
+ 'efpidocs':('UnravelSports EFPI tutorial','https://unravelsports.readthedocs.io/en/latest/tutorials/formation_detection.html'),
+ 'graphepv':('Joris Bekkers: GraphEPV, PyData London 2025','https://rawcdn.githack.com/UnravelSports/keynotes/main/html/20250607-PyData-London.html'),
+ 'unravel':('UnravelSports soccer GNN tutorial','https://unravelsports.readthedocs.io/en/latest/tutorials/soccer_gnn.html'),
  'xt':('Karun Singh: Expected Threat','https://karun.in/blog/expected-threat.html'),
  'dbxt':('DataBallPy fitted xT methodology','https://databallpy.readthedocs.io/en/main/features/xt_models.html'),
  'explosive':('SkillCorner explosive accelerations','https://skillcorner.com/articles/new-feature-explosive-accelerations'),
@@ -72,7 +77,8 @@ def make_slides():
         if s['title']=='Temporal convolution on graph history':s['sources']=['tcn']
         if s['title']=='Causal temporal attention':s['sources']=['attention','temporal']
         if s['title']=='Spatiotemporal message passing':s['sources']=['temporal','pathcrf']
-    return slides
+    from role_content import enrich_slides
+    return enrich_slides(slides)
 
 def extend_notebook(cells):
     def md(s):return nbf.v4.new_markdown_cell(textwrap.dedent(s).strip())
@@ -117,4 +123,5 @@ These are supplied model fields, not predictions from our own EPV or GNN. Run xt
 display(sample_events[sample_events.event_type.eq('off_ball_run')][['player_name','event_subtype','frame_start','xthreat']].dropna().head(10))
 display(sample_events[sample_events.event_type.eq('player_possession')][['frame_start','end_type','pass_outcome','pass_epv_total','pass_epv_delta_for']].dropna(subset=['pass_epv_total']).head(10))
 ''')]
-    return base[:13]+event+base[13:16]+xt+base[16:]+graph+temporal+cells[24:]
+    from role_content import enrich_notebook
+    return enrich_notebook(base[:13]+event+base[13:16]+xt+base[16:]+graph+temporal+cells[24:])

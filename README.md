@@ -45,6 +45,7 @@ SkillCorner definitions anchor the physical metrics; DataBallPy documentation su
 python scripts/build_materials.py
 python scripts/render_figures.py
 python scripts/illustrate_methods.py
+python scripts/illustrate_roles.py
 python scripts/execute_notebook.py
 python -m unittest discover -s tests
 ```
@@ -54,3 +55,5 @@ The slide authoring source is `scripts/build_slides.mjs`; it uses OpenAI's bundl
 ## Figure and model provenance
 
 `assets/methods/` contains generated method illustrations. `resources/visual_manifest.json` describes their provenance. Real tracking and supplied provider values are distinguished from architecture schematics and teaching baselines. The DataBallPy fitted open-play xT grid is retained with its license and SHA-256 provenance in `resources/models/`. It is an external event-trained model, not a grid fitted on this tracking sample.
+
+Role and formation walkthroughs include centroid-normalized covariance ellipses, Devin Pleuler's angular teammate-count idea (with an explicitly added opponent channel), fixed-template assignment and persistence-filtered change candidates. Joris Bekkers' GraphEPV talk anchors the graph-model discussion, including its ten-second scoring target. The notebook does not train a role classifier or GraphEPV model. Our fixed-template example is distinct from Bekkers' elastic EFPI algorithm. See `resources/ROLE_AND_GRAPHEPV.md` for sources and limitations.

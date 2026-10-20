@@ -248,5 +248,45 @@
     "description": "Schematic match-level data split, not measured validation performance",
     "match_id": 1925299,
     "kind": "derived from tracking / supplied events unless labeled schematic"
+  },
+  "role_distributions": {
+    "description": "Raw and centroid-normalized bivariate position distributions; metadata role labels",
+    "match_id": 1925299,
+    "kind": "Independent teaching implementation / real tracking"
+  },
+  "role_quiz": {
+    "description": "Unlabeled real simultaneous team snapshots",
+    "match_id": 1925299,
+    "kind": "Independent teaching implementation / real tracking"
+  },
+  "angular_view": {
+    "description": "Pleuler-inspired rotating geometric viewpoint; 24 headings / 90-degree field selected here",
+    "match_id": 1925299,
+    "kind": "Independent teaching implementation / real tracking"
+  },
+  "role_features": {
+    "description": "Actual teammate-count feature matrix; role labels come from match metadata, not frame-level truth",
+    "match_id": 1925299,
+    "kind": "Independent teaching implementation / real tracking"
+  },
+  "formation_assignment": {
+    "description": "Attack-normalized fixed-template Hungarian assignment; no ground-truth formation claim",
+    "match_id": 1925299,
+    "kind": "Independent teaching implementation / real tracking"
+  },
+  "formation_changes": {
+    "description": "Real defensive-window candidates and persistence filter; no tactical ground truth; missing windows not bridged in revised code",
+    "match_id": 1925299,
+    "kind": "Independent teaching implementation / real tracking"
+  },
+  "bekkers_graph": {
+    "description": "Real tracking coordinates with split-by-team plus ball topology; independently built, not library inference",
+    "match_id": 1925299,
+    "kind": "Independent teaching implementation / real tracking"
+  },
+  "bekkers_epv": {
+    "description": "GraphEPV target and general graph-classification pipeline attributed to PyData London 2025",
+    "match_id": 1925299,
+    "kind": "Independent teaching implementation / real tracking"
   }
 }

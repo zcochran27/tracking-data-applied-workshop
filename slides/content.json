@@ -118,6 +118,108 @@
     "cue": ""
   },
   {
+    "title": "Guess the current player roles",
+    "body": [
+      "Inspect two real team snapshots",
+      "Distinguish assigned position from occupied role",
+      "Use relative geometry to explain your answer"
+    ],
+    "image": "methods/role_quiz.png",
+    "sources": [
+      "pleuler"
+    ],
+    "notes": "Audience prompt inspired by the supplied reference. These are actual SkillCorner frames, with identities hidden. A single snapshot is ambiguous; metadata positions are not frame-level role truth.",
+    "cue": ""
+  },
+  {
+    "title": "Position distributions and centering",
+    "body": [
+      "Plot a mean and covariance for each player",
+      "Subtract the team centroid in every frame",
+      "Compare dispersion before assigning a formation"
+    ],
+    "image": "methods/role_distributions.png",
+    "sources": [
+      "pleuler",
+      "formation"
+    ],
+    "notes": "Independently generated from SkillCorner. Two-standard-deviation covariance ellipses, not confidence regions. Labels are metadata roles. Pros: removes team translation. Cons: averaging still mixes phases and rotations; covariance can hide multimodal behavior. Use identical qualifying samples in both panels.",
+    "cue": ""
+  },
+  {
+    "title": "Pleuler: rotating player viewpoints",
+    "body": [
+      "Place the origin at the player",
+      "Rotate a geometric viewing sector",
+      "Count teammates at each heading"
+    ],
+    "image": "methods/angular_view.png",
+    "sources": [
+      "pleuler"
+    ],
+    "notes": "Pleuler (June 2024), independently implemented. Our choices: 24 headings and overlapping 90-degree sectors. This is geometric context, not observed head orientation, actual sight or occlusion. Attack-normalize both axes. Opponent-count channel is our extension. Pros: translation-invariant and intuitive. Cons: angular resolution, orientation and missing players affect features.",
+    "cue": "NOTEBOOK \u00b7 inspect angular count features"
+  },
+  {
+    "title": "From angular features to role labels",
+    "body": [
+      "Create one feature row per player and frame",
+      "Fit a supervised role classifier on labeled matches",
+      "Retain role probabilities for uncertain states"
+    ],
+    "image": "methods/role_features.png",
+    "sources": [
+      "pleuler"
+    ],
+    "notes": "Pleuler used XGBoost. This notebook manufactures features but does not train or claim accuracy from a single match. Assigned-position metadata gives weak labels during rotations. For credible evaluation use manually reviewed frame roles and held-out matches/players. Add opponent counts as a separate tested extension. Pros: flexible nonlinear classification. Cons: label noise and domain shift.",
+    "cue": ""
+  },
+  {
+    "title": "Formation prediction by assignment",
+    "body": [
+      "Compare centered shape with candidate templates",
+      "Match ten outfield players to ten slots",
+      "Select the lowest assignment cost"
+    ],
+    "image": "methods/formation_assignment.png",
+    "sources": [
+      "efpi",
+      "efpidocs"
+    ],
+    "notes": "Teaching baseline: four fixed templates, Hungarian minimum squared-distance assignment, attack-right orientation. RMS residual is not a probability. Unlike EFPI, this implementation has no elastic template optimization. Pros: interpretable assignments and no player-order dependence. Cons: template inventory, scale and asymmetry determine results.",
+    "cue": "NOTEBOOK \u00b7 inspect template scores and assignments"
+  },
+  {
+    "title": "Bekkers: elastic formation identification",
+    "body": [
+      "Allow templates to adapt to team shape",
+      "Assign players to formation roles",
+      "Analyze comparable windows and possession states"
+    ],
+    "image": "methods/formation_assignment.png",
+    "sources": [
+      "efpi",
+      "efpidocs"
+    ],
+    "notes": "EFPI is the published extension using elastic templates and linear assignment. The displayed visualization is our simpler fixed-template baseline, not an EFPI result. Follow the linked tutorial for package inference. Pros: formation and role assignment together. Cons: parameter choices, substitutions, partial tracking and tactical ambiguity. Compare output to video-reviewed labels.",
+    "cue": ""
+  },
+  {
+    "title": "Detecting formation-change candidates",
+    "body": [
+      "Score successive windows in the same phase",
+      "Require persistent evidence before switching",
+      "Review changes alongside substitutions and video"
+    ],
+    "image": "methods/formation_changes.png",
+    "sources": [
+      "pleuler",
+      "efpi"
+    ],
+    "notes": "Plot uses real defensive-context windows with at least 50 qualifying frames. Three consecutive available 30-second bins confirm a label; missing bins reset the candidate count. Existing confirmed state is retained through missing bins, not evidence of ongoing stability. This is an educational rule, not EFPI change logic. Pleuler explicitly proposed change detection without testing it. No tactical ground truth is available here. Role swaps alone need not imply formation changes.",
+    "cue": "NOTEBOOK \u00b7 candidate timeline and persistence"
+  },
+  {
     "title": "Formation detection",
     "body": [
       "Remove team translation with centered coordinates",
@@ -638,6 +740,51 @@
       "soccermap"
     ],
     "notes": "Architecture schematic. SoccerMap is a convolutional approach, not a GNN. Pros: field-wide outputs. Cons: rasterization and training data requirements; no pretrained inference is claimed.",
+    "cue": ""
+  },
+  {
+    "title": "Bekkers: building a football graph",
+    "body": [
+      "Represent players and ball as nodes",
+      "Encode team, motion and relative geometry",
+      "Choose edges to suit the prediction task"
+    ],
+    "image": "methods/bekkers_graph.png",
+    "sources": [
+      "graphepv",
+      "unravel"
+    ],
+    "notes": "Real SkillCorner frame with one documented UnravelSports configuration: split-by-team connections plus ball links. This is not asserted as the unique GraphEPV topology. Pros: permutation-invariant aggregation and relational features. Cons: edges determine which interactions can be learned. Current documentation recommends PyTorch Geometric; the 2025 talk used Keras/Spektral.",
+    "cue": ""
+  },
+  {
+    "title": "Bekkers: GraphEPV scoring target",
+    "body": [
+      "One tracking frame becomes one graph",
+      "Label goals by the possession team within 10 seconds",
+      "Train a graph classifier to estimate that probability"
+    ],
+    "image": "methods/bekkers_epv.png",
+    "sources": [
+      "graphepv",
+      "unravel"
+    ],
+    "notes": "PyData London, 7 June 2025. Talk uses World Cup 2022 PFF data across 64 matches, with labels respecting team and period. This is a ten-second scoring target, not automatically the complete action-decomposed Fern\u00e1ndez EPV framework. Schematic only: no pretrained model inference here. Strength: includes off-ball context. Limitation: rare correlated labels, calibration and transfer to another competition.",
+    "cue": ""
+  },
+  {
+    "title": "GraphEPV and temporal extensions",
+    "body": [
+      "A frame model can use velocity features",
+      "History adds runs, pressure and changing lanes",
+      "Add temporal encoders with causal inputs"
+    ],
+    "image": "methods/temporal_edges.png",
+    "sources": [
+      "graphepv",
+      "unravel"
+    ],
+    "notes": "Our extension discussion, not a claim that the 2025 GraphEPV presentation trained a temporal GNN. Use the existing lagged features, GRU, TCN and attention slides as alternative temporal encoders. Keep whole matches/possessions together when splitting; account for the ten-second outcome window. Compare against location xT and non-graph models on the same target.",
     "cue": ""
   },
   {
