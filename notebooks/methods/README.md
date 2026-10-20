@@ -25,3 +25,5 @@ Read each notebook from top to bottom: inputs and assumptions, helper functions,
 
 
 Teaching boundaries: fixed-template formation fitting does not reproduce elastic EFPI. Gaussian, arrival-time, AS/DAS and run-threat examples are explicit proxies/baselines. Synthetic checks verify derivatives; the graph notebook then trains a separate real-data teaching GNN and shows its held-out results. Its reconstructed labels, few matches and sparse positive states limit reliability. It is not Bekkers' released model or a production system.
+
+Relevant methods include embedded MP4 playback beside the corresponding calculations: tracking playback, pass candidates, formation centering/window candidates, moving control comparisons, dynamic graphs and actual held-out graph-EPV predictions. Saved notebook and HTML video outputs work without a live kernel. Playback cells use local MP4s when available and a checksum-verified public asset pinned to a repository commit otherwise; no Python helper module is required. Comparison videos clearly identify their illustrative parameters where these differ from the notebook calculations.

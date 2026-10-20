@@ -17,3 +17,5 @@ Download an HTML file and open it in a browser to view figures and embedded anim
 - [Accessible and dangerous space proxies](13_space_and_danger.html)
 - [Graph-based EPV modeling pipeline](16_graph_epv.html)
 - [Actual trained-model EPV animation on an unseen possession](graph_epv_goal_animation.html)
+
+The data-exploration, event-detection, formation, Voronoi, Gaussian, arrival-time and graph-EPV exports also contain embedded MP4 videos beside the relevant steps. Download the HTML and open it in a browser to play these offline.

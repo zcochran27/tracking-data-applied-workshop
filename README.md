@@ -24,7 +24,7 @@ python -m pip install -r requirements.txt
 jupyter lab notebooks/methods
 ```
 
-Choose a method notebook and run its cells in order. Internet is required for the initial data download. Saved outputs and HTML copies support viewing without execution; live widgets require Jupyter. Each notebook manages its own cache. Raw downloads are excluded from Git.
+Choose a method notebook and run its cells in order. Internet is required for the initial data download. Saved outputs and HTML copies support viewing without execution; live widgets require Jupyter. Relevant method notebooks and their HTML exports also embed the MP4 videos beside the corresponding calculations. Each notebook manages its own cache. Raw downloads are excluded from Git.
 
 ## Models and examples
 

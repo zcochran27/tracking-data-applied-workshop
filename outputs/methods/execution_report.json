@@ -1,18 +1,24 @@
 [
   {
     "notebook": "01_data_exploration.ipynb",
-    "code_cells": 9,
-    "errors": 0
+    "code_cells": 10,
+    "errors": 0,
+    "embedded_mp4_cells": 1,
+    "video_update": "Executed only added playback cells; retained prior method/model outputs."
   },
   {
     "notebook": "02_event_detection.ipynb",
-    "code_cells": 9,
-    "errors": 0
+    "code_cells": 10,
+    "errors": 0,
+    "embedded_mp4_cells": 1,
+    "video_update": "Executed only added playback cells; retained prior method/model outputs."
   },
   {
     "notebook": "03_formation_analysis.ipynb",
-    "code_cells": 11,
-    "errors": 0
+    "code_cells": 13,
+    "errors": 0,
+    "embedded_mp4_cells": 2,
+    "video_update": "Executed only added playback cells; retained prior method/model outputs."
   },
   {
     "notebook": "04_role_classification.ipynb",
@@ -41,18 +47,24 @@
   },
   {
     "notebook": "09_voronoi_control.ipynb",
-    "code_cells": 7,
-    "errors": 0
+    "code_cells": 8,
+    "errors": 0,
+    "embedded_mp4_cells": 1,
+    "video_update": "Executed only added playback cells; retained prior method/model outputs."
   },
   {
     "notebook": "10_gaussian_control.ipynb",
-    "code_cells": 8,
-    "errors": 0
+    "code_cells": 9,
+    "errors": 0,
+    "embedded_mp4_cells": 1,
+    "video_update": "Executed only added playback cells; retained prior method/model outputs."
   },
   {
     "notebook": "11_arrival_time_control.ipynb",
-    "code_cells": 7,
-    "errors": 0
+    "code_cells": 8,
+    "errors": 0,
+    "embedded_mp4_cells": 1,
+    "video_update": "Executed only added playback cells; retained prior method/model outputs."
   },
   {
     "notebook": "12_pass_completion.ipynb",
@@ -66,7 +78,9 @@
   },
   {
     "notebook": "16_graph_epv.ipynb",
-    "code_cells": 33,
-    "errors": 0
+    "code_cells": 35,
+    "errors": 0,
+    "embedded_mp4_cells": 2,
+    "video_update": "Executed only added playback cells; retained prior method/model outputs."
   }
 ]
