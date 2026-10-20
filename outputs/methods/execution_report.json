@@ -1,0 +1,87 @@
+[
+  {
+    "notebook": "01_data_exploration.ipynb",
+    "code_cells": 12,
+    "errors": 0
+  },
+  {
+    "notebook": "02_event_detection.ipynb",
+    "code_cells": 14,
+    "errors": 0
+  },
+  {
+    "notebook": "03_formation_analysis.ipynb",
+    "code_cells": 17,
+    "errors": 0
+  },
+  {
+    "notebook": "04_role_classification.ipynb",
+    "code_cells": 11,
+    "errors": 0
+  },
+  {
+    "notebook": "05_match_segmentation.ipynb",
+    "code_cells": 13,
+    "errors": 0
+  },
+  {
+    "notebook": "06_physical_metrics.ipynb",
+    "code_cells": 22,
+    "errors": 0
+  },
+  {
+    "notebook": "07_expected_goals.ipynb",
+    "code_cells": 9,
+    "errors": 0
+  },
+  {
+    "notebook": "08_expected_threat.ipynb",
+    "code_cells": 9,
+    "errors": 0
+  },
+  {
+    "notebook": "09_voronoi_control.ipynb",
+    "code_cells": 6,
+    "errors": 0
+  },
+  {
+    "notebook": "10_gaussian_control.ipynb",
+    "code_cells": 8,
+    "errors": 0
+  },
+  {
+    "notebook": "11_arrival_time_control.ipynb",
+    "code_cells": 8,
+    "errors": 0
+  },
+  {
+    "notebook": "12_pass_completion.ipynb",
+    "code_cells": 10,
+    "errors": 0
+  },
+  {
+    "notebook": "13_space_and_danger.ipynb",
+    "code_cells": 12,
+    "errors": 0
+  },
+  {
+    "notebook": "14_run_threat.ipynb",
+    "code_cells": 5,
+    "errors": 0
+  },
+  {
+    "notebook": "15_epv_decomposition.ipynb",
+    "code_cells": 5,
+    "errors": 0
+  },
+  {
+    "notebook": "16_graph_epv.ipynb",
+    "code_cells": 19,
+    "errors": 0
+  },
+  {
+    "notebook": "17_temporal_graph_models.ipynb",
+    "code_cells": 22,
+    "errors": 0
+  }
+]

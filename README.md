@@ -6,6 +6,7 @@ An illustrated soccer analytics workshop using SkillCorner open tracking data, w
 
 - [PowerPoint deck](slides/tracking-data-applied.pptx)
 - [Interactive notebook with saved outputs](notebooks/tracking_data_applied.ipynb)
+- [Standalone notebook for each method, including inline helpers and intermediate visuals](notebooks/methods/README.md)
 - [From-scratch notebooks for every avenue](notebooks/avenues/README.md)
 - [Browser-readable notebook with animation](outputs/tracking-data-applied.html)
 - [Reading list and research projects](resources/READING_LIST.md)
@@ -56,6 +57,8 @@ For the independent method notebooks, run `python scripts/build_avenue_notebooks
 The slide authoring source is `scripts/build_slides.mjs`; it uses OpenAI's bundled artifact-tool runtime (not a public npm dependency). Edit `slides/content.json` or the authoring script for slide content and layout. The exported PPTX is editable in PowerPoint. `build_materials.py` regenerates an unexecuted notebook, so execute it afterward.
 
 ## Figure and model provenance
+
+The 17 method notebooks under `notebooks/methods/` each cover a complete analytical workflow. Formation centering, assignment and change detection are together; graph construction, message passing, pooling, labels and training are together. Each notebook includes data downloading, kloppy ingestion, reshaping, pitch drawing, helper functions, prerequisite calculations and intermediate visual diagnostics inline. They import no local Python helper files and require no previous notebook session. Set `DATA_ROOT` in the first code cell if using another cache. Each method has a saved HTML counterpart under `outputs/methods/`. The earlier presenter and avenue notebooks remain available as broader walkthroughs.
 
 `assets/methods/` contains generated method illustrations. `resources/visual_manifest.json` describes their provenance. Real tracking and supplied provider values are distinguished from architecture schematics and teaching baselines. The DataBallPy fitted open-play xT grid is retained with its license and SHA-256 provenance in `resources/models/`. It is an external event-trained model, not a grid fitted on this tracking sample.
 

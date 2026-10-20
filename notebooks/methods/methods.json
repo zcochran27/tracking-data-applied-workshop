@@ -1,0 +1,104 @@
+[
+  {
+    "notebook": "01_data_exploration.ipynb",
+    "title": "Loading, quality, plotting and animation",
+    "question": "Inspect and visualize tracking data",
+    "stages": "Download and load; reshape; inspect quality; plot; animate"
+  },
+  {
+    "notebook": "02_event_detection.ipynb",
+    "title": "Possession and pass-event detection",
+    "question": "Recover candidate on-ball events",
+    "stages": "Player\u2013ball vectors; proximity; stable possession; release/transit/reception; timing evaluation"
+  },
+  {
+    "notebook": "03_formation_analysis.ipynb",
+    "title": "Formation prediction and change detection",
+    "question": "Describe team shape and identify change candidates",
+    "stages": "Centroid distributions; exploratory line clustering; fixed-template assignment; persistence"
+  },
+  {
+    "notebook": "04_role_classification.ipynb",
+    "title": "Player-viewpoint role classification",
+    "question": "Encode relative geometry and classify roles",
+    "stages": "Relative bearings; sector membership; teammate/opponent counts; softmax training"
+  },
+  {
+    "notebook": "05_match_segmentation.ipynb",
+    "title": "Phase-of-play segmentation",
+    "question": "Split a match into interpretable tactical states",
+    "stages": "Features; rule gates; confirmation; interval construction; provider-label joins"
+  },
+  {
+    "notebook": "06_physical_metrics.ipynb",
+    "title": "Physical-metric calculation pipeline",
+    "question": "Measure movement and physical effort",
+    "stages": "Smooth positions; velocity; acceleration; distance integration; intensity bands; efforts; crossing times; sample peaks"
+  },
+  {
+    "notebook": "07_expected_goals.ipynb",
+    "title": "Expected goals: shot geometry and training",
+    "question": "Estimate shot-outcome probability",
+    "stages": "Distance and opening angle; logistic link; gradient-based optimizer; synthetic check"
+  },
+  {
+    "notebook": "08_expected_threat.ipynb",
+    "title": "Expected Threat: fitting and action valuation",
+    "question": "Value locations and completed movement",
+    "stages": "Action counts; reward; transition matrix; iterative solution; endpoint gain"
+  },
+  {
+    "notebook": "09_voronoi_control.ipynb",
+    "title": "Voronoi pitch-control baseline",
+    "question": "Assign space by nearest player",
+    "stages": "Pairwise distance; nearest-player regions; team aggregation"
+  },
+  {
+    "notebook": "10_gaussian_control.ipynb",
+    "title": "Gaussian influence and team control",
+    "question": "Model smooth directional influence",
+    "stages": "Projected centers; directional coordinates; covariance scale; player influence; team aggregation"
+  },
+  {
+    "notebook": "11_arrival_time_control.ipynb",
+    "title": "Arrival-time pitch-control baseline",
+    "question": "Compare which team reaches a target sooner",
+    "stages": "Reaction; projected position; travel time; earliest arrival; bounded comparison"
+  },
+  {
+    "notebook": "12_pass_completion.ipynb",
+    "title": "Pass-interception survival model",
+    "question": "Assess a hypothetical passing option",
+    "stages": "Ball path and timing; player arrival; interception hazard; survival integration"
+  },
+  {
+    "notebook": "13_space_and_danger.ipynb",
+    "title": "Accessible and dangerous space proxies",
+    "question": "Integrate reachability and weight dangerous space",
+    "stages": "Control surface; grid-cell area; danger weight; per-cell contributions; totals"
+  },
+  {
+    "notebook": "14_run_threat.ipynb",
+    "title": "Off-ball run option-value proxy",
+    "question": "Explain how a run may improve an option",
+    "stages": "Completion component; destination value; product; before/after comparison"
+  },
+  {
+    "notebook": "15_epv_decomposition.ipynb",
+    "title": "Action-decomposed possession value",
+    "question": "Combine action choices and outcome values",
+    "stages": "Selection probabilities; success/failure values; expected contribution; sum"
+  },
+  {
+    "notebook": "16_graph_epv.ipynb",
+    "title": "Graph-based EPV modeling pipeline",
+    "question": "Construct and train a graph scoring model",
+    "stages": "Features; distances; adjacency; normalization; messages; pooling; gradients; training; ten-second labels"
+  },
+  {
+    "notebook": "17_temporal_graph_models.ipynb",
+    "title": "Temporal graph modeling",
+    "question": "Represent changing player interactions",
+    "stages": "Lagged features; identity edges; graph embeddings; recurrent, convolutional and masked-attention alternatives"
+  }
+]
