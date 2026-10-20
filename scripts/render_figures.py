@@ -27,6 +27,6 @@ for e in edges.itertuples():
     a=nodes[nodes.player_id.eq(e.source)].iloc[0];b=nodes[nodes.player_id.eq(e.target)].iloc[0]
     ax.plot([a.x,b.x],[a.y,b.y],color='gray',alpha=.4)
 ax.set_title('Tracking frame as a radius graph (15 m)');save('graph.png')
-(ROOT/'outputs/physical_sample.csv').write_text(s.to_csv(index=False),encoding='utf-8')
+(ROOT/'outputs/physical_sample.csv').write_text(s.to_csv(index=False,lineterminator='\n'),encoding='utf-8')
 (ROOT/'resources/clip.json').write_text(json.dumps({'match_id':1925299,'first_frame':int(frames[0]),'last_frame':int(frames[-1]),'selection':'10 s live-ball sequence with high coordinate/velocity coverage; selected for territory, not a labeled goal event'},indent=2))
 print('Figures rendered; frame',frame)

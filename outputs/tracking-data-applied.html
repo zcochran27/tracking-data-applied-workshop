@@ -8,9 +8,9 @@
   function addWidgetsRenderer() {
     var mimeElement = document.querySelector('script[type="application/vnd.jupyter.widget-view+json"]');
     var scriptElement = document.createElement('script');
-    
+
     var widgetRendererSrc = 'https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js';
-    
+
     var widgetState;
 
     // Fallback for older version:
@@ -18,9 +18,9 @@
       widgetState = mimeElement && JSON.parse(mimeElement.innerHTML);
 
       if (widgetState && (widgetState.version_major < 2 || !widgetState.version_major)) {
-        
+
         var widgetRendererSrc = 'https://unpkg.com/@jupyter-js-widgets@*/dist/embed.js';
-        
+
       }
     } catch(e) {}
 
@@ -8088,7 +8088,7 @@ input[type=range].anim-slider {
     var slider_id = "_anim_slider9c53bac48014448d8cc96213456734e7";
     var loop_select_id = "_anim_loop_select9c53bac48014448d8cc96213456734e7";
     var frames = new Array(100);
-    
+
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA4QAAAJYCAYAAAA6xSjbAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90\
 bGliIHZlcnNpb24zLjEwLjMsIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvZiW1igAAAAlwSFlzAAAP\
 YQAAD2EBqD+naQAAaBdJREFUeJzt3Qd4VFX6x/F3kkwaKQSEhN67dKUqiiCgYlnsFRTroq4iFv7u\
