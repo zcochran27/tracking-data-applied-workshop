@@ -406,21 +406,19 @@ Original synchronized comparison video. Scores are teaching outputs, not calibra
 [Wide Open Spaces, Fernández & Bornn (2018)](https://static.capabiliaserver.com/frontend/clients/barca/wp_prod/wp-content/uploads/2018/05/Wide-Open-Spaces.pdf)
 [Beyond Expected Goals, Spearman (2018)](https://static.hudl.com/craft/downloads/SSAC2018_Beyond_Expected_Goals.pdf?mtime=20180327111214)
 
-## 32. Which passing targets are more likely to succeed?
+## 32. Which passes survive interception?
 
-Main surface: actual accessible-space 2.0.13 expected-completion inference on real SkillCorner tracking, respecting offside. Inset: independently parameterized uncalibrated teaching survival example. Notebook 12 implements a teaching model, not the published fitted parameters. Targets are hypothetical, not observed choices; no SkillCorner-domain calibration claim.
+**Problem:** Compare hypothetical teammate options and show where defenders threaten the ball path.
 
-**Problem:** Assess a receiver before the pass is attempted.
+**Method:** Same independent interception-survival model as notebook 12. Ball speed is 15 m/s. Defender arrival is 0.7 s reaction plus distance divided by 5 m/s. Each defender's hazard is 2 × sigmoid((ball time − arrival time)/0.15), summed across defenders and integrated over 40 path points; exponential negative cumulative hazard gives survival.
 
-**Methods:** Published accessible-space completion model; survival-proxy illustration.
+**Result:** The left pitch labels all ten teammate destinations from a known real carrier, excluding the carrier. The right pitch highlights a selected pass and two threatening defenders, with dashed links to three ball-path points. The table compares arrival times and 1−exp(−hazard × 0.2), a per-defender conditional interception chance over 0.2 s at a fixed local hazard. Do not sum these probe numbers or interpret them as whole-pass completion.
 
-**Result:** A field-wide completion map ranks hypothetical target locations.
+The example is deliberately chosen for intermediate survival and at least two potential interceptors. It is not an observed pass or a calibration result. This model ignores receiving control, offside, aerial trajectories and execution error. The prior published-model completion map and differently parameterized inset have been replaced here so the slide matches the notebook.
 
 [Method notebook](../notebooks/methods/12_pass_completion.ipynb)
 
-[Dangerous Accessible Space: paper and implementation](https://github.com/jonas-bischofberger/accessible-space)
-[DataBallPy DAS and expected completion](https://databallpy.readthedocs.io/en/main/features/dangerous_accessible_space.html)
-[Beyond Expected Goals, Spearman (2018)](https://static.hudl.com/craft/downloads/SSAC2018_Beyond_Expected_Goals.pdf?mtime=20180327111214)
+[Simulation video](../assets/videos/pass_survival_options.mp4)
 
 ## 33. Where can the attacking team receive?
 

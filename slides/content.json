@@ -551,20 +551,20 @@
   {
     "layout": "result",
     "section": "Game modeling",
-    "title": "Which passing targets are more likely to succeed?",
-    "problem": "Assess a receiver before the pass is attempted.",
-    "methods": "Published accessible-space completion model; survival-proxy illustration.",
-    "result": "A field-wide completion map ranks hypothetical target locations.",
-    "image": "results/completion.png",
+    "title": "Which passes survive interception?",
+    "problem": "Compare passing options and identify where defenders threaten a ball path.",
+    "methods": "Simulate ball travel, estimate defender arrival, then integrate interception risk.",
+    "result": "Passing scores and defender probes come from the same survival model.",
+    "image": "results/pass_survival_options.png",
     "sources": [
-      "accessible",
-      "das",
       "spearman"
     ],
-    "status": "Published output; separate teaching inset",
-    "notes": "Main surface: actual accessible-space 2.0.13 expected-completion inference on real SkillCorner tracking, respecting offside. Inset: independently parameterized uncalibrated teaching survival example. Notebook 12 implements a teaching model, not the published fitted parameters. Targets are hypothetical, not observed choices; no SkillCorner-domain calibration claim.",
+    "status": "Uncalibrated teaching model; hypothetical ground passes.",
+    "notes": "Same interception_components as notebook 12, not the accessible-space main map previously used here. Real frame with known nearby carrier and 22 players; ten teammate options excluding carrier. Constant ball speed 15 m/s, player arrival 0.7 s + distance/5 m/s, hazard 2*sigmoid((ball_time-arrival)/0.15), 40 path points, trapezoidal integration and exp(-cumulative hazard). Selected pass has 15–80% survival and at least two potential interceptors under the assumed model. Dashed defender-to-path links and table compare ball and defender ETAs at three points. Per-defender local P over 0.2 s = 1-exp(-hazard*0.2), conditional on a free ball and constant local hazard; these are not whole-pass completion probabilities and cannot be added. Percentages on teammate rays are endpoint ball-survival estimates. Receivers do not move or need to control the ball; offside, pass execution error and height are not modeled. No calibration or accuracy claim. The model is an independent teaching construction, not an exact Spearman implementation.",
     "cue": "Notebook: 12_pass_completion.ipynb",
-    "notebook": "notebooks/methods/12_pass_completion.ipynb"
+    "notebook": "notebooks/methods/12_pass_completion.ipynb",
+    "video": "assets/videos/pass_survival_options.mp4",
+    "videoDescription": "Same interception_components as notebook 12, not the accessible-space main map previously used here. Real frame with known nearby carrier and 22 players; ten teammate options excluding carrier. Constant ball speed 15 m/s, player arrival 0.7 s + distance/5 m/s, hazard 2*sigmoid((ball_time-arrival)/0.15), 40 path points, trapezoidal integration and exp(-cumulative hazard). Selected pass has 15–80% survival and at least two potential interceptors under the assumed model. Dashed defender-to-path links and table compare ball and defender ETAs at three points. Per-defender local P over 0.2 s = 1-exp(-hazard*0.2), conditional on a free ball and constant local hazard; these are not whole-pass completion probabilities and cannot be added. Percentages on teammate rays are endpoint ball-survival estimates. Receivers do not move or need to control the ball; offside, pass execution error and height are not modeled. No calibration or accuracy claim. The model is an independent teaching construction, not an exact Spearman implementation."
   },
   {
     "layout": "result",

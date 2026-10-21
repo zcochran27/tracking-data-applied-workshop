@@ -76,8 +76,11 @@
   },
   {
     "notebook": "12_pass_completion.ipynb",
-    "code_cells": 8,
-    "errors": 0
+    "code_cells": 10,
+    "errors": 0,
+    "embedded_mp4_cells": 1,
+    "validation": "Executed all method cells including real passing-option selection and defender probes; ten targets exclude the carrier, intermediate survival and two potential interceptors asserted. Executed added video playback cell.",
+    "video_update": "Media pinned to cf2de1679f5923d55bfb3d7ad14d50b69230da8b. Same model as slide 32."
   },
   {
     "notebook": "13_space_and_danger.ipynb",
