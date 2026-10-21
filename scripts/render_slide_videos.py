@@ -41,9 +41,21 @@ def draw_players(ax,r, labels=False):
         for pid,q in zip(ids,xy):ax.annotate(str(PLAYERS[pid]['number']),q,xytext=(4,4),textcoords='offset points',fontsize=9)
     return ids,xy,teams
 
+# Ball velocity uses valid timestamps and adjacent source frames within a period.
+RAW_BYFRAME={r['frame']:r for r in RAW if r['period']==1}
+def horizontal_speed(r):
+    previous=RAW_BYFRAME.get(r['frame']-1)
+    if previous is None or previous['period']!=r['period']:return np.nan
+    if r['timestamp'] is None or previous['timestamp'] is None:return np.nan
+    dt=(pd.to_timedelta(r['timestamp'])-pd.to_timedelta(previous['timestamp'])).total_seconds()
+    if not .05<=dt<=.15:return np.nan
+    xy=np.array([[q['ball_data'].get(k) for k in ['x','y']] for q in [previous,r]],float)
+    return float(np.linalg.norm(xy[1]-xy[0])/dt) if np.isfinite(xy).all() else np.nan
+
 def nearest(r):
-    ids,xy,t=positions(r); b=np.array([r['ball_data']['x'],r['ball_data']['y']]);d=np.linalg.norm(xy-b,axis=1);j=d.argmin()
-    z=r['ball_data'].get('z'); candidate=int(ids[j]) if d[j]<=2 and z is not None and z<=2 else None
+    ids,xy,t=positions(r);b=np.array([r['ball_data']['x'],r['ball_data']['y']]);d=np.linalg.norm(xy-b,axis=1);j=d.argmin()
+    z=r['ball_data'].get('z');speed=horizontal_speed(r)
+    candidate=int(ids[j]) if d[j]<=2 and z is not None and 0<=z<=2 and np.isfinite(speed) and speed<=3 else None
     return candidate,float(d[j])
 
 # Same transparent pass-candidate gates as notebook 02; no provider event endpoints.
@@ -108,15 +120,16 @@ movie('event_detection',CLIP,event,subtitle='Heuristic candidate: distance ≤2 
 times=np.array([(r['frame']-start)/10 for r in CLIP])
 stable_owner={f:s['player'] for s in stable for f in range(s['start'],s['end']+1)}
 def possession_result(fig,r,i):
-    gs=fig.add_gridspec(3,2,width_ratios=[1.45,1],height_ratios=[1,1,.4])
+    gs=fig.add_gridspec(3,2,width_ratios=[1.45,1],height_ratios=[1,1,.4],hspace=.65)
     ax=fig.add_subplot(gs[:2,0]);pitch(ax);ids,xy,_=draw_players(ax,r,True)
     owner=stable_owner.get(r['frame'])
     if owner in ids:
         q=xy[ids==owner][0];ax.scatter(*q,s=320,facecolors='none',edgecolors='#147d68',lw=3,zorder=7)
     ax.set_title('Inferred carrier: '+(f"#{PLAYERS[owner]['number']}" if owner else 'unassigned'),fontsize=18)
-    trace=fig.add_subplot(gs[:2,1]);dist=[nearest(q)[1] for q in CLIP]
+    trace=fig.add_subplot(gs[0,1]);dist=[nearest(q)[1] for q in CLIP]
     trace.plot(times,dist,c='#147d68');trace.axhline(2,c='#e87524',ls='--',label='2 m gate');trace.axvline(times[i],c='black',lw=1.5)
-    trace.set(xlabel='Sequence time (s)',ylabel='Distance to closest player (m)',title='Distance explains ambiguous moments');trace.legend(fontsize=10)
+    trace.set(xlabel='Sequence time (s)',ylabel='Distance to closest player (m)',title='Proximity gate');trace.legend(fontsize=9)
+    speedtrace=fig.add_subplot(gs[1,1]);speedtrace.plot(times,[horizontal_speed(q) for q in CLIP],c='#7959b5');speedtrace.axhline(3,c='#e87524',ls='--',label='3 m/s control gate');speedtrace.axvline(times[i],c='black');speedtrace.set(ylabel='Ball speed (m/s)',xlabel='Sequence time (s)',title='Low-speed evidence for control');speedtrace.legend(fontsize=9)
     timeline=fig.add_subplot(gs[2,:]);owners=list(dict.fromkeys(stable_owner.get(q['frame']) for q in CLIP)); palette={p:plt.get_cmap('Set2')(j) for j,p in enumerate(owners)}
     for q,t in zip(CLIP,times):
         p=stable_owner.get(q['frame']);timeline.broken_barh([(t,.1)],(0,1),facecolors=palette[p] if p else '#ddd')
@@ -125,7 +138,7 @@ def possession_result(fig,r,i):
             inds=[j for j,q in enumerate(CLIP) if stable_owner.get(q['frame'])==p];timeline.text(np.mean(times[inds]),.5,f"#{PLAYERS[p]['number']}",ha='center',va='center',fontsize=11)
     timeline.axvline(times[i],c='black');timeline.set(xlim=(times[0],times[-1]+.1),yticks=[],xlabel='Sequence time (s)',title='Stable possession timeline · gray = unassigned')
     fig.suptitle('Who controls the ball?',fontsize=22)
-movie('possession_result',CLIP,possession_result,repeat=2,subtitle='Offline heuristic result · proximity + ball-height gate + ≥0.3 s stable control · half-speed playback')
+movie('possession_physics',CLIP,possession_result,repeat=2,subtitle='Control: distance ≤2 m, height 0–2 m, speed ≤3 m/s for ≥0.3 s · offline heuristic · half speed')
 
 def distance_to(r,pid):
     ids,xy,_=positions(r);return np.linalg.norm(xy[ids==pid][0]-[r['ball_data']['x'],r['ball_data']['y']])
@@ -133,7 +146,7 @@ passer_dist=np.array([distance_to(r,a['player']) for r in CLIP]);receiver_dist=n
 ball_speed=[]
 for r in CLIP:
     prev=BYFRAME.get(r['frame']-1)
-    ball_speed.append(np.linalg.norm(np.array([r['ball_data'][k]-prev['ball_data'][k] for k in ['x','y']]))/.1 if prev else np.nan)
+    ball_speed.append(horizontal_speed(r))
 height=np.array([r['ball_data'].get('z',np.nan) for r in CLIP],float)
 release_t=(a['end']-start)/10;reception_t=(b['start']-start)/10
 def pass_physics(fig,r,i):
@@ -148,13 +161,13 @@ def pass_physics(fig,r,i):
         trace=fig.add_subplot(gs[j,1]);trace.axvspan(release_t,reception_t,color='#147d68',alpha=.09)
         if j==0:
             trace.plot(times,passer_dist,label='To passer',c='#e87524');trace.plot(times,receiver_dist,label='To receiver',c='#7959b5');trace.axhline(2,c='#777',ls='--',lw=1);trace.set_ylabel('Distance (m)');trace.legend(fontsize=9,ncol=2)
-        elif j==1:trace.plot(times,ball_speed,c='#147d68');trace.set_ylabel('Ball speed (m/s)');trace.set_title('Horizontal speed · diagnostic, not a fitted threshold',fontsize=10)
+        elif j==1:trace.plot(times,ball_speed,c='#147d68');trace.axhline(3,c='#777',ls='--',lw=1);trace.set_ylabel('Ball speed (m/s)');trace.set_title('3 m/s gate applies to control; transit can be faster',fontsize=10)
         else:trace.plot(times,height,c='#51645c');trace.axhline(2,c='#777',ls='--',lw=1);trace.set(ylabel='Ball height (m)',xlabel='Sequence time (s)')
         trace.axvline(release_t,c='#147d68',ls='--',lw=1);trace.axvline(reception_t,c='#7959b5',ls='--',lw=1);trace.axvline(times[i],c='black',lw=1.5);trace.set_xlim(times[0],times[-1])
         if j==0:
             trace.text(release_t,1.05,'Release',transform=trace.get_xaxis_transform(),ha='center',fontsize=10,color='#147d68');trace.text(reception_t,1.05,'Reception',transform=trace.get_xaxis_transform(),ha='center',fontsize=10,color='#7959b5')
     fig.suptitle('When does a pass occur?',fontsize=22)
-movie('pass_physics',CLIP,pass_physics,repeat=2,subtitle='Actual tracking diagnostics · heuristic candidate, not verified ground truth · speed from consecutive 0.1 s intervals')
+movie('pass_control_physics',CLIP,pass_physics,repeat=2,subtitle='Sustained low-speed control defines endpoints · continuous ball travel links them · heuristic candidate')
 
 def centered(fig,r,i):
     ids,xy,teams=positions(r);mask=teams==HOME; q=xy[mask];centroid=q.mean(0)

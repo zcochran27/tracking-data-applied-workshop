@@ -75,9 +75,7 @@
     "fps": 10,
     "source": "SkillCorner match 1925299",
     "description": "Offline heuristic result \u00b7 proximity + ball-height gate + \u22650.3 s stable control \u00b7 half-speed playback",
-    "slide_numbers": [
-      7
-    ]
+    "slide_numbers": []
   },
   {
     "file": "assets/videos/pass_physics.mp4",
@@ -86,9 +84,7 @@
     "fps": 10,
     "source": "SkillCorner match 1925299",
     "description": "Actual tracking diagnostics \u00b7 heuristic candidate, not verified ground truth \u00b7 speed from consecutive 0.1 s intervals",
-    "slide_numbers": [
-      8
-    ]
+    "slide_numbers": []
   },
   {
     "file": "assets/videos/phase_comparison.mp4",
@@ -130,6 +126,28 @@
     "description": "Actual published AS/DAS surfaces and value traces; not notebook proxies. Ball shown with a black-centered white marker and legend.",
     "slide_numbers": [
       35
+    ]
+  },
+  {
+    "file": "assets/videos/possession_physics.mp4",
+    "poster": "methods/video_possession_physics.png",
+    "frames": 72,
+    "fps": 10,
+    "source": "SkillCorner match 1925299",
+    "description": "Control: distance \u22642 m, height 0\u20132 m, speed \u22643 m/s for \u22650.3 s \u00b7 offline heuristic \u00b7 half speed",
+    "slide_numbers": [
+      7
+    ]
+  },
+  {
+    "file": "assets/videos/pass_control_physics.mp4",
+    "poster": "methods/video_pass_control_physics.png",
+    "frames": 72,
+    "fps": 10,
+    "source": "SkillCorner match 1925299",
+    "description": "Sustained low-speed control defines endpoints \u00b7 continuous ball travel links them \u00b7 heuristic candidate",
+    "slide_numbers": [
+      8
     ]
   }
 ]
