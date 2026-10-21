@@ -8,10 +8,10 @@
   },
   {
     "notebook": "02_event_detection.ipynb",
-    "code_cells": 10,
+    "code_cells": 11,
     "errors": 0,
-    "embedded_mp4_cells": 1,
-    "video_update": "Executed only added playback cells; retained prior method/model outputs."
+    "embedded_mp4_cells": 2,
+    "video_update": "Executed new/replaced playback cells only; retained prior method outputs. Media pinned to 62abf20cbf699df0118c289b91246a166f7bfd85"
   },
   {
     "notebook": "03_formation_analysis.ipynb",
@@ -27,8 +27,10 @@
   },
   {
     "notebook": "05_match_segmentation.ipynb",
-    "code_cells": 8,
-    "errors": 0
+    "code_cells": 9,
+    "errors": 0,
+    "embedded_mp4_cells": 1,
+    "video_update": "Executed new/replaced playback cells only; retained prior method outputs. Media pinned to 62abf20cbf699df0118c289b91246a166f7bfd85"
   },
   {
     "notebook": "06_physical_metrics.ipynb",
@@ -73,8 +75,10 @@
   },
   {
     "notebook": "13_space_and_danger.ipynb",
-    "code_cells": 11,
-    "errors": 0
+    "code_cells": 12,
+    "errors": 0,
+    "embedded_mp4_cells": 1,
+    "video_update": "Executed new/replaced playback cells only; retained prior method outputs. Media pinned to 62abf20cbf699df0118c289b91246a166f7bfd85"
   },
   {
     "notebook": "16_graph_epv.ipynb",
