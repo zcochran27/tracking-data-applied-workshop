@@ -1,0 +1,45 @@
+{
+  "frame": 7267,
+  "carrier": "560987",
+  "receiver": "966112",
+  "target_count": 10,
+  "survival_score": 0.4964439641311101,
+  "ball_speed_mps": 15,
+  "reaction_s": 0.7,
+  "run_speed_mps": 5,
+  "rate_per_s": 2,
+  "sigmoid_scale_s": 0.15,
+  "probes": [
+    {
+      "marker": "A",
+      "index": 19,
+      "defender_id": "51002",
+      "defender_number": 26,
+      "ball_s": 0.8298336360621139,
+      "defender_s": 1.4176274317742998,
+      "hazard_per_s": 0.03896265277855904,
+      "conditional_02s": 0.007762247501077679
+    },
+    {
+      "marker": "B",
+      "index": 25,
+      "defender_id": "51002",
+      "defender_number": 26,
+      "ball_s": 1.0918863632396236,
+      "defender_s": 1.0133696273411128,
+      "hazard_per_s": 1.2559058941503047,
+      "conditional_02s": 0.22211857685526304
+    },
+    {
+      "marker": "C",
+      "index": 39,
+      "defender_id": "51050",
+      "defender_number": 4,
+      "ball_s": 1.7033427266538128,
+      "defender_s": 1.4064729294176814,
+      "hazard_per_s": 1.7571772008468083,
+      "conditional_02s": 0.2963227222185465
+    }
+  ],
+  "note": "Same interception_components as notebook 12; hypothetical ground passes, not calibrated completion or observed attempts."
+}

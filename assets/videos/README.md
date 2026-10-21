@@ -24,3 +24,5 @@ Rebuild clips with `python scripts/render_slide_videos.py` (requires ffmpeg and 
 The current AS/DAS clip and the completion, AS and DAS static maps include a black-centered white ball marker with a legend. The earlier movie remains available for reproducibility of previously pinned notebooks.
 
 Current event clips: `possession_physics.mp4` and `pass_control_physics.mp4` use the sustained proximity, low-speed and ball-height control gates documented in notebook 02. Their predecessors remain for existing immutable notebook pins. The 3 m/s line applies to possession endpoints, not to ball transit.
+
+`pass_survival_options.mp4` (slide 32) uses the exact notebook 12 interception model: ten teammate passing options plus a selected ball-path simulation with two defender interception probes. Ray percentages are uncalibrated survival estimates; probe percentages are conditional single-defender risks over 0.2 s.

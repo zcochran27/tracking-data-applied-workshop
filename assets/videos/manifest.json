@@ -149,5 +149,16 @@
     "slide_numbers": [
       14
     ]
+  },
+  {
+    "file": "assets/videos/pass_survival_options.mp4",
+    "poster": "results/pass_survival_options.png",
+    "frames": 80,
+    "fps": 10,
+    "source": "SkillCorner match 1925299, frame 7267; same independent model as notebook 12",
+    "description": "Ten teammate survival estimates; selected pass with two defender probes and conditional local risks. Uncalibrated ground-pass teaching model.",
+    "slide_numbers": [
+      32
+    ]
   }
 ]
