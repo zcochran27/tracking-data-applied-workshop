@@ -7,3 +7,6 @@ __pycache__/
 node_modules/
 *.pyc
 .env
+
+# Microsoft Office lock files
+~$*.pptx

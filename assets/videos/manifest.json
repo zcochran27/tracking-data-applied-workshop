@@ -119,6 +119,15 @@
     "frames": 24,
     "source": "accessible-space 2.0.13 on SkillCorner match 1925299",
     "description": "Actual published AS/DAS surfaces and value traces; not notebook proxies.",
+    "slide_numbers": []
+  },
+  {
+    "file": "assets/videos/dangerous_space_ball.mp4",
+    "poster": "methods/video_dangerous_space_ball.png",
+    "fps": 5,
+    "frames": 24,
+    "source": "accessible-space 2.0.13 on SkillCorner match 1925299",
+    "description": "Actual published AS/DAS surfaces and value traces; not notebook proxies. Ball shown with a black-centered white marker and legend.",
     "slide_numbers": [
       35
     ]

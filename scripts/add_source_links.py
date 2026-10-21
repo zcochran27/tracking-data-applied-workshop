@@ -5,7 +5,9 @@ from xml.etree import ElementTree as E
 
 root=Path(__file__).resolve().parents[1]
 deck=Path(sys.argv[1])
-content=json.loads((root/'slides/content.json').read_text(encoding='utf-8'))
+content_path=Path(sys.argv[2]).resolve() if len(sys.argv)>2 else root/'slides/content.json'
+content_path.relative_to(root)
+content=json.loads(content_path.read_text(encoding='utf-8'))
 sources=json.loads((root/'resources/sources.json').read_text(encoding='utf-8'))
 A='http://schemas.openxmlformats.org/drawingml/2006/main'
 P='http://schemas.openxmlformats.org/presentationml/2006/main'

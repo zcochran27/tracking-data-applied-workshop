@@ -1,0 +1,91 @@
+{
+  "status": "pass",
+  "powerpoint_version": "16.0",
+  "deck_sha256": "e33b2fcac1985b7d942d8b75db879725f71603a7d4629dab0b82d052a7c91fe1",
+  "movie_count": 9,
+  "movies": [
+    {
+      "slide": 5,
+      "title": "Read movement in context",
+      "asset": "assets/videos/tracking_playback.mp4",
+      "native_shape_type": 16,
+      "native_media_type": 3,
+      "native_duration_ms": 15000,
+      "click_action": 12
+    },
+    {
+      "slide": 7,
+      "title": "Who controls the ball?",
+      "asset": "assets/videos/possession_result.mp4",
+      "native_shape_type": 16,
+      "native_media_type": 3,
+      "native_duration_ms": 7600,
+      "click_action": 12
+    },
+    {
+      "slide": 8,
+      "title": "When does a pass occur?",
+      "asset": "assets/videos/pass_physics.mp4",
+      "native_shape_type": 16,
+      "native_media_type": 3,
+      "native_duration_ms": 7600,
+      "click_action": 12
+    },
+    {
+      "slide": 14,
+      "title": "Where does one phase end and another begin?",
+      "asset": "assets/videos/phase_comparison.mp4",
+      "native_shape_type": 16,
+      "native_media_type": 3,
+      "native_duration_ms": 14200,
+      "click_action": 12
+    },
+    {
+      "slide": 31,
+      "title": "How do the control assumptions change the answer?",
+      "asset": "assets/videos/control_comparison.mp4",
+      "native_shape_type": 16,
+      "native_media_type": 3,
+      "native_duration_ms": 15000,
+      "click_action": 12
+    },
+    {
+      "slide": 35,
+      "title": "How does useful space change during play?",
+      "asset": "assets/videos/dangerous_space_ball.mp4",
+      "native_shape_type": 16,
+      "native_media_type": 3,
+      "native_duration_ms": 4800,
+      "click_action": 12
+    },
+    {
+      "slide": 36,
+      "title": "Which off-ball run offers more threat?",
+      "asset": "assets/videos/run_comparison.mp4",
+      "native_shape_type": 16,
+      "native_media_type": 3,
+      "native_duration_ms": 5800,
+      "click_action": 12
+    },
+    {
+      "slide": 41,
+      "title": "How does the graph change as players move?",
+      "asset": "assets/videos/dynamic_graph.mp4",
+      "native_shape_type": 16,
+      "native_media_type": 3,
+      "native_duration_ms": 15000,
+      "click_action": 12
+    },
+    {
+      "slide": 44,
+      "title": "What does EPV look like during a possession?",
+      "asset": "assets/videos/graph_epv_possession.mp4",
+      "native_shape_type": 16,
+      "native_media_type": 3,
+      "native_duration_ms": 23100,
+      "click_action": 12
+    }
+  ],
+  "scope": "Native PowerPoint recognizes embedded videos with nonzero duration. This check alone does not run slideshow playback.",
+  "deck": "slides/tracking-data-applied-updated.pptx"
+}

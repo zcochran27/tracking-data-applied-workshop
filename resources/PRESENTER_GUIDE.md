@@ -694,3 +694,9 @@ Event detection needs reviewed timing-tolerant matching. Formation/role labels r
 
 [SkillCorner open data and schema](https://github.com/SkillCorner/opendata)
 [Fine-grained expected possession value (2021)](https://pmc.ncbi.nlm.nih.gov/articles/PMC8570314/)
+
+## Formation visualization alternatives and ball markers
+
+`slides/formation-options.pptx` contains four editable alternatives for slide 10: A role board, B candidate-template comparison, C raw/normalized ellipses beside the result, D assignment residuals. All use the same real window and fixed-template assignment; the current main slide 10 is unchanged pending selection. Formation boards show schematic role slots, not observed coordinates.
+
+The completion/accessible-space/dangerous-space maps and moving AS/DAS comparison now explicitly mark the ball. Because the original presentation was open in PowerPoint, this revision was saved as `slides/tracking-data-applied-updated.pptx`; the open file was preserved.

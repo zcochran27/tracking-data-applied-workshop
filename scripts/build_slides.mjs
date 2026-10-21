@@ -9,7 +9,10 @@ process.env.RUNTIME_NODE_MODULES=runtime;
 const skill=process.env.WORKSHOP_SLIDES_SKILL || 'C:/Users/zcoch/.codex/plugins/cache/openai-primary-runtime/presentations/26.1015.12040/skills/presentations';
 const python=process.env.WORKSHOP_RUNTIME_PYTHON || 'C:/Users/zcoch/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe';
 const {Presentation,PresentationFile}=await import(pathToFileURL(path.join(runtime,'@oai/artifact-tool/dist/artifact_tool.mjs')).href);
-const content=JSON.parse(await fs.readFile(path.join(root,'slides/content.json'),'utf8'));
+const optionsMode=process.argv.includes('--formation-options');
+const deckStem=optionsMode?'formation-options':'tracking-data-applied';
+const contentPath=path.join(root,optionsMode?'slides/formation-options.json':'slides/content.json');
+const content=JSON.parse(await fs.readFile(contentPath,'utf8'));
 const sources=JSON.parse(await fs.readFile(path.join(root,'resources/sources.json'),'utf8'));
 const p=Presentation.create({slideSize:{width:1280,height:720}});
 const ink='#183a35',accent='#147d68',orange='#e87524';
@@ -65,9 +68,9 @@ for(let i=0;i<content.length;i++){
 }
 await fs.mkdir(path.join(root,'.build'),{recursive:true});
 await fs.mkdir(path.join(root,'slides/previews'),{recursive:true});
-const candidate=path.join(root,'.build/candidate.pptx');
+const candidate=path.join(root,`.build/${deckStem}-candidate.pptx`);
 await (await PresentationFile.exportPptx(p)).save(candidate);
-const links=spawnSync(python,[path.join(root,'scripts/add_source_links.py'),candidate],{encoding:'utf8'});
+const links=spawnSync(python,[path.join(root,'scripts/add_source_links.py'),candidate,contentPath],{encoding:'utf8'});
 if(links.status!==0)throw new Error(links.stderr);
 console.log('Exported draft');
 const renderDir=path.join(root,`.build/previews-${Date.now()}`);
@@ -79,15 +82,27 @@ for(let i=0;i<p.slides.items.length;i++){
  console.log('Rendered',i+1);
 }
 const {finalizePresentation}=await import(pathToFileURL(path.join(skill,'container_tools/artifact_tool_utils.mjs')).href);
-const validated=path.join(root,`.build/export-${Date.now()}/tracking-data-applied.pptx`);
+const validated=path.join(root,`.build/export-${Date.now()}/${deckStem}.pptx`);
 await fs.mkdir(path.dirname(validated),{recursive:true});
 await finalizePresentation({workspaceDir:root,candidatePath:candidate,finalPath:validated,
  pythonExecutable:python,integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),
  layoutValidatorPath:path.join(skill,'container_tools/inspect_presentation_layout_geometry.py'),
  layoutArgs:['--expected-slide-size-emu','12192000,6858000','--validate-bullet-geometry','--validate-heading-fit'],
  fontPolicy:{basis:'design',families:['Arial']},verifyArtifactToolImport:true,
- receiptPath:path.join(root,`.build/presentation-validation-${Date.now()}.json`)});
-await fs.copyFile(validated,path.join(root,'slides/tracking-data-applied.pptx'));
-const previews=spawnSync('python',[path.join(root,'scripts/publish_previews.py'),renderDir],{encoding:'utf8'});
-if(previews.status!==0)throw new Error(previews.stderr);
+ receiptPath:path.join(root,`.build/${optionsMode?'formation-options':'presentation'}-validation-${Date.now()}.json`)});
+try {
+ await fs.copyFile(validated,path.join(root,`slides/${deckStem}.pptx`));
+} catch(error) {
+ if(!['EBUSY','EPERM'].includes(error.code))throw error;
+ const alternate=path.join(root,`slides/${deckStem}-updated.pptx`);
+ await fs.copyFile(validated,alternate);
+ console.log('Open presentation is locked; saved updated copy:',alternate);
+}
+if(optionsMode){
+ const dest=path.join(root,'slides/formation-options-previews');await fs.mkdir(dest,{recursive:true});
+ for(const name of await fs.readdir(renderDir))await fs.copyFile(path.join(renderDir,name),path.join(dest,name));
+}else{
+ const previews=spawnSync('python',[path.join(root,'scripts/publish_previews.py'),renderDir],{encoding:'utf8'});
+ if(previews.status!==0)throw new Error(previews.stderr);
+}
 console.log('Final PPTX validated');

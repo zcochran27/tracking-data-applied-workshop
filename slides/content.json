@@ -605,7 +605,7 @@
     "problem": "Connect movement to changing options over time.",
     "methods": "Recompute published AS and DAS on successive real frames.",
     "result": "The video links changing surfaces with their own value traces.",
-    "image": "methods/video_dangerous_space_result.png",
+    "image": "methods/video_dangerous_space_ball.png",
     "sources": [
       "accessible",
       "das"
@@ -614,8 +614,8 @@
     "notes": "Published accessible-space outputs at 5 Hz; traces show AS m² and DAS danger-weighted m² separately. Team/possession context must be read with the clip. Before/after movement does not establish causal player credit.",
     "cue": "Notebook: 13_space_and_danger.ipynb",
     "notebook": "notebooks/methods/13_space_and_danger.ipynb",
-    "video": "assets/videos/dangerous_space_result.mp4",
-    "videoDescription": "Published accessible-space outputs at 5 Hz; traces show AS m² and DAS danger-weighted m² separately. Team/possession context must be read with the clip. Before/after movement does not establish causal player credit."
+    "video": "assets/videos/dangerous_space_ball.mp4",
+    "videoDescription": "Published accessible-space outputs at 5 Hz; traces show AS m² and DAS danger-weighted m² separately. Team/possession context must be read with the clip. Before/after movement does not establish causal player credit. The black-centered white marker shows the ball in both panels."
   },
   {
     "layout": "result",
