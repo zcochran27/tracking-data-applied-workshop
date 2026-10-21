@@ -702,3 +702,9 @@ Event detection needs reviewed timing-tolerant matching. Formation/role labels r
 The completion/accessible-space/dangerous-space maps and moving AS/DAS comparison now explicitly mark the ball. Because the original presentation was open in PowerPoint, this revision was saved as `slides/tracking-data-applied-updated.pptx`; the open file was preserved.
 
 Slide 10 links centroid normalization to formation assignment: summarize normalized positions by coordinate-wise medians, optimize a one-to-one player-to-slot assignment for each template with the Hungarian algorithm, and rank the candidates by RMS distance. The plotted assignment shows the winning template; the final role board uses schematic slots.
+
+## Physics rules for event detection
+
+Slides 6–8 and notebook 02 now derive horizontal ball velocity and speed from adjacent-frame displacement and elapsed time. Acceleration is introduced as a diagnostic, but no acceleration threshold is used. The control rule requires the same closest player within 2 m, height 0–2 m, speed at most 3 m/s and three consecutive 10 Hz samples (0.3 s sample duration). All gates must hold; missing measurements or discontinuities break evidence. This conservative offline heuristic can miss fast dribbles, aerial controls and one-touch actions, and cannot eliminate all slow dummies. Pass candidates link stable same-team controls with complete travel of at least 3 m within 4 s. These thresholds are teaching assumptions and need video-based evaluation.
+
+Notebook 03 reproduces the selected slide-10 normalization, one-to-one assignment, candidate RMS comparison and schematic role board from its own loaded tracking data. All calculations and drawing code remain inline.

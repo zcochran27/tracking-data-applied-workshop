@@ -101,57 +101,58 @@
     "layout": "section",
     "section": "ANALYTICAL AVENUE",
     "title": "Event detection",
-    "problem": "Can continuous coordinates recover the events we want to analyze?",
+    "problem": "Derive motion from tracking coordinates, then combine physical measurements with rules to identify event candidates.",
     "ideas": [
-      "Ball control and possession",
-      "Pass release and reception",
-      "Shots, carries and duels",
-      "Pressure and defensive engagements",
-      "Timing-aware validation",
-      "Ambiguity and missing ball tracking"
+      "Control: close, low, slow and sustained",
+      "Passes: release, travel and reception",
+      "Shots, carries, duels and pressure",
+      "Speed = displacement / elapsed time",
+      "Acceleration = velocity change / time",
+      "Detection rules and video validation"
     ],
-    "result": "Examples: possession and pass-event candidates",
+    "result": "Physics supplies measurements. Event definitions supply thresholds and timing rules.",
     "sources": [],
-    "notes": "Can continuous coordinates recover the events we want to analyze?\nIdeas: Ball control and possession; Pass release and reception; Shots, carries and duels; Pressure and defensive engagements; Timing-aware validation; Ambiguity and missing ball tracking",
-    "cue": ""
+    "notes": "Start with coordinates and timestamps in metres and seconds. Player–ball distance is the Euclidean distance. Backward finite differences give velocity from displacement divided by elapsed time, speed from the velocity magnitude, and acceleration from velocity change divided by elapsed time. Compute within periods, reject gaps and missing coordinates, and inspect noise because differencing magnifies it. Combine these derived features into explicit event definitions. The control example requires the same closest player within 2 m, ball height 0–2 m, and horizontal ball speed at most 3 m/s for at least 0.3 s at 10 Hz. Pass candidates connect different same-team stable control intervals through a complete ball trajectory with at least 3 m displacement within 4 s. Acceleration is a diagnostic idea for kicks or deflections, not a gate used by the current detector. Conservative low-speed control can miss fast dribbles, aerial control or one-touch play; slow dummies can still qualify. Tune and evaluate thresholds using independent video-reviewed labels; a physical rule is not event truth.",
+    "cue": "",
+    "ideasLabel": "Ideas and detection rules"
   },
   {
     "layout": "result",
     "section": "Event detection",
     "title": "Who controls the ball?",
     "problem": "Identify the likely ball carrier between recorded events.",
-    "methods": "Proximity and ball-height gates; require stable control.",
+    "methods": "Require sustained proximity, low ball speed and low ball height.",
     "result": "Highlighted carrier states; uncertain intervals remain unassigned.",
-    "image": "methods/video_possession_result.png",
+    "image": "methods/video_possession_physics.png",
     "sources": [
       "skillcorner",
       "pathcrf"
     ],
     "status": "Offline teaching heuristic",
-    "notes": "Result video highlights stable-control candidates, with a possession timeline and player–ball distance plot. Candidate uses distance ≤2 m, ball height ≤2 m and ≥0.3 s stable control. This is an offline heuristic, not a validated event detector or PathCRF implementation. Half-speed playback.",
+    "notes": "Control candidate: same nearest player within 2 m, ball height 0–2 m and horizontal ball speed ≤3 m/s for ≥0.3 s at native 10 Hz. Velocity comes from adjacent-frame displacement divided by valid elapsed time, within a period. Missing speed, height, coordinates or frame continuity break the evidence. Video synchronizes distance, speed and stable ownership. This conservative offline heuristic reduces flyovers and fast dummies but can miss fast dribbles, aerial control and one-touch play; slow dummies can still qualify. No validated accuracy claim. Half-speed playback.",
     "cue": "Notebook: 02_event_detection.ipynb",
     "notebook": "notebooks/methods/02_event_detection.ipynb",
-    "video": "assets/videos/possession_result.mp4",
-    "videoDescription": "Result video highlights stable-control candidates, with a possession timeline and player–ball distance plot. Candidate uses distance ≤2 m, ball height ≤2 m and ≥0.3 s stable control. This is an offline heuristic, not a validated event detector or PathCRF implementation. Half-speed playback."
+    "video": "assets/videos/possession_physics.mp4",
+    "videoDescription": "Control candidate: same nearest player within 2 m, ball height 0–2 m and horizontal ball speed ≤3 m/s for ≥0.3 s at native 10 Hz. Velocity comes from adjacent-frame displacement divided by valid elapsed time, within a period. Missing speed, height, coordinates or frame continuity break the evidence. Video synchronizes distance, speed and stable ownership. This conservative offline heuristic reduces flyovers and fast dummies but can miss fast dribbles, aerial control and one-touch play; slow dummies can still qualify. No validated accuracy claim. Half-speed playback."
   },
   {
     "layout": "result",
     "section": "Event detection",
     "title": "When does a pass occur?",
     "problem": "Separate a pass from touches, ball transit and reception.",
-    "methods": "Link same-team control segments; inspect distance and ball motion.",
+    "methods": "Link same-team low-speed control intervals through continuous ball travel.",
     "result": "Release and reception candidates align with the physics traces.",
-    "image": "methods/video_pass_physics.png",
+    "image": "methods/video_pass_control_physics.png",
     "sources": [
       "skillcorner",
       "pathcrf"
     ],
     "status": "Unverified pass candidate",
-    "notes": "Actual player–ball distances, horizontal ball speed and ball height share the same clip time axis. Release/reception gates follow notebook 02; speed is diagnostic, not a learned or fitted threshold. Dashed target arrow is the retrospectively identified candidate. No precision/recall claim.",
+    "notes": "Actual player–ball distances, horizontal ball speed and ball height share the clip time axis. Same-player proximity within 2 m, height 0–2 m, speed ≤3 m/s and ≥0.3 s persistence define the control endpoints. Different same-team endpoints form a pass candidate only if the intervening ball trajectory is complete, crosses no period boundary, travels at least 3 m and spans no more than 4 s. Transit can exceed the control-speed threshold. Dashed arrow and endpoints are retrospective candidates, not reviewed event truth. Acceleration is not a detection gate.",
     "cue": "Notebook: 02_event_detection.ipynb",
     "notebook": "notebooks/methods/02_event_detection.ipynb",
-    "video": "assets/videos/pass_physics.mp4",
-    "videoDescription": "Actual player–ball distances, horizontal ball speed and ball height share the same clip time axis. Release/reception gates follow notebook 02; speed is diagnostic, not a learned or fitted threshold. Dashed target arrow is the retrospectively identified candidate. No precision/recall claim."
+    "video": "assets/videos/pass_control_physics.mp4",
+    "videoDescription": "Actual player–ball distances, horizontal ball speed and ball height share the clip time axis. Same-player proximity within 2 m, height 0–2 m, speed ≤3 m/s and ≥0.3 s persistence define the control endpoints. Different same-team endpoints form a pass candidate only if the intervening ball trajectory is complete, crosses no period boundary, travels at least 3 m and spans no more than 4 s. Transit can exceed the control-speed threshold. Dashed arrow and endpoints are retrospective candidates, not reviewed event truth. Acceleration is not a detection gate."
   },
   {
     "layout": "section",

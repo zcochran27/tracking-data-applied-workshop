@@ -29,7 +29,7 @@ for(let i=0;i<content.length;i++){
    text(s,c.section||'ANALYTICAL AVENUE',50,44,1150,30,14,accent,true);
    text(s,c.title,50,112,1160,85,52,ink,true);
    text(s,c.problem,50,218,1130,92,30,ink);
-   text(s,'Questions to explore',50,352,400,36,20,accent,true);
+   text(s,c.ideasLabel||'Questions to explore',50,352,400,36,20,accent,true);
    c.ideas.forEach((idea,j)=>text(s,'• '+idea,50+(j%2)*590,409+Math.floor(j/2)*65,550,60,24,ink));
    text(s,c.result||'',50,612,1160,45,21,accent,true);
  }else if(c.layout==='overview'){

@@ -11,14 +11,16 @@
     "code_cells": 11,
     "errors": 0,
     "embedded_mp4_cells": 2,
-    "video_update": "Executed new/replaced playback cells only; retained prior method outputs. Media pinned to 62abf20cbf699df0118c289b91246a166f7bfd85"
+    "video_update": "Executed replacement playback cells. Low-speed control clips pinned to 57972403518bc1a240283985feac1be4ba3a4d7a.",
+    "validation": "Executed all code cells top to bottom after physics/formation revisions. Rule edge-case assertions and slide-10 fit checks passed."
   },
   {
     "notebook": "03_formation_analysis.ipynb",
-    "code_cells": 13,
+    "code_cells": 14,
     "errors": 0,
     "embedded_mp4_cells": 2,
-    "video_update": "Executed only added playback cells; retained prior method/model outputs."
+    "video_update": "Executed only added playback cells; retained prior method/model outputs.",
+    "validation": "Executed all code cells top to bottom after physics/formation revisions. Rule edge-case assertions and slide-10 fit checks passed."
   },
   {
     "notebook": "04_role_classification.ipynb",
