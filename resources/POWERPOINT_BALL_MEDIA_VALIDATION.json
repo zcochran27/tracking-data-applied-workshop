@@ -1,7 +1,7 @@
 {
   "status": "pass",
   "powerpoint_version": "16.0",
-  "deck_sha256": "04e90a730b2b906340a772b3fbf7461b4be6abb35b0077580876f725dec6a9b8",
+  "deck_sha256": "95aa4660acb307647500a0e7fbc194505cbbd44a628ae4c2d9e502e9631a8b54",
   "movie_count": 9,
   "movies": [
     {
@@ -33,11 +33,11 @@
     },
     {
       "slide": 14,
-      "title": "Where does one phase end and another begin?",
-      "asset": "assets/videos/phase_comparison.mp4",
+      "title": "Phase rules and predictions over time",
+      "asset": "assets/videos/phase_predictions.mp4",
       "native_shape_type": 16,
       "native_media_type": 3,
-      "native_duration_ms": 14200,
+      "native_duration_ms": 20000,
       "click_action": 12
     },
     {

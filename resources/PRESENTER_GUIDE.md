@@ -162,22 +162,19 @@ What tactical context should an event, shape or workload be compared within?
 Ideas: Possession and transition phases; Build-up, progression and advanced play; Defensive blocks and pressing phases; Set pieces and interruptions; Phase duration and boundary detection; Context-conditioned physical/tactical summaries
 
 
-## 14. Where does one phase end and another begin?
+## 14. Phase rules and predictions over time
 
-Rule-based estimates use possession age, attack-normalized ball location and past progression speed, with three-frame confirmation. Provider labels use SkillCorner’s taxonomy. Compare interval behavior, not exact label accuracy without a reviewed mapping. The video shows actual transition context.
+**Problem:** Segment continuous play without brief label flickers.
 
-**Problem:** Assign context to continuous tracking intervals.
+**Rules, in priority order:** Unknown when ball position or possession team is missing. Transition candidate if possession age is below 8 s and the trailing 1 s mean forward ball speed exceeds 3 m/s (at least five valid 10 Hz intervals). Otherwise attack-normalized ball x assigns deep circulation below −17.5 m, middle progression below 17.5 m, and advanced possession at or above 17.5 m.
 
-**Methods:** Causal rule estimates versus supplied SkillCorner phase intervals.
+**Smoothing:** Accept runs lasting at least 1 s. Shorter excursions inherit the last accepted phase; leading short runs inherit the first accepted phase in the block, and wholly short blocks stay unknown. This is offline and backdates accepted changes. Do not smooth across possession changes, periods, tracking gaps or unknown states. Real short transitions may be suppressed.
 
-**Result:** The synchronized timelines expose boundaries and disagreements.
+**Result:** The clip shows only our own raw and smoothed prediction timelines, synchronized with tracking and the phase rule card.
 
 [Method notebook](../notebooks/methods/05_match_segmentation.ipynb)
 
-[Standalone MP4](../assets/videos/phase_comparison.mp4)
-
-[Augmented possession and phases framework (2025)](https://doi.org/10.1177/22150218241290988)
-[SkillCorner open data and schema](https://github.com/SkillCorner/opendata)
+[Standalone MP4](../assets/videos/phase_predictions.mp4)
 
 ## 15. Physical metrics
 
@@ -708,3 +705,5 @@ Slide 10 links centroid normalization to formation assignment: summarize normali
 Slides 6–8 and notebook 02 now derive horizontal ball velocity and speed from adjacent-frame displacement and elapsed time. Acceleration is introduced as a diagnostic, but no acceleration threshold is used. The control rule requires the same closest player within 2 m, height 0–2 m, speed at most 3 m/s and three consecutive 10 Hz samples (0.3 s sample duration). All gates must hold; missing measurements or discontinuities break evidence. This conservative offline heuristic can miss fast dribbles, aerial controls and one-touch actions, and cannot eliminate all slow dummies. Pass candidates link stable same-team controls with complete travel of at least 3 m within 4 s. These thresholds are teaching assumptions and need video-based evaluation.
 
 Notebook 03 reproduces the selected slide-10 normalization, one-to-one assignment, candidate RMS comparison and schematic role board from its own loaded tracking data. All calculations and drawing code remain inline.
+
+The phase notebook no longer downloads, joins or plots supplied phase labels. Its frame-level `outputs/methods/phase_predictions.csv` supplies the current video.

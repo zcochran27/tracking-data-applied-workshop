@@ -20,4 +20,4 @@ Download an HTML file and open it in a browser to view figures and embedded anim
 
 The data-exploration, event-detection, formation, Voronoi, Gaussian, arrival-time and graph-EPV exports also contain embedded MP4 videos beside the relevant steps. Download the HTML and open it in a browser to play these offline.
 
-The phase and space-proxy exports now include their labeled comparison clips; event detection includes the redesigned possession and pass-physics videos.
+The phase export shows our own raw/smoothed predictions; the space-proxy export includes its labeled comparison clip; event detection includes the redesigned possession and pass-physics videos.

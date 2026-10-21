@@ -37,9 +37,9 @@
       "process": "Persistence and missing-bin annotations"
     },
     "match_segmentation": {
-      "result": "Predicted versus supplied phase timelines plus transition clip",
-      "process": "Only a small feature trace if it explains the transition",
-      "caveat": "Rule-based teaching taxonomy differs from supplied provider taxonomy; no unqualified accuracy claim"
+      "result": "Own raw and smoothed predictions over time with tracking clip",
+      "process": "Explicit phase rules and 1 s minimum run duration",
+      "caveat": "Offline smoothing can suppress genuine short transitions; no accuracy claim"
     },
     "distance_covered": {
       "result": "One player cumulative-distance curve plus valid coverage",

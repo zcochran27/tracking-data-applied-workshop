@@ -104,5 +104,6 @@
     "before": "All nine movies had zero native duration; sample native click action was none (0).",
     "after": "All nine movies have nonzero native durations and ppActionPlay (12).",
     "correction": "Registered media-extension URI and schema-correct click-action ordering."
-  }
+  },
+  "superseded_by": "POWERPOINT_BALL_MEDIA_VALIDATION.json"
 }

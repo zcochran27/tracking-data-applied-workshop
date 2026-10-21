@@ -32,7 +32,10 @@
     "code_cells": 9,
     "errors": 0,
     "embedded_mp4_cells": 1,
-    "video_update": "Executed new/replaced playback cells only; retained prior method outputs. Media pinned to 62abf20cbf699df0118c289b91246a166f7bfd85"
+    "video_update": "Executed replacement playback cell. Our own raw/smoothed phase clip pinned to 7740ab8209e84340907d46fea9863e6e92cb1877. No supplied phase comparison.",
+    "validation": "Executed all cells top to bottom. Synthetic 0.5 s excursion removed; sustained change and unknown boundaries preserved. Every known smoothed interval in 6153 frame predictions lasts at least 1 s.",
+    "smoothing": "Offline minimum raw-run duration 1 s, independently within uninterrupted possessions and known-data blocks.",
+    "external_phase_labels_used": false
   },
   {
     "notebook": "06_physical_metrics.ipynb",

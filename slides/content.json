@@ -245,21 +245,22 @@
   {
     "layout": "result",
     "section": "Match segmentation and phases",
-    "title": "Where does one phase end and another begin?",
-    "problem": "Assign context to continuous tracking intervals.",
-    "methods": "Causal rule estimates versus supplied SkillCorner phase intervals.",
-    "result": "The synchronized timelines expose boundaries and disagreements.",
-    "image": "methods/video_phase_comparison.png",
+    "title": "Phase rules and predictions over time",
+    "problem": "Segment continuous play into tactical states without brief label flickers.",
+    "methods": "Transition: age <8 s and speed >3 m/s.\nOtherwise x <−17.5: deep; x <17.5: middle; else advanced.\nSuppress runs <1 s.",
+    "result": "Brief phase jumps disappear while sustained changes remain visible.",
+    "image": "methods/video_phase_predictions.png",
     "sources": [
       "phases",
       "skillcorner"
     ],
-    "status": "Different taxonomies · no accuracy claim",
-    "notes": "Rule-based estimates use possession age, attack-normalized ball location and past progression speed, with three-frame confirmation. Provider labels use SkillCorner’s taxonomy. Compare interval behavior, not exact label accuracy without a reviewed mapping. The video shows actual transition context.",
+    "status": "Attack-normalized x; offline smoothing.",
+    "notes": "Rules apply in priority order. Unknown when ball x is missing or possession team is unknown. Transition candidate when possession age <8 s and trailing 1 s mean forward ball speed >3 m/s (minimum five valid 10 Hz intervals). Otherwise use attack-normalized ball x: deep circulation below -17.5 m, middle progression from -17.5 to below 17.5 m, advanced possession at or above 17.5 m. Offline smoothing accepts raw runs lasting at least 1 s in each known-data block within an uninterrupted possession. Shorter runs inherit the last accepted label; leading short runs inherit the first accepted label, and a block with no accepted run remains unknown. Unknown measurements, possession/team changes, periods and tracking/frame gaps prevent smoothing across boundaries. Changes are backdated to their raw onset after future evidence confirms duration. The video shows our raw and smoothed predictions only, with the rules on screen. Thresholds are teaching assumptions; smoothing can hide genuine short transitions. No accuracy claim.",
     "cue": "Notebook: 05_match_segmentation.ipynb",
     "notebook": "notebooks/methods/05_match_segmentation.ipynb",
-    "video": "assets/videos/phase_comparison.mp4",
-    "videoDescription": "Rule-based estimates use possession age, attack-normalized ball location and past progression speed, with three-frame confirmation. Provider labels use SkillCorner’s taxonomy. Compare interval behavior, not exact label accuracy without a reviewed mapping. The video shows actual transition context."
+    "video": "assets/videos/phase_predictions.mp4",
+    "videoDescription": "Rules apply in priority order. Unknown when ball x is missing or possession team is unknown. Transition candidate when possession age <8 s and trailing 1 s mean forward ball speed >3 m/s (minimum five valid 10 Hz intervals). Otherwise use attack-normalized ball x: deep circulation below -17.5 m, middle progression from -17.5 to below 17.5 m, advanced possession at or above 17.5 m. Offline smoothing accepts raw runs lasting at least 1 s in each known-data block within an uninterrupted possession. Shorter runs inherit the last accepted label; leading short runs inherit the first accepted label, and a block with no accepted run remains unknown. Unknown measurements, possession/team changes, periods and tracking/frame gaps prevent smoothing across boundaries. Changes are backdated to their raw onset after future evidence confirms duration. The video shows our raw and smoothed predictions only, with the rules on screen. Thresholds are teaching assumptions; smoothing can hide genuine short transitions. No accuracy claim.",
+    "methodFontSize": 18
   },
   {
     "layout": "section",

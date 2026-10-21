@@ -53,7 +53,7 @@ for(let i=0;i<content.length;i++){
    text(s,'Problem',48,158,232,28,15,accent,true);
    text(s,c.problem,48,190,232,136,22);
    text(s,'Methods',48,348,232,28,15,accent,true);
-   text(s,c.methods,48,380,232,150,20);
+   text(s,c.methods,48,380,232,150,c.methodFontSize||20);
    if(c.status)text(s,c.status,48,547,232,65,13,'#65756d');
    if(!c.image)throw new Error(`Missing result visual: ${c.title}`);
    const bytes=await fs.readFile(path.join(root,'assets',c.image));
