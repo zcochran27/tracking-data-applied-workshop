@@ -48,14 +48,18 @@ for i,s in enumerate(content,1):
         props=pic.find(f'{{{P}}}nvPicPr/{{{P}}}cNvPr')
         props.set('name','Video: '+s['title'])
         props.set('descr','Embedded MP4. Click to play. '+s.get('videoDescription',s['title']))
-        E.SubElement(props,f'{{{A}}}hlinkClick',{'action':'ppaction://media'})
+        # CT_NonVisualDrawingProps requires click actions BEFORE extLst.
+        # Appending after artifact-tool's creationId extension breaks native playback.
+        click=E.Element(f'{{{A}}}hlinkClick',{'action':'ppaction://media'})
+        props.insert(0,click)
         nv=pic.find(f'{{{P}}}nvPicPr/{{{P}}}nvPr')
         video_id='rIdWorkshopVideo';media_id='rIdWorkshopMedia'
         E.SubElement(rels,f'{{{REL}}}Relationship',{'Id':video_id,'Type':R+'/video','Target':'../media/'+media_name})
         E.SubElement(rels,f'{{{REL}}}Relationship',{'Id':media_id,'Type':'http://schemas.microsoft.com/office/2007/relationships/media','Target':'../media/'+media_name})
         E.SubElement(nv,f'{{{A}}}videoFile',{f'{{{R}}}link':video_id})
         extlist=E.SubElement(nv,f'{{{P}}}extLst')
-        ext=E.SubElement(extlist,f'{{{P}}}ext',{'uri':'{DAA4B4D4-6D71-4841-9C94-3DE7FCFBED7A}'})
+        # This is PowerPoint's registered embedded-media extension identifier.
+        ext=E.SubElement(extlist,f'{{{P}}}ext',{'uri':'{DAA4B4D4-6D71-4841-9C94-3DE7FCFB9230}'})
         E.SubElement(ext,f'{{{P14}}}media',{f'{{{R}}}embed':media_id})
         timing=E.SubElement(tree,f'{{{P}}}timing');tnlist=E.SubElement(timing,f'{{{P}}}tnLst')
         par=E.SubElement(tnlist,f'{{{P}}}par');ctn=E.SubElement(par,f'{{{P}}}cTn',{'id':'1','dur':'indefinite','restart':'never','nodeType':'tmRoot'})
