@@ -1,0 +1,33 @@
+[
+  {
+    "file": "assets/references/research/soccermap.png",
+    "source": "https://arxiv.org/html/2010.10202v1/pass_prob2.png",
+    "paper": "https://arxiv.org/html/2010.10202v1",
+    "caption": "Original probability surface across candidate passing locations; team positions and velocities are overlaid."
+  },
+  {
+    "file": "assets/references/research/counterattack.png",
+    "source": "https://arxiv.org/html/2411.17450v1/img/fig5.png",
+    "paper": "https://arxiv.org/html/2411.17450v1",
+    "caption": "Published women’s-model example estimating penalty-box entry; the displayed estimate is 49.5%."
+  },
+  {
+    "file": "assets/references/research/tacticai.png",
+    "source": "https://arxiv.org/html/2310.10553v1/fig3_defensive_adjustment.png",
+    "paper": "https://arxiv.org/html/2310.10553v1",
+    "caption": "Published corner-setup adjustment and comparison of receiver probabilities before and after adjustment."
+  },
+  {
+    "file": "assets/references/research/defcon_result.png",
+    "source": "https://arxiv.org/pdf/2512.10355",
+    "page": 7,
+    "figure": 3,
+    "caption": "Figure 3, page 7: original defender responsibility and credit maps for two interceptions; cropped figure, numeric values retained."
+  },
+  {
+    "file": "assets/references/research/gentac_result.png",
+    "source": "https://arxiv.org/html/2604.11786v1/figures/fig6.png",
+    "paper": "https://arxiv.org/abs/2604.11786",
+    "caption": "Figure 5a: original forecast samples and tactical-outcome distributions; cropped panel, numeric values retained."
+  }
+]

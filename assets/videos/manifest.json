@@ -5,7 +5,10 @@
     "frames": 150,
     "fps": 10,
     "source": "SkillCorner match 1925299",
-    "description": "Real SkillCorner coordinates \u00b7 native 10 Hz \u00b7 no inferred future motion"
+    "description": "Real SkillCorner coordinates \u00b7 native 10 Hz \u00b7 no inferred future motion",
+    "slide_numbers": [
+      5
+    ]
   },
   {
     "file": "assets/videos/event_detection.mp4",
@@ -13,7 +16,8 @@
     "frames": 76,
     "fps": 10,
     "source": "SkillCorner match 1925299",
-    "description": "Heuristic candidate: distance \u22642 m, ball height \u22642 m, stable control \u22650.3 s \u00b7 not a verified pass"
+    "description": "Heuristic candidate: distance \u22642 m, ball height \u22642 m, stable control \u22650.3 s \u00b7 not a verified pass",
+    "slide_numbers": []
   },
   {
     "file": "assets/videos/formation_centering.mp4",
@@ -21,7 +25,8 @@
     "frames": 150,
     "fps": 10,
     "source": "SkillCorner match 1925299",
-    "description": "Same players and frames in both panels \u00b7 centering removes translation, not rotations or phase changes"
+    "description": "Same players and frames in both panels \u00b7 centering removes translation, not rotations or phase changes",
+    "slide_numbers": []
   },
   {
     "file": "assets/videos/formation_candidates.mp4",
@@ -29,7 +34,8 @@
     "frames": 87,
     "fps": 6,
     "source": "SkillCorner match 1925299",
-    "description": "30-second defensive windows \u00b7 fixed templates \u00b7 3-bin confirmation \u00b7 missing bins reset evidence \u00b7 60\u00d7 playback"
+    "description": "30-second defensive windows \u00b7 fixed templates \u00b7 3-bin confirmation \u00b7 missing bins reset evidence \u00b7 60\u00d7 playback",
+    "slide_numbers": []
   },
   {
     "file": "assets/videos/control_comparison.mp4",
@@ -37,7 +43,10 @@
     "frames": 75,
     "fps": 5,
     "source": "SkillCorner match 1925299",
-    "description": "Teaching baselines \u00b7 Gaussian and arrival scores are not calibrated possession probabilities"
+    "description": "Teaching baselines \u00b7 Gaussian and arrival scores are not calibrated possession probabilities",
+    "slide_numbers": [
+      31
+    ]
   },
   {
     "file": "assets/videos/dynamic_graph.mp4",
@@ -45,12 +54,73 @@
     "frames": 150,
     "fps": 10,
     "source": "SkillCorner match 1925299",
-    "description": "Actual moving players \u00b7 edges are recomputed each frame \u00b7 topology illustration, not learned attention"
+    "description": "Actual moving players \u00b7 edges are recomputed each frame \u00b7 topology illustration, not learned attention",
+    "slide_numbers": [
+      41
+    ]
   },
   {
     "file": "assets/videos/graph_epv_possession.mp4",
     "poster": "methods/video_graph_epv_possession.png",
     "source": "Notebook 16 held-out SkillCorner match 1925299",
-    "description": "Actual frozen-model ten-second scoring predictions, synchronized with real tracking; independent workshop GNN, not Bekkers weights"
+    "description": "Actual frozen-model ten-second scoring predictions, synchronized with real tracking; independent workshop GNN, not Bekkers weights",
+    "slide_numbers": [
+      44
+    ]
+  },
+  {
+    "file": "assets/videos/possession_result.mp4",
+    "poster": "methods/video_possession_result.png",
+    "frames": 76,
+    "fps": 10,
+    "source": "SkillCorner match 1925299",
+    "description": "Offline heuristic result \u00b7 proximity + ball-height gate + \u22650.3 s stable control \u00b7 half-speed playback",
+    "slide_numbers": [
+      7
+    ]
+  },
+  {
+    "file": "assets/videos/pass_physics.mp4",
+    "poster": "methods/video_pass_physics.png",
+    "frames": 76,
+    "fps": 10,
+    "source": "SkillCorner match 1925299",
+    "description": "Actual tracking diagnostics \u00b7 heuristic candidate, not verified ground truth \u00b7 speed from consecutive 0.1 s intervals",
+    "slide_numbers": [
+      8
+    ]
+  },
+  {
+    "file": "assets/videos/phase_comparison.mp4",
+    "poster": "methods/video_phase_comparison.png",
+    "frames": 71,
+    "fps": 5,
+    "source": "SkillCorner match 1925299",
+    "description": "Rule estimates and provider labels use different taxonomies \u00b7 disagreement is not a measured classification error",
+    "slide_numbers": [
+      14
+    ]
+  },
+  {
+    "file": "assets/videos/run_comparison.mp4",
+    "poster": "methods/video_run_comparison.png",
+    "frames": 58,
+    "fps": 10,
+    "source": "SkillCorner match 1925299",
+    "description": "Selected low/high examples, not controlled counterfactuals \u00b7 dashed lane is hypothetical \u00b7 shorter run freezes at its end",
+    "slide_numbers": [
+      36
+    ]
+  },
+  {
+    "file": "assets/videos/dangerous_space_result.mp4",
+    "poster": "methods/video_dangerous_space_result.png",
+    "fps": 5,
+    "frames": 24,
+    "source": "accessible-space 2.0.13 on SkillCorner match 1925299",
+    "description": "Actual published AS/DAS surfaces and value traces; not notebook proxies.",
+    "slide_numbers": [
+      35
+    ]
   }
 ]

@@ -1,6 +1,6 @@
 # Tracking Data Applied
 
-Illustrated soccer analytics methods using SkillCorner open tracking data. The slide deck links directly to the corresponding standalone method notebooks and embeds seven playable MP4 tracking/model videos. Click a video in PowerPoint slideshow view to play it. [Standalone video files](assets/videos/README.md) are also included.
+Illustrated soccer analytics methods using SkillCorner open tracking data. The slide deck links directly to the corresponding standalone method notebooks and embeds nine playable MP4 tracking/model videos. Click a video in PowerPoint slideshow view to play it. [Standalone video files](assets/videos/README.md) are also included.
 
 ## Materials
 
@@ -26,13 +26,19 @@ jupyter lab notebooks/methods
 
 Choose a method notebook and run its cells in order. Internet is required for the initial data download. Saved outputs and HTML copies support viewing without execution; live widgets require Jupyter. Relevant method notebooks and their HTML exports also embed the MP4 videos beside the corresponding calculations. Each notebook manages its own cache. Raw downloads are excluded from Git.
 
+## Slide structure
+
+The 51-slide deck opens with the five avenues, then organizes examples into event detection, formation/position identification, match segmentation, physical metrics and game modeling. Each avenue has a purpose-and-ideas opener. Method slides focus on the problem, a concise description of the methods and a dominant result visual; numbered implementation steps live in the notebooks.
+
+General graph concepts use attributed Joris Bekkers keynote figures and a real dynamic-graph video. Standalone temporal-model architecture slides have been removed. Five full research examples use published figures: SoccerMap, DEFCON, counterattack GNNs, TacticAI and GenTac.
+
 ## Models and examples
 
 The xG notebook uses StatsBomb Open Data shot freeze frames to compare location-only and goalkeeper/defender-context models on identical match-held-out folds, with ROC/AUC curves and uncertainty intervals.
 
 The graph-EPV notebook includes real SkillCorner training code, a saved teaching checkpoint, held-out match results, possession-value curves and a synchronized [EPV animation](outputs/methods/graph_epv_goal_animation.html). Set `RETRAIN=True` to retrain. Its reconstructed goal labels, limited matches and sparse positives constrain reliability; it does not reproduce Bekkers' architecture or weights.
 
-Formation centering, template assignment and change detection form one workflow. Pleuler-inspired angular features and role classification form another. Pitch-control and space examples label their assumptions and teaching approximations. The slide deck also discusses research methods with no accompanying implementation; those slides have no notebook band.
+Formation centering, template assignment and change detection form one workflow. Pleuler-inspired angular features and role classification form another. Pitch-control and space examples label their assumptions and teaching approximations. The slide deck also discusses research methods with no accompanying implementation; those slides have no notebook link.
 
 ## Sources and credit
 
@@ -42,6 +48,6 @@ The xG notebook additionally uses [StatsBomb Open Data](https://github.com/hudl/
 
 ## Slide source and assets
 
-Edit `slides/content.json` for slide text and notebook mappings. `scripts/build_slides.mjs` builds the deck using OpenAI's bundled artifact-tool runtime; `scripts/add_source_links.py` adds source and notebook hyperlinks, and `scripts/publish_previews.py` publishes rendered previews. These scripts support the slide deck only. `scripts/render_slide_videos.py` renders MP4 assets using cached tracking data, NumPy/SciPy/Matplotlib and an installed ffmpeg executable; it does not supply code to any notebook.
+Edit `slides/content.json` for slide text and notebook mappings. `scripts/build_slides.mjs` builds the deck using OpenAI's bundled artifact-tool runtime; `scripts/add_source_links.py` adds source and notebook hyperlinks, and `scripts/publish_previews.py` publishes rendered previews. These scripts support the slide deck only. The `render_result_figures.py`, `render_space_results.py` and `render_xt_result.py` scripts create slide figures from notebook calculations, published-model inference and the licensed xT grid. `scripts/render_slide_videos.py` renders MP4 assets using cached tracking data, NumPy/SciPy/Matplotlib and an installed ffmpeg executable; it does not supply code to any notebook.
 
 `assets/methods/` retains slide illustrations. `resources/visual_manifest.json` records provenance. `resources/models/` retains the graph teaching checkpoint/history/model card and the licensed external DataBallPy xT grid used by slide illustrations. Method HTML exports are under `outputs/methods/`.

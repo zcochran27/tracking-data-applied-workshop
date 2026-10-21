@@ -1,359 +1,696 @@
 # Presenter guide
 
-Movies are embedded MP4s: click the video in PowerPoint slideshow view. The still image is its poster. Standalone copies are in `assets/videos/`. These are tracking/model visualizations, not broadcast footage.
+The deck is organized into five analytical avenues. Each section introduces its scope and ideas; method slides pair a concise problem/method description with a dominant result visual. Numbered implementation steps remain in the standalone notebooks.
+
+Movies are native embedded MP4s. Click a movie in slideshow view. Posters remain visible when stopped. Research figures retain their authors’ results and source links.
 
 ## 1. Tracking Data Applied
 
-Introduce the match and the distinction between observed tracking, extrapolated tracking and derived labels.
+SkillCorner open tracking, StatsBomb shot freeze frames, published research and independent teaching models are identified throughout.
 
-## 2. Data and documentation
+[SkillCorner open data and schema](https://github.com/SkillCorner/opendata)
+
+## 2. What can tracking data answer?
+
+User-requested introduction to all avenues. Graphs and GNNs are general modeling tools introduced within game modeling, with applications beyond EPV. No duration or audience-level framing.
+
+[SkillCorner open data and schema](https://github.com/SkillCorner/opendata)
+
+## 3. Data and documentation
 
 The opening entries are linked. Full sources are in the reading list. Real sample: Brisbane vs Perth, 21 December 2024, match 1925299.
 
-[Open method notebook](../notebooks/methods/01_data_exploration.ipynb)
+**Problem:** Where do coordinates, labels and metric definitions come from?
 
-## 3. Loading tracking data
+**Methods:** SkillCorner open data; kloppy ingestion; DataBallPy metric documentation.
 
-The figure contains actual dataframe values; velocity columns are derived after loading.
+**Result:** Keep coordinates, supplied labels and our derived estimates distinct.
 
-[Open method notebook](../notebooks/methods/01_data_exploration.ipynb)
+[Method notebook](../notebooks/methods/01_data_exploration.ipynb)
+
+[SkillCorner open data and schema](https://github.com/SkillCorner/opendata)
+[kloppy SkillCorner loader](https://kloppy.pysport.org/reference/providers/skillcorner/)
+[DataBallPy covered distance](https://databallpy.readthedocs.io/en/main/features/covered_distance_page.html)
 
 ## 4. Tracking quality and visibility
 
 Actual SkillCorner frame 163. The green polygon connects top-left, bottom-left, bottom-right and top-right image_corners_projection in native metric coordinates; its fill is clipped to the pitch, while the boundary retains the actual projected corners. Green shading shows the camera footprint, gray pitch lies outside it. Player marker style comes directly from is_detected: filled detections, hollow extrapolations; orange Brisbane, purple Perth. This illustrative frame has 11 players inside/detected and 11 outside/extrapolated. Polygon membership is not substituted for detection status: occlusion or missed detections can occur inside the camera footprint. Coordinates outside camera coverage may still be supplied by extrapolation.
 
-[Open method notebook](../notebooks/methods/01_data_exploration.ipynb)
+**Problem:** Which positions were observed on screen?
 
-## 5. Plotting a tracking frame
+**Methods:** Project image corners; read each player’s is_detected flag.
 
-Use actual pitch dimensions. A visually plausible frame is a useful first check, but does not prove identity or position accuracy.
+**Result:** Camera coverage and detection status are related, separate fields.
 
-[Open method notebook](../notebooks/methods/01_data_exploration.ipynb)
+[Method notebook](../notebooks/methods/01_data_exploration.ipynb)
 
-## 6. Animating a sequence
+[SkillCorner open data and schema](https://github.com/SkillCorner/opendata)
+[DataBallPy preprocessing](https://databallpy.readthedocs.io/en/main/getting_started/preprocessing_options.html)
+
+## 5. Read movement in context
 
 Embedded native-rate MP4 of actual SkillCorner player and ball positions with shirt numbers. Click the movie in slideshow view. Tracking visualization, not broadcast footage.
 
-[Open method notebook](../notebooks/methods/01_data_exploration.ipynb)
+**Problem:** What does a tracking sequence reveal that one frame misses?
 
-[Open MP4](../assets/videos/tracking_playback.mp4)
+**Methods:** Animate the same player identities and ball through time.
 
-## 7. Possession detection
+**Result:** Motion, team structure and tracking uncertainty become visible.
 
-Figure is an actual 2 m proximity heuristic, not the full Vidal-Codina or PathCRF method. Pros: transparent and quick. Cons: aerial balls, duels and tracking uncertainty. Compare with supplied possession labels; evaluate timing-aware accuracy.
+[Method notebook](../notebooks/methods/01_data_exploration.ipynb)
 
-[Open method notebook](../notebooks/methods/02_event_detection.ipynb)
+[Standalone MP4](../assets/videos/tracking_playback.mp4)
 
-## 8. Pass-event detection
+[SkillCorner open data and schema](https://github.com/SkillCorner/opendata)
+[kloppy SkillCorner loader](https://kloppy.pysport.org/reference/providers/skillcorner/)
 
-Embedded MP4 uses computed heuristic candidates, not supplied event endpoints: nearest player within 2 m, ball height at most 2 m, stable control at least 0.3 seconds, same-team player change, transit 0.1–4 seconds and endpoint displacement at least 3 m. Playback is half speed. These are unverified pass candidates, not measured detection accuracy.
+## 6. Event detection
 
-[Open method notebook](../notebooks/methods/02_event_detection.ipynb)
+Can continuous coordinates recover the events we want to analyze?
+Ideas: Ball control and possession; Pass release and reception; Shots, carries and duels; Pressure and defensive engagements; Timing-aware validation; Ambiguity and missing ball tracking
 
-[Open MP4](../assets/videos/event_detection.mp4)
 
-## 9. Guess the current player roles
+## 7. Who controls the ball?
 
-Audience prompt inspired by the supplied reference. These are actual SkillCorner frames, with identities hidden. A single snapshot is ambiguous; metadata positions are not frame-level role truth.
+Result video highlights stable-control candidates, with a possession timeline and player–ball distance plot. Candidate uses distance ≤2 m, ball height ≤2 m and ≥0.3 s stable control. This is an offline heuristic, not a validated event detector or PathCRF implementation. Half-speed playback.
 
-[Open method notebook](../notebooks/methods/03_formation_analysis.ipynb)
+**Problem:** Identify the likely ball carrier between recorded events.
 
-## 10. Position distributions and centering
+**Methods:** Proximity and ball-height gates; require stable control.
 
-Independently generated from SkillCorner. Two-standard-deviation covariance ellipses, not confidence regions. Labels are metadata roles. Pros: removes team translation. Cons: averaging still mixes phases and rotations; covariance can hide multimodal behavior. Use identical qualifying samples in both panels.
+**Result:** Highlighted carrier states; uncertain intervals remain unassigned.
 
-[Open method notebook](../notebooks/methods/03_formation_analysis.ipynb)
+[Method notebook](../notebooks/methods/02_event_detection.ipynb)
 
-## 11. Centering a moving team shape
+[Standalone MP4](../assets/videos/possession_result.mp4)
 
-Native-rate video of real coordinates. The left panel retains pitch position; the right shows team-centroid-relative coordinates. Includes all home players in this geometric illustration. Removing translation does not remove rotation, phase changes or individual role swaps.
+[SkillCorner open data and schema](https://github.com/SkillCorner/opendata)
+[PathCRF: player trajectories to events (2026)](https://github.com/hyunsungkim-ds/pathcrf)
 
-[Open method notebook](../notebooks/methods/03_formation_analysis.ipynb)
+## 8. When does a pass occur?
 
-[Open MP4](../assets/videos/formation_centering.mp4)
+Actual player–ball distances, horizontal ball speed and ball height share the same clip time axis. Release/reception gates follow notebook 02; speed is diagnostic, not a learned or fitted threshold. Dashed target arrow is the retrospectively identified candidate. No precision/recall claim.
 
-## 12. Pleuler: rotating player viewpoints
+**Problem:** Separate a pass from touches, ball transit and reception.
 
-Pleuler (June 2024), independently implemented. Our choices: 24 headings and overlapping 90-degree sectors. This is geometric context, not observed head orientation, actual sight or occlusion. Attack-normalize both axes. Opponent-count channel is our extension. Pros: translation-invariant and intuitive. Cons: angular resolution, orientation and missing players affect features.
+**Methods:** Link same-team control segments; inspect distance and ball motion.
 
-[Open method notebook](../notebooks/methods/04_role_classification.ipynb)
+**Result:** Release and reception candidates align with the physics traces.
 
-## 13. From angular features to role labels
+[Method notebook](../notebooks/methods/02_event_detection.ipynb)
 
-Pleuler used XGBoost. This notebook manufactures features but does not train or claim accuracy from a single match. Assigned-position metadata gives weak labels during rotations. For credible evaluation use manually reviewed frame roles and held-out matches/players. Add opponent counts as a separate tested extension. Pros: flexible nonlinear classification. Cons: label noise and domain shift.
+[Standalone MP4](../assets/videos/pass_physics.mp4)
 
-[Open method notebook](../notebooks/methods/04_role_classification.ipynb)
+[SkillCorner open data and schema](https://github.com/SkillCorner/opendata)
+[PathCRF: player trajectories to events (2026)](https://github.com/hyunsungkim-ds/pathcrf)
 
-## 14. Formation prediction by assignment
+## 9. Formation and position identification
 
-Teaching baseline: four fixed templates, Hungarian minimum squared-distance assignment, attack-right orientation. RMS residual is not a probability. Unlike EFPI, this implementation has no elastic template optimization. Pros: interpretable assignments and no player-order dependence. Cons: template inventory, scale and asymmetry determine results.
+How can we describe team organization while players move and rotate?
+Ideas: Team shape and phase-conditioned averages; Formation-template identification; Player roles and positional rotations; Role signatures from relative geometry; Persistent formation-change candidates; Substitutions and asymmetric shapes
 
-[Open method notebook](../notebooks/methods/03_formation_analysis.ipynb)
 
-## 15. Bekkers: elastic formation identification
+## 10. Which formation best fits this shape?
 
-EFPI is the published extension using elastic templates and linear assignment. The displayed visualization is our simpler fixed-template baseline, not an EFPI result. Follow the linked tutorial for package inference. Pros: formation and role assignment together. Cons: parameter choices, substitutions, partial tracking and tactical ambiguity. Compare output to video-reviewed labels.
+Best residual example from defensive 30-second windows; ten outfield players, at least 50 qualifying frames each. Four fixed templates and Hungarian squared-distance assignment. Player labels are assigned template slots, not reviewed role truth. Raw versus centered covariance ellipses appear as a small inset. RMS error is not a formation probability; not elastic EFPI inference.
 
-## 16. Detecting formation-change candidates
+**Problem:** Infer organization from positions rather than the team sheet.
 
-Embedded MP4 computes centered defensive-window medians, fixed-template Hungarian assignments and three-bin causal persistence. Uses 30-second bins with at least 50 qualifying frames per outfield player. Missing bins reset candidate evidence; the last confirmed state is retained through gaps. 60× playback. Shape labels are candidates without tactical ground truth, not elastic EFPI inference.
+**Methods:** Centroid normalization and minimum-cost template assignment.
 
-[Open method notebook](../notebooks/methods/03_formation_analysis.ipynb)
+**Result:** A best-fitting formation, assigned slots and competing scores.
 
-[Open MP4](../assets/videos/formation_candidates.mp4)
+[Method notebook](../notebooks/methods/03_formation_analysis.ipynb)
 
-## 17. Formation detection
+[Shaw & Glickman: Dynamic Analysis of Team Strategy](https://static.capabiliaserver.com/frontend/clients/barca/wp_prod/wp-content/uploads/2020/01/83c87dfe-barca_poster_shaw.pdf)
+[Joris Bekkers: Elastic Formation and Position Identification](https://arxiv.org/abs/2506.23843)
+[Devin Pleuler: Fixed to Fluid (2024)](https://github.com/devinpleuler/research/blob/master/frame-by-frame-position.md)
 
-Real median outfield positions are shown separately by possession. Pros: summarizes organization beyond a team sheet. Cons: averaging mixes roles and game states; these are not asserted formation labels.
+## 11. Which spatial signature describes a role?
 
-[Open method notebook](../notebooks/methods/03_formation_analysis.ipynb)
+Twenty-four attack-normalized headings; teammates only in the comparison. Sector geometry is not observed gaze or occlusion. Metadata roles label the examples, not frame-level ground truth. No real role-classifier performance is claimed; the notebook’s classifier training check remains synthetic.
 
-## 18. Player-role and line detection
+**Problem:** Distinguish players by where their teammates lie around them.
 
-Ward clustering of real centered x positions into three groups is a teaching baseline. It is not a validated named-formation classifier. Pros: interpretable. Cons: fixed line counts, overlaps and rotations.
+**Methods:** Pleuler-inspired teammate counts across rotating 90° sectors.
 
-[Open method notebook](../notebooks/methods/03_formation_analysis.ipynb)
+**Result:** Contrasting angular signatures for wide, central and attacking roles.
 
-## 19. Phase-of-play segmentation
+[Method notebook](../notebooks/methods/04_role_classification.ipynb)
 
-The plot shows supplied SkillCorner labels, not predictions from a classifier trained here. Pros: makes context explicit. Cons: taxonomy-dependent and sensitive to boundary definitions.
+[Devin Pleuler: Fixed to Fluid (2024)](https://github.com/devinpleuler/research/blob/master/frame-by-frame-position.md)
 
-[Open method notebook](../notebooks/methods/05_match_segmentation.ipynb)
+## 12. Did the formation actually change?
 
-## 20. Estimating player speed
+Dominant timeline and before/after pitch views. Three consecutive available 30-second bins confirm a candidate; missing bins reset evidence, while the last confirmed state is retained. Gray windows are insufficient samples. No substitutions fall in this bounded sample. Differing candidates are not claimed to be verified formation changes.
 
-Actual speed curves are shown. Pros: foundation for physical and tactical features. Cons: derivatives amplify noise; smoothing removes some short peaks.
+**Problem:** Separate persistent reorganization from transient shape changes.
 
-[Open method notebook](../notebooks/methods/06_physical_metrics.ipynb)
+**Methods:** Compare defensive windows; confirm only persistent candidates.
 
-## 21. Distance covered
+**Result:** The timeline distinguishes raw candidates, confirmed labels and gaps.
 
-The real sample’s cumulative distance excludes missing derivatives. No full-match extrapolation. Pros: simple workload volume measure. Cons: incomplete and extrapolated tracking affect accuracy.
+[Method notebook](../notebooks/methods/03_formation_analysis.ipynb)
 
-[Open method notebook](../notebooks/methods/06_physical_metrics.ipynb)
+[Shaw & Glickman: Dynamic Analysis of Team Strategy](https://static.capabiliaserver.com/frontend/clients/barca/wp_prod/wp-content/uploads/2020/01/83c87dfe-barca_poster_shaw.pdf)
+[Joris Bekkers: Elastic Formation and Position Identification](https://arxiv.org/abs/2506.23843)
+[Devin Pleuler: Fixed to Fluid (2024)](https://github.com/devinpleuler/research/blob/master/frame-by-frame-position.md)
 
-## 22. High-speed and sprint distance
+## 13. Match segmentation and phases
 
-Our code uses [20,25) and [25,infinity) to avoid overlap; exact equality handling is a teaching convention. Pros: distinguishes intensity from volume. Cons: thresholds and exposure affect comparisons.
+What tactical context should an event, shape or workload be compared within?
+Ideas: Possession and transition phases; Build-up, progression and advanced play; Defensive blocks and pressing phases; Set pieces and interruptions; Phase duration and boundary detection; Context-conditioned physical/tactical summaries
 
-[Open method notebook](../notebooks/methods/06_physical_metrics.ipynb)
 
-## 23. Sprint-effort counts
+## 14. Where does one phase end and another begin?
 
-Shaded segments are our >=1 s, no-merging teaching rule. They are not exact SkillCorner production sprint counts. Pros: repeated-effort view. Cons: sensitive to thresholds, smoothing and merging rules.
+Rule-based estimates use possession age, attack-normalized ball location and past progression speed, with three-frame confirmation. Provider labels use SkillCorner’s taxonomy. Compare interval behavior, not exact label accuracy without a reviewed mapping. The video shows actual transition context.
 
-[Open method notebook](../notebooks/methods/06_physical_metrics.ipynb)
+**Problem:** Assign context to continuous tracking intervals.
 
-## 24. Acceleration and deceleration
+**Methods:** Causal rule estimates versus supplied SkillCorner phase intervals.
 
-The plot uses real signed speed derivatives. A direction change can produce acceleration-vector magnitude without increasing scalar speed. Pros: captures bursts and braking. Cons: highly noise-sensitive; threshold crossing alone does not qualify a production explosive effort.
+**Result:** The synchronized timelines expose boundaries and disagreements.
 
-[Open method notebook](../notebooks/methods/06_physical_metrics.ipynb)
+[Method notebook](../notebooks/methods/05_match_segmentation.ipynb)
 
-## 25. Time to high-speed running
+[Standalone MP4](../assets/videos/phase_comparison.mp4)
 
-The real crossing is illustrative, not production-qualified. The published metric is the minimum interval within qualifying explosive accelerations. Start detection, >0.7 s high-acceleration qualification and filtering matter.
+[Augmented possession and phases framework (2025)](https://doi.org/10.1177/22150218241290988)
+[SkillCorner open data and schema](https://github.com/SkillCorner/opendata)
 
-[Open method notebook](../notebooks/methods/06_physical_metrics.ipynb)
+## 15. Physical metrics
 
-## 26. Time to sprint
+How much did players move, and what physical capacities did they demonstrate?
+Ideas: Distance and valid tracking exposure; High-speed and sprint distance; Sprint efforts and repeated intensity; Acceleration and braking; Time to high-speed running / sprint; PSV-99 and Peak Velocity
 
-Real observed crossing shown. No official Time to Sprint or Top 3 value is reconstructed. Pros: explosiveness/capacity. Cons: limited opportunities, sample size and qualification rules.
 
-[Open method notebook](../notebooks/methods/06_physical_metrics.ipynb)
+## 16. How much ground did one player cover?
 
-## 27. PSV-99: activity-based speed capacity
+Same smoothing and contiguous-segment derivative rules as notebook 06. Cumulative distance uses mean endpoint speeds and observed elapsed time. Coverage is valid integration seconds divided by bounded sample duration. Extrapolated positions may still contribute; no full-match extrapolation.
 
-The real frame-speed distribution illustrates why populations matter. SkillCorner describes PSV-99 over physical activities above 15 km/h. This histogram is not the official PSV-99 calculation.
+**Problem:** Measure movement volume without hiding missing intervals.
 
-[Open method notebook](../notebooks/methods/06_physical_metrics.ipynb)
+**Methods:** Integrate speed only across valid consecutive intervals.
 
-## 28. Peak Velocity: absolute top speed
+**Result:** Cumulative distance is reported alongside the valid sample coverage.
 
-The figure uses our smoothed sample-speed estimates. It does not reproduce SkillCorner’s validated production Peak Velocity. Pros: interpretable capacity measure. Cons: noisy spikes, short exposure and preprocessing dependence.
+[Method notebook](../notebooks/methods/06_physical_metrics.ipynb)
 
-[Open method notebook](../notebooks/methods/06_physical_metrics.ipynb)
+[DataBallPy covered distance](https://databallpy.readthedocs.io/en/main/features/covered_distance_page.html)
+[DataBallPy preprocessing](https://databallpy.readthedocs.io/en/main/getting_started/preprocessing_options.html)
 
-## 29. Expected goals: shot quality
+## 17. Who accumulated high-intensity distance?
 
-Hypothetical shot rays at a real ball location; no xG prediction is invented. Pros: familiar target and interpretable features. Cons: sparse shots, outcome imbalance and contextual bias.
+Main bars: HSR [20,25) and sprint [25,infinity) km/h. Small speed trace illustrates threshold-qualified intervals. Exact equality handling is a teaching convention. Compare exposure/coverage before interpreting player rankings; these are not full-match or official production totals.
 
-[Open method notebook](../notebooks/methods/07_expected_goals.ipynb)
+**Problem:** Separate high-speed running from total movement volume.
 
-## 30. Expected Threat: location value
+**Methods:** Integrate distances within explicitly defined speed bands.
 
-Actual fitted DataBallPy open-play grid, not trained on this small sample. V(s)=P(shot|s)P(goal|shot,s)+sum P(successful move to s'|s)V(s'). Classic location xT does not use defender positions. State the model target and training domain.
+**Result:** Player comparison bars show HSR and sprint contributions.
 
-[Open method notebook](../notebooks/methods/08_expected_threat.ipynb)
+[Method notebook](../notebooks/methods/06_physical_metrics.ipynb)
 
-## 31. Expected Threat gained
+[SkillCorner physical thresholds and time-to metrics](https://skillcorner.com/us/articles/scouted-brazilian-centre-backs)
+[DataBallPy covered distance](https://databallpy.readthedocs.io/en/main/features/covered_distance_page.html)
 
-The arrow is real ball displacement in the selected clip, not an assertion of a single completed pass. Attack direction is normalized and 105 m scaled to the model’s 106 m convention. Pros: simple action valuation. Cons: path-independent, no defender context or causal attribution.
+## 18. How many sprint efforts qualified?
 
-[Open method notebook](../notebooks/methods/08_expected_threat.ipynb)
+Uses ≥25 km/h for at least one second, with no merging across gaps. Efforts are numbered on the trace; count comes from notebook 06. These are not exact SkillCorner production effort counts.
 
-## 32. Voronoi space control
+**Problem:** Distinguish sustained sprint efforts from brief speed spikes.
 
-Actual frame, grid approximation to a Voronoi partition. Pros: quick and interpretable. Cons: hard boundaries and no movement, ball-flight or uncertainty.
+**Methods:** Threshold speed, minimum duration and an explicit gap rule.
 
-[Open method notebook](../notebooks/methods/09_voronoi_control.ipynb)
+**Result:** Qualifying efforts are shaded and counted on the speed trace.
 
-## 33. Gaussian player influence
+[Method notebook](../notebooks/methods/06_physical_metrics.ipynb)
 
-Real player velocity with an illustrative ellipse. The covariance is not the exact Fernández/Bornn parameterization. Pros: smooth and motion-aware. Cons: hand-set influence scale and simplified movement ability.
+[SkillCorner physical thresholds and time-to metrics](https://skillcorner.com/us/articles/scouted-brazilian-centre-backs)
+[DataBallPy preprocessing](https://databallpy.readthedocs.io/en/main/getting_started/preprocessing_options.html)
 
-[Open method notebook](../notebooks/methods/10_gaussian_control.ipynb)
+## 19. When does the player accelerate or brake?
 
-## 34. Gaussian team control
+Large signed acceleration trace; small synchronized speed trace. This is not acceleration-vector magnitude, and highlighted positive/negative samples are not automatically production-qualified explosive efforts. Derivatives amplify noise; smoothing changes peaks.
 
-Our logistic transformation bounds the team difference; it is not a calibrated possession probability. Pros: contested-space view. Cons: aggregation and covariance assumptions affect the surface.
+**Problem:** Describe speeding up and slowing down around an effort.
 
-[Open method notebook](../notebooks/methods/10_gaussian_control.ipynb)
+**Methods:** Differentiate smoothed scalar speed within valid segments.
 
-## 35. Arrival-time control
+**Result:** Positive bursts and braking intervals align with the speed trace.
 
-Actual frame with a simple 0.7 s projection and 5 m/s travel speed baseline. Pros: interpretable timing. Cons: no ball flight, acceleration optimization or interception-rate integration; not Spearman’s full model.
+[Method notebook](../notebooks/methods/06_physical_metrics.ipynb)
 
-[Open method notebook](../notebooks/methods/11_arrival_time_control.ipynb)
+[SkillCorner explosive accelerations](https://skillcorner.com/articles/new-feature-explosive-accelerations)
+[DataBallPy preprocessing](https://databallpy.readthedocs.io/en/main/getting_started/preprocessing_options.html)
 
-## 36. Pitch control as players move
+## 20. How quickly does the player reach HSR?
 
-Actual tracking, same frame/grid for Voronoi, directional Gaussian and simplified arrival-time scores. Gaussian influence uses projected centers and hand-set directional scales. Arrival time uses 0.7 s reaction/projection and 5 m/s travel speed. These are teaching baselines, not exact published production models. Video samples at 5 Hz with real-time playback. Orange denotes Brisbane, purple Perth.
+Separate slide for 9→20 km/h. Shows fastest qualifying monotone crossing found by the notebook’s sample rule. Official SkillCorner Time to HSR uses additional explosive-acceleration qualification; this slide does not reproduce that production metric.
 
-[Open method notebook](../notebooks/methods/11_arrival_time_control.ipynb)
+**Problem:** Measure the elapsed time from 9 to 20 km/h.
 
-[Open MP4](../assets/videos/control_comparison.mp4)
+**Methods:** Inspect and interpolate one continuous rising-speed trajectory.
 
-## 37. Ball-aware pitch control
+**Result:** The observed threshold-crossing interval is visible and labeled.
 
-Architecture schematic on actual tracking context, not a computed Spearman surface. Pros: physical link to passing. Cons: uncertain reactions, speed and ball parameters. Separate from the arrival-time teaching baseline.
+[Method notebook](../notebooks/methods/06_physical_metrics.ipynb)
 
-## 38. Expected pass completion
+[SkillCorner physical thresholds and time-to metrics](https://skillcorner.com/us/articles/scouted-brazilian-centre-backs)
+[SkillCorner explosive accelerations](https://skillcorner.com/articles/new-feature-explosive-accelerations)
 
-Actual accessible-space xC inference on hypothetical endpoints at real teammate positions. Pros: interpretable risk. Cons: model calibration, ball speed and offside conventions; candidates are not observed choices.
+## 21. How quickly does the player reach sprint speed?
 
-[Open method notebook](../notebooks/methods/12_pass_completion.ipynb)
+Separate slide for 9→25 km/h with its own actual trajectory. No official Time to Sprint or Top-3 metric is reconstructed; opportunity, qualification and filtering matter.
 
-## 39. Accessible space
+**Problem:** Measure the elapsed time from 9 to 25 km/h.
 
-Actual public-model output. Pros: incorporates ball and player movement. Cons: simulation assumptions and resolution; individual access can overlap.
+**Methods:** Inspect and interpolate one continuous rising-speed trajectory.
 
-[Open method notebook](../notebooks/methods/13_space_and_danger.ipynb)
+**Result:** Time to sprint is distinct from the maximum speed reached.
 
-## 40. Dangerous accessible space
+[Method notebook](../notebooks/methods/06_physical_metrics.ipynb)
 
-Actual public-model dangerous surface. Pros: links access and useful territory. Cons: danger definition and physical assumptions; DAS units are danger-weighted square metres.
+[SkillCorner physical thresholds and time-to metrics](https://skillcorner.com/us/articles/scouted-brazilian-centre-backs)
+[SkillCorner explosive accelerations](https://skillcorner.com/articles/new-feature-explosive-accelerations)
 
-[Open method notebook](../notebooks/methods/13_space_and_danger.ipynb)
+## 22. PSV-99: a robust speed-capacity proxy
 
-## 41. Changes in dangerous space
+Original chart from SkillCorner, Peak Velocity article, 11 June 2026. PSV-99 is described as the 99th percentile of physical activities over 15 km/h, not all frame speeds. This figure is supplied research/product communication, not our sample calculation. Retain original legend and axes.
 
-Actual model values on three frames. Pros: connects movement to changing opportunity. Cons: different team possession states and model noise must be checked; before/after changes alone are not causal credit.
+**Problem:** How can speed capacity be summarized without one noisy maximum?
 
-[Open method notebook](../notebooks/methods/13_space_and_danger.ipynb)
+**Methods:** SkillCorner’s 99th percentile of physical activities above 15 km/h.
 
-## 42. Off-ball run threat
+**Result:** The published example contrasts an activity-based proxy with peak speed.
 
-Actual supplied xthreat values for off-ball runs. The provider model is not reconstructed. Pros: visible unserved contributions. Cons: counterfactual assumptions, context and selection bias.
+[SkillCorner PSV-99 and Peak Velocity](https://skillcorner.com/articles/skillcorner-releases-new-peak-velocity-metric)
 
-## 43. Tracking as a spatial graph
+## 23. Peak Velocity: absolute top-end speed
 
-Real radius graph. Pros: models relationships directly. Cons: radius edges miss distant tactical relationships; fully connected and learned connectivity are alternatives.
+Original SkillCorner figure. Article reports correlation 0.96 / R² 0.92 when averaging each player’s top three metric values in the displayed validation. Do not generalize this validation to our smoothed sample maxima or to every competition.
 
-[Open method notebook](../notebooks/methods/16_graph_epv.ipynb)
+**Problem:** What is the highest speed a player reliably reaches?
 
-## 44. Node and edge features
+**Methods:** SkillCorner’s validated maximum-speed processing.
 
-Actual edge-feature rows. Edge direction controls the sign of relative position. Team IDs should be encoded meaningfully rather than treated as numeric magnitudes.
+**Result:** The provider’s published validation compares Peak Velocity with ground truth.
 
-[Open method notebook](../notebooks/methods/16_graph_epv.ipynb)
+[SkillCorner PSV-99 and Peak Velocity](https://skillcorner.com/articles/skillcorner-releases-new-peak-velocity-metric)
 
-## 45. Graph neural message passing
+## 24. Game modeling
 
-Architecture schematic, not a trained result. Pros: relational inductive bias and shared updates. Cons: oversmoothing, connectivity choices and training requirements. Attention alone is not causal importance.
+Which locations, options and game states create or prevent scoring opportunities?
+Ideas: Shot quality and location value; Control, interception and completion; Accessible and dangerous space; Off-ball options and run threat; Graphs and learned relational models; Possession value and tactical applications
 
-[Open method notebook](../notebooks/methods/16_graph_epv.ipynb)
 
-## 46. Temporal node features
+## 25. How does context change a shot estimate?
 
-Actual one-second lag and speed change on a real player. Explicit lag frame checks prevent bridging gaps. Instantaneous velocity adds motion information but is not a substitute for full history.
+Actual out-of-fold predictions from notebook 07; no model used the example match during that fold’s training. Context includes goalkeeper distance/offset and defender geometry. Selected for model disagreement, not as evidence of aggregate improvement. Freeze-frame coverage is not continuous full tracking.
 
-## 47. Dynamic graphs over time
+**Problem:** Location alone cannot describe the goalkeeper and defenders.
 
-Embedded MP4 of real player motion and 20 m radius edges, recomputed at native 10 Hz. This player-only topology illustration differs from the workshop trained model, which adds a ball node and ball connections. No learned edge importance is displayed.
+**Methods:** Compare location-only and contextual logistic xG on the same shot.
 
-[Open MP4](../assets/videos/dynamic_graph.mp4)
+**Result:** The same real freeze frame receives two different held-out estimates.
 
-## 48. Temporal edges between snapshots
+[Method notebook](../notebooks/methods/07_expected_goals.ipynb)
 
-Schematic topology with real player IDs. The notebook creates actual spatial and temporal edge records. Do not connect across substitutions or tracking gaps without an explicit rule; labels cannot leak future frames.
+[StatsBomb: Upgrading Expected Goals](https://blogarchive.statsbomb.com/articles/soccer/upgrading-expected-goals/)
 
-## 49. Recurrent temporal graph models
+## 26. Does context improve xG discrimination?
 
-Architecture schematic rather than a claim about a specific cited model’s GRU implementation. Pros: sequential processing with a compact state. Cons: long-history retention and sequence alignment. No trained inference is shown.
+Location AUC 0.743879, 95% match-bootstrap interval [0.713895,0.774165]; contextual 0.779870 [0.749411,0.809066]. Paired difference 0.035990 [0.021778,0.051104]. 1,000 match resamples of existing out-of-fold predictions, without refitting. Training-only scaling. ROC is discrimination, not calibration.
 
-## 50. Temporal convolution on graph history
+**Problem:** Test contextual features across held-out matches, not one example.
 
-Architecture schematic. Pros: parallel computation and explicit receptive field. Cons: window length, dilation and sampling-rate choices. Filters must not access future frames at prediction time.
+**Methods:** Same five match-grouped folds for both logistic models.
 
-## 51. Causal temporal attention
+**Result:** ROC AUC rises from 0.744 to 0.780 on the shared eligible cohort.
 
-Architecture schematic. Pros: flexible history selection and long-range dependencies. Cons: data/computation requirements, masking and leakage; attention weights do not establish causal importance.
+[Method notebook](../notebooks/methods/07_expected_goals.ipynb)
 
-## 52. Spatiotemporal message passing
+[StatsBomb: Upgrading Expected Goals](https://blogarchive.statsbomb.com/articles/soccer/upgrading-expected-goals/)
 
-General architecture schematic, not a reproduction of PathCRF. Pros: joint relational/time structure. Cons: graph size, identity errors and edge construction choices.
+## 27. Which completed moves increase location value?
 
-## 53. SoccerMap: spatial neural prediction
+Main map: licensed fitted DataBallPy open-play grid; SkillCorner successful player-possession passes use release coordinates x_end/y_end and supplied reception coordinates. Attack-normalized 105 m x scaled to the model 106 m convention. Two highest positive and one highest negative gains are selected examples. Small inset: synthetic two-state fitting mechanics from notebook 08; not training the full grid on this sample. Source provenance JSON stores event IDs.
 
-Architecture schematic. SoccerMap is a convolutional approach, not a GNN. Pros: field-wide outputs. Cons: rasterization and training data requirements; no pretrained inference is claimed.
+**Problem:** Value progression before a shot is taken.
 
-## 54. Bekkers: building a football graph
+**Methods:** Fitted location xT; value a completed move by V(end)−V(start).
 
-Real SkillCorner frame with one documented UnravelSports configuration: split-by-team connections plus ball links. This is not asserted as the unique GraphEPV topology. Pros: permutation-invariant aggregation and relational features. Cons: edges determine which interactions can be learned. Current documentation recommends PyTorch Geometric; the 2025 talk used Keras/Spektral.
+**Result:** Actual completed passes gain or lose value on the fitted map.
 
-## 55. Bekkers: GraphEPV scoring target
+[Method notebook](../notebooks/methods/08_expected_threat.ipynb)
 
-PyData London, 7 June 2025. Talk uses World Cup 2022 PFF data across 64 matches, with labels respecting team and period. This is a ten-second scoring target, not automatically the complete action-decomposed Fernández EPV framework. Schematic only: no pretrained model inference here. Strength: includes off-ball context. Limitation: rare correlated labels, calibration and transfer to another competition.
+[Karun Singh: Expected Threat](https://karun.in/blog/expected-threat.html)
+[DataBallPy fitted xT methodology](https://databallpy.readthedocs.io/en/main/features/xt_models.html)
 
-[Open method notebook](../notebooks/methods/16_graph_epv.ipynb)
+## 28. Who is closest to each patch of space?
 
-## 56. Our graph model: an unseen possession
+Grid approximation to Voronoi on a real frame. Strength: simple and interpretable. Limitation: ignores player movement, ball travel and uncertainty.
 
-Embedded MP4 re-encodes the actual animation generated by notebook 16. Independent 353-parameter frame GNN trained on ten SkillCorner matches, calibrated on three and evaluated on three unseen matches. Not Bekkers CrystalGraph architecture or weights; not supplied SkillCorner EPV. Test ROC AUC 0.843, AP 0.020 versus prevalence 0.0033; Brier score does not improve over the constant baseline. Goal markers are score-reconciled but not video-verified. This display case was selected by event context, not high predictions; it is not a performance sample. The model uses only the current frame, even though playback reveals successive predictions.
+**Problem:** Build a transparent geometric control baseline.
 
-[Open method notebook](../notebooks/methods/16_graph_epv.ipynb)
+**Methods:** Voronoi regions from nearest-player distance.
 
-[Open MP4](../assets/videos/graph_epv_possession.mp4)
+**Result:** Hard boundaries partition the pitch into nearest-player regions.
 
-## 57. GraphEPV and temporal extensions
+[Method notebook](../notebooks/methods/09_voronoi_control.ipynb)
 
-Our extension discussion, not a claim that the 2025 GraphEPV presentation trained a temporal GNN. Use the existing lagged features, GRU, TCN and attention slides as alternative temporal encoders. Keep whole matches/possessions together when splitting; account for the ten-second outcome window. Compare against location xT and non-graph models on the same target.
+[Space and Control in Soccer (2021)](https://www.frontiersin.org/journals/sports-and-active-living/articles/10.3389/fspor.2021.676179/full)
+[Wide Open Spaces, Fernández & Bornn (2018)](https://static.capabiliaserver.com/frontend/clients/barca/wp_prod/wp-content/uploads/2018/05/Wide-Open-Spaces.pdf)
 
-## 58. Expected possession value
+## 29. How does movement shape spatial influence?
 
-Conceptual decomposition: sum over actions P(action|state) times outcome-conditional value, including failure. EPV is a framework/target, not a synonym for GNN. Different EPV definitions must not be mixed.
+Directional Gaussian teaching parameterization, not exact Fernández/Bornn covariance. Bounded team comparison is not calibrated possession probability. Velocity and covariance affect the surface; contribution is not causal importance.
 
-## 59. Observed passes and supplied EPV
+**Problem:** Replace hard boundaries with smooth directional influence.
 
-Actual pass_epv_delta_for fields in SkillCorner dynamic events. This is the provider’s model output; not a reconstructed Fernández or DEFCON prediction. The field name is shown rather than assuming undocumented equivalence.
+**Methods:** Projected Gaussian player influence, aggregated by team.
 
-## 60. DEFCON: defensive contribution
+**Result:** A continuous team-influence surface reflects movement direction.
 
-Architecture schematic only. Explain attribution assumptions before interpreting defensive credits. Actual frame is context, not DEFCON inference.
+[Method notebook](../notebooks/methods/10_gaussian_control.ipynb)
 
-## 61. U.S. Soccer: counterattack graphs
+[Wide Open Spaces, Fernández & Bornn (2018)](https://static.capabiliaserver.com/frontend/clients/barca/wp_prod/wp-content/uploads/2018/05/Wide-Open-Spaces.pdf)
 
-Architecture schematic. The published balanced event-frame study uses reaching the penalty area as success; the repository’s additional all-frame dataset has different goal labels. Do not mix those datasets or quote them as equivalent.
+## 30. Which team reaches a target sooner?
 
-## 62. TacticAI: corner-kick modeling
+0.7 s projection/reaction and 5 m/s travel baseline. No full ball-flight, acceleration optimization or competing interception-rate integration. Not the full Spearman model.
 
-Architecture schematic. The input illustration uses real tracking near a supplied corner-reception event; it is not the original TacticAI input or trained inference. Complete task-specific code/weights and licensed data are not released. Model-generated suggestions are not guarantees.
+**Problem:** Model the race to space rather than only proximity.
 
-## 63. Trajectory forecasting
+**Methods:** Reaction/projection time and earliest team travel time.
 
-Architecture schematic; no invented future trajectories are shown as learned output. GenTac is a recent preprint example. Distinguish forecasting and causal intervention.
+**Result:** The arrival-time score exposes contested and reachable regions.
 
-## 64. Validating tracking models
+[Method notebook](../notebooks/methods/11_arrival_time_control.ipynb)
 
-Schematic split only, not measured performance. Event detection needs timing tolerances; probability models need calibration; tactical labels need a clear taxonomy.
+[Beyond Expected Goals, Spearman (2018)](https://static.hudl.com/craft/downloads/SSAC2018_Beyond_Expected_Goals.pdf?mtime=20180327111214)
+[Space and Control in Soccer (2021)](https://www.frontiersin.org/journals/sports-and-active-living/articles/10.3389/fspor.2021.676179/full)
+
+## 31. How do the control assumptions change the answer?
+
+Original synchronized comparison video. Scores are teaching outputs, not calibrated possession probabilities; parameter choices are stated in assets/videos/README.md. Sampled at 5 Hz with real-time playback.
+
+**Problem:** Compare methods without changing the tracking situation.
+
+**Methods:** Voronoi, Gaussian and arrival-time baselines on identical frames.
+
+**Result:** The moving comparison makes each model’s different boundaries visible.
+
+[Method notebook](../notebooks/methods/11_arrival_time_control.ipynb)
+
+[Standalone MP4](../assets/videos/control_comparison.mp4)
+
+[Wide Open Spaces, Fernández & Bornn (2018)](https://static.capabiliaserver.com/frontend/clients/barca/wp_prod/wp-content/uploads/2018/05/Wide-Open-Spaces.pdf)
+[Beyond Expected Goals, Spearman (2018)](https://static.hudl.com/craft/downloads/SSAC2018_Beyond_Expected_Goals.pdf?mtime=20180327111214)
+
+## 32. Which passing targets are more likely to succeed?
+
+Main surface: actual accessible-space 2.0.13 expected-completion inference on real SkillCorner tracking, respecting offside. Inset: independently parameterized uncalibrated teaching survival example. Notebook 12 implements a teaching model, not the published fitted parameters. Targets are hypothetical, not observed choices; no SkillCorner-domain calibration claim.
+
+**Problem:** Assess a receiver before the pass is attempted.
+
+**Methods:** Published accessible-space completion model; survival-proxy illustration.
+
+**Result:** A field-wide completion map ranks hypothetical target locations.
+
+[Method notebook](../notebooks/methods/12_pass_completion.ipynb)
+
+[Dangerous Accessible Space: paper and implementation](https://github.com/jonas-bischofberger/accessible-space)
+[DataBallPy DAS and expected completion](https://databallpy.readthedocs.io/en/main/features/dangerous_accessible_space.html)
+[Beyond Expected Goals, Spearman (2018)](https://static.hudl.com/craft/downloads/SSAC2018_Beyond_Expected_Goals.pdf?mtime=20180327111214)
+
+## 33. Where can the attacking team receive?
+
+Actual accessible-space inference. Public model simulation settings and frame provenance are recorded in assets/results/space_result_provenance.json. Notebook 13 demonstrates a simpler area-integral proxy; it is not this published output. AS is an area quantity; individual accessible regions may overlap.
+
+**Problem:** Measure space that is accessible through potential passes.
+
+**Methods:** Published pass-flight and player-interception simulation.
+
+**Result:** The accessible-space surface identifies receiving opportunity.
+
+[Method notebook](../notebooks/methods/13_space_and_danger.ipynb)
+
+[Dangerous Accessible Space: paper and implementation](https://github.com/jonas-bischofberger/accessible-space)
+[DataBallPy DAS and expected completion](https://databallpy.readthedocs.io/en/main/features/dangerous_accessible_space.html)
+
+## 34. Which accessible space is dangerous?
+
+Published dangerous-accessible-space output on the same frame as AS. DAS units are danger-weighted square metres, not scoring probability. The notebook’s chosen distance-based danger proxy is separate.
+
+**Problem:** Separate available territory from valuable territory.
+
+**Methods:** Weight published accessibility by the model’s danger definition.
+
+**Result:** Danger weighting concentrates attention on useful receiving space.
+
+[Method notebook](../notebooks/methods/13_space_and_danger.ipynb)
+
+[Dangerous Accessible Space: paper and implementation](https://github.com/jonas-bischofberger/accessible-space)
+[DataBallPy DAS and expected completion](https://databallpy.readthedocs.io/en/main/features/dangerous_accessible_space.html)
+
+## 35. How does useful space change during play?
+
+Published accessible-space outputs at 5 Hz; traces show AS m² and DAS danger-weighted m² separately. Team/possession context must be read with the clip. Before/after movement does not establish causal player credit.
+
+**Problem:** Connect movement to changing options over time.
+
+**Methods:** Recompute published AS and DAS on successive real frames.
+
+**Result:** The video links changing surfaces with their own value traces.
+
+[Method notebook](../notebooks/methods/13_space_and_danger.ipynb)
+
+[Standalone MP4](../assets/videos/dangerous_space_result.mp4)
+
+[Dangerous Accessible Space: paper and implementation](https://github.com/jonas-bischofberger/accessible-space)
+[DataBallPy DAS and expected completion](https://databallpy.readthedocs.io/en/main/features/dangerous_accessible_space.html)
+
+## 36. Which off-ball run offers more threat?
+
+Selected low/high off-ball-run events fully covered by the sample. Each panel is synchronized to its own run start; the shorter run freezes at the end. A square marks supplied ball carrier when available; dashed lane is hypothetical. Values are supplied event-level xthreat fields, not locally fitted or controlled causal effects.
+
+**Problem:** Recognize useful runs even when a pass is not played.
+
+**Methods:** Compare supplied SkillCorner run-threat estimates in context.
+
+**Result:** Two actual runs receive contrasting supplied threat values.
+
+[Standalone MP4](../assets/videos/run_comparison.mp4)
+
+[SkillCorner: Expected Threat for off-ball runs](https://www.linkedin.com/posts/skillcorner_game-intelligence-expected-threat-activity-7057009275247689728-NVPh)
+[SkillCorner open data and schema](https://github.com/SkillCorner/opendata)
+
+## 37. Why represent football as a graph?
+
+Original graph illustration from Bekkers, PyData London 2025. General representation explanation before EPV: player/ball nodes, player-player and player-ball relations, adjacency and global context. The picture is conceptual, not a trained prediction. Source URL and attribution in assets/references/bekkers/attribution.json.
+
+**Problem:** Positions alone hide who relates to whom.
+
+**Methods:** Players and ball as nodes; relationships as edges.
+
+**Result:** A graph encodes interactions without relying on player row order.
+
+[Method notebook](../notebooks/methods/16_graph_epv.ipynb)
+
+[Joris Bekkers: GraphEPV, PyData London 2025](https://rawcdn.githack.com/UnravelSports/keynotes/main/html/20250607-PyData-London.html)
+
+## 38. What information should a graph carry?
+
+Original node/global-feature matrix from the linked keynote. This is a general feature menu; do not imply our independent workshop GNN includes every displayed velocity, acceleration or global feature. Its actual features are current-frame geometry and identity/context indicators, specified in notebook 16.
+
+**Problem:** Describe players and game context in machine-readable form.
+
+**Methods:** Node feature vectors plus global match-state features.
+
+**Result:** The feature matrix captures geometry and context for every node.
+
+[Method notebook](../notebooks/methods/16_graph_epv.ipynb)
+
+[Joris Bekkers: GraphEPV, PyData London 2025](https://rawcdn.githack.com/UnravelSports/keynotes/main/html/20250607-PyData-London.html)
+[UnravelSports soccer GNN tutorial](https://unravelsports.readthedocs.io/en/latest/tutorials/soccer_gnn.html)
+
+## 39. Which relationships can the model exchange information over?
+
+Keynote adjacency matrix shows one documented team/ball connection configuration, not a unique universal GraphEPV topology. Edge features can describe distance, relative geometry and team relations; the actual workshop model uses 20 m radius edges plus ball links, not this matrix. The main visual combines original edge-feature and adjacency illustrations from the same keynote; both source files are retained and credited.
+
+**Problem:** Choose which interactions a graph can represent.
+
+**Methods:** Edge attributes and an explicit adjacency structure.
+
+**Result:** Connectivity defines the available routes for relational information.
+
+[Method notebook](../notebooks/methods/16_graph_epv.ipynb)
+
+[Joris Bekkers: GraphEPV, PyData London 2025](https://rawcdn.githack.com/UnravelSports/keynotes/main/html/20250607-PyData-London.html)
+[UnravelSports soccer GNN tutorial](https://unravelsports.readthedocs.io/en/latest/tutorials/soccer_gnn.html)
+
+## 40. What does a graph neural network learn?
+
+Original Sahasrabudhe & Bekkers architecture image reused in the keynote, attributed to its authors. General GNN explanation: shared updates, permutation-invariant aggregation and task-specific output. This is not our independent 353-parameter teaching architecture. No standalone temporal-network/encoder slides are included.
+
+**Problem:** Use player relationships to predict a task outcome.
+
+**Methods:** Shared message passing, graph pooling and a task-specific readout.
+
+**Result:** Relational representations become a prediction for the chosen task.
+
+[Method notebook](../notebooks/methods/16_graph_epv.ipynb)
+
+[Joris Bekkers: GraphEPV, PyData London 2025](https://rawcdn.githack.com/UnravelSports/keynotes/main/html/20250607-PyData-London.html)
+[U.S. Soccer: counterattack GNNs with SkillCorner (2023)](https://github.com/USSoccerFederation/ussf_ssac_23_soccer_gnn)
+
+## 41. How does the graph change as players move?
+
+Player-only real radius graph at native 10 Hz. The trained workshop graph additionally includes a ball node and ball links. Recomputing spatial edges over time is not itself a trained temporal network or learned attention.
+
+**Problem:** A useful relationship at one instant may disappear at the next.
+
+**Methods:** Recompute 20 m player-radius edges on real tracking frames.
+
+**Result:** The video reveals changing spatial neighborhoods in actual play.
+
+[Method notebook](../notebooks/methods/16_graph_epv.ipynb)
+
+[Standalone MP4](../assets/videos/dynamic_graph.mp4)
+
+[Joris Bekkers: GraphEPV, PyData London 2025](https://rawcdn.githack.com/UnravelSports/keynotes/main/html/20250607-PyData-London.html)
+[UnravelSports soccer GNN tutorial](https://unravelsports.readthedocs.io/en/latest/tutorials/soccer_gnn.html)
+
+## 42. Graph EPV: what exactly are we predicting?
+
+Published PyData London 2025 target uses World Cup PFF tracking and event-aligned goals, respecting team and period. Our notebook trains an independent frame GNN on SkillCorner with reconstructed, score-audited goal timing. It is not Bekkers’ CrystalGraph architecture/weights or a full action-decomposed EPV reproduction.
+
+**Problem:** Turn a tracking state into a clearly defined future outcome.
+
+**Methods:** Bekkers: one frame graph; goal by the possession team within 10 s.
+
+**Result:** A scoring probability belongs to a stated team and time horizon.
+
+[Method notebook](../notebooks/methods/16_graph_epv.ipynb)
+
+[Joris Bekkers: GraphEPV, PyData London 2025](https://rawcdn.githack.com/UnravelSports/keynotes/main/html/20250607-PyData-London.html)
+
+## 43. Does our graph model generalize to unseen matches?
+
+16 included matches total: 10 train, 3 validation, 3 test. Test has 4,846 sampled states and 16 positives, not 16 independent goals. AP baseline prevalence 0.00330. Log loss improves 0.02363→0.02158; Brier worsens 0.003308→0.003335. Model mean prediction 0.00858 versus test prevalence 0.00330. Goal timing is reconstructed and not video-verified. ROC and PR are actual saved notebook results; no temporal model was trained.
+
+**Problem:** Evaluate predictions beyond the training matches.
+
+**Methods:** Match-level holdout; validation-only model selection and calibration.
+
+**Result:** AUC 0.843; AP 0.020—ranking improves, probability reliability is limited.
+
+[Method notebook](../notebooks/methods/16_graph_epv.ipynb)
+
+[SkillCorner open data and schema](https://github.com/SkillCorner/opendata)
+[Joris Bekkers: GraphEPV, PyData London 2025](https://rawcdn.githack.com/UnravelSports/keynotes/main/html/20250607-PyData-London.html)
+
+## 44. What does EPV look like during a possession?
+
+Actual independent trained model output from notebook 16. Display case is selected by goal context, not high prediction; not a performance sample. Shading indicates retrospective target window, not an input. Model features use the current frame only. User requested goal buildup plus separate performance results; non-goal example stays in the notebook.
+
+**Problem:** Read a predicted scoring probability alongside the actual play.
+
+**Methods:** Frozen workshop GNN evaluated frame by frame on an unseen match.
+
+**Result:** The goal buildup’s predicted value evolves with player and ball positions.
+
+[Method notebook](../notebooks/methods/16_graph_epv.ipynb)
+
+[Standalone MP4](../assets/videos/graph_epv_possession.mp4)
+
+[SkillCorner open data and schema](https://github.com/SkillCorner/opendata)
+[Joris Bekkers: GraphEPV, PyData London 2025](https://rawcdn.githack.com/UnravelSports/keynotes/main/html/20250607-PyData-London.html)
+
+## 45. How do supplied pass values differ across events?
+
+Actual pass_epv_delta_for event fields. Provider output is separate from our ten-second scoring model, classic location xT and Fernández’s action-decomposed EPV framework. Show original field name, target/horizon distinctions and source documentation; no reconstruction or cross-model numerical equivalence is asserted.
+
+**Problem:** Inspect provider estimates without mixing model definitions.
+
+**Methods:** Join supplied event-value fields to their tracking context.
+
+**Result:** Pass EPV changes identify events worth examining in context.
+
+[SkillCorner open data and schema](https://github.com/SkillCorner/opendata)
+[Fine-grained expected possession value (2021)](https://pmc.ncbi.nlm.nih.gov/articles/PMC8570314/)
+
+## 46. SoccerMap: score every possible passing location
+
+Original SoccerMap Figure 3, arXiv 2010.10202v1. Yellow/blue attacking/defending players, arrows are velocity, white circle is ball; original probability color scale retained. A CNN, not a GNN. This result is from the paper’s data/model, not our SkillCorner inference. Other heads can address pass selection and expected pass value.
+
+**Problem:** Predict a surface rather than one chosen pass endpoint.
+
+**Methods:** Fully convolutional network over spatial tracking feature channels.
+
+**Result:** The published model produces a field-wide pass-success surface.
+
+[SoccerMap (2020)](https://arxiv.org/abs/2010.10202)
+
+## 47. DEFCON: credit defensive positioning
+
+Original DEFCON paper Figure 3, page 7. Two intercepted passes; color is defender responsibility and numeric text is assigned defensive credit. Credit follows the framework’s assumptions, not causal proof. Cropped figure only, no values changed. Not model inference on our sample; authors’ underlying club dataset is not public.
+
+**Problem:** Value prevention beyond tackles and interceptions.
+
+**Methods:** Graph-based action values and defender responsibility estimates.
+
+**Result:** Published defensive credits distribute value among involved defenders.
+
+[DEFCON: GNN-based defensive EPV (2026)](https://github.com/hyunsungkim-ds/defcon)
+
+## 48. Counterattacks: will this attack reach the box?
+
+Original Figure 5a from A Graph Neural Network deep-dive into successful counterattacks. Women’s-model example predicts ending in the opponent penalty box with probability 49.5%. This is the published event-frame task; do not mix with additional all-frame goal-label datasets in the repository. Not our local model output.
+
+**Problem:** Predict counterattack success from team interactions.
+
+**Methods:** Graph classifiers trained on synchronized tracking and events.
+
+**Result:** The published example shows a 49.5% model estimate for box entry.
+
+[U.S. Soccer: counterattack GNNs with SkillCorner (2023)](https://github.com/USSoccerFederation/ussf_ssac_23_soccer_gnn)
+
+## 49. TacticAI: improve a corner-kick setup
+
+Original TacticAI Figure 3 from arXiv 2310.10553v1. Corner adjustment and predicted receiver probabilities are authors’ results, not interventions proven to improve match outcomes. Pre/post tactical suggestions are not locally generated or trained on SkillCorner. Retain original figure labels and legend.
+
+**Problem:** Support decisions about receivers and player positioning.
+
+**Methods:** Geometric graph learning with predictive and generative components.
+
+**Result:** The published example compares receiver probabilities before and after adjustment.
+
+[TacticAI (2024)](https://www.nature.com/articles/s41467-024-45965-x)
+
+## 50. GenTac: forecast multiple plausible continuations
+
+Original GenTac Figure 5 panel a, arXiv 2604.11786v1. Four-second history, 20 generated rollouts and resulting event distribution are from the paper. Cropped original panel, no probabilities changed. Not a workshop-trained forecast, not a standalone temporal-network architecture slide and not causal intervention evidence.
+
+**Problem:** Represent uncertainty about how play may develop.
+
+**Methods:** Diffusion-based multi-player trajectory generation and event prediction.
+
+**Result:** Published forecast samples imply a distribution of possible tactical outcomes.
+
+[GenTac: trajectory forecasting (2026 preprint)](https://arxiv.org/abs/2604.11786)
+
+## 51. What would make these results trustworthy?
+
+Event detection needs reviewed timing-tolerant matching. Formation/role labels require tactical ground truth. Physical comparisons require exposure and preprocessing definitions. Probability models need calibration and rare-event baselines. Stress-test extrapolated tracking, missing data, attack direction and domain shift. Current slide diagram is conceptual, not an extra experiment.
+
+**Problem:** Distinguish an explanatory example from a reliable model.
+
+**Methods:** Independent match splits; task-specific error and probability checks.
+
+**Result:** A useful result states its target, evidence, uncertainty and failure modes.
+
+[SkillCorner open data and schema](https://github.com/SkillCorner/opendata)
+[Fine-grained expected possession value (2021)](https://pmc.ncbi.nlm.nih.gov/articles/PMC8570314/)

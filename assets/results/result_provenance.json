@@ -1,0 +1,13 @@
+{
+  "physical_player_id": "560983",
+  "physical_name": "A. Burke-Gilroy",
+  "xg_example_match": 8656,
+  "xg_example_event": "43dd92be-78ea-4a85-a6ab-55a898f5527f",
+  "xg_example_probabilities": {
+    "Location only": 0.29094836693663717,
+    "Location + GK/defenders": 0.4005093335235225
+  },
+  "formation_window": 28,
+  "formation_label": "4-2-3-1",
+  "source": "Existing standalone notebooks and pinned cached data; slide authoring only"
+}

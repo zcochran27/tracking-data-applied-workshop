@@ -1,0 +1,43 @@
+{
+  "model": "resources/models/open_play_xT.npy",
+  "coordinates": "Attack-normalized SkillCorner event endpoints, pitch x scaled 105 to 106 m for lookup",
+  "actions": [
+    {
+      "event_id": 8119,
+      "gain": 0.03756303077315486,
+      "start": [
+        43.13,
+        -23.78
+      ],
+      "end": [
+        38.98,
+        -8.0
+      ]
+    },
+    {
+      "event_id": 8187,
+      "gain": 0.02896617637667579,
+      "start": [
+        41.44,
+        27.31
+      ],
+      "end": [
+        41.05,
+        12.76
+      ]
+    },
+    {
+      "event_id": 8159,
+      "gain": -0.01240330170723677,
+      "start": [
+        30.8,
+        12.19
+      ],
+      "end": [
+        19.47,
+        -2.78
+      ]
+    }
+  ],
+  "selection": "Two largest positive and one largest negative gain in bounded sample; illustrative, not a passing-skill ranking"
+}

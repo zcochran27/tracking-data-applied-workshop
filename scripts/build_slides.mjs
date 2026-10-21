@@ -22,18 +22,45 @@ function node(s,label,x,y,w=250){rect(s,x,y,w,76,'#e0eee8');text(s,label,x+15,y+
 for(let i=0;i<content.length;i++){
  const c=content[i],s=p.slides.add();s.background.fill='#fbfcf8';
  rect(s,0,0,1280,12,accent);
- text(s,c.title,60,42,1160,85,i===0?50:40,ink,true);
- c.body.forEach((b,j)=>{
-   text(s,String(j+1).padStart(2,'0'),55,151+j*140,40,28,16,accent,true);
-   text(s,b,55,185+j*140,340,109,25);
- });
- if(!c.image)throw new Error(`Missing method visual: ${c.title}`);
- const bytes=await fs.readFile(path.join(root,'assets',c.image));
- s.images.add({blob:bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),contentType:'image/png',alt:c.title,fit:'contain',position:{left:430,top:c.video?145:140,width:800,height:c.video?420:455}});
- if(c.cue){rect(s,60,600,1160,43,'#e0eee8');text(s,c.cue,78,608,1120,34,22,accent,true);}
- if(c.video)text(s,'▶ Click the video to play · embedded MP4',450,574,760,24,15,accent,true);
- c.sources.forEach((k,j)=>text(s,sources[k][0],60+j*(1080/c.sources.length),657,1060/c.sources.length,40,12,'#51645c'));
- text(s,`${i+1} / ${content.length}`,1165,657,90,30,14,'#51645c');
+ if(c.layout==='section'){
+   text(s,c.section||'ANALYTICAL AVENUE',50,44,1150,30,14,accent,true);
+   text(s,c.title,50,112,1160,85,52,ink,true);
+   text(s,c.problem,50,218,1130,92,30,ink);
+   text(s,'Questions to explore',50,352,400,36,20,accent,true);
+   c.ideas.forEach((idea,j)=>text(s,'• '+idea,50+(j%2)*590,409+Math.floor(j/2)*65,550,60,24,ink));
+   text(s,c.result||'',50,612,1160,45,21,accent,true);
+ }else if(c.layout==='overview'){
+   text(s,c.title,50,55,1150,85,46,ink,true);
+   text(s,c.problem,50,153,1160,62,25);
+   c.avenues.forEach((a,j)=>{
+     const y=240+j*74;
+     text(s,a.name,50,y,460,45,25,accent,true);
+     text(s,a.question,530,y,680,54,23,ink);
+   });
+ }else if(c.layout==='cover'){
+   text(s,'SOCCER ANALYTICS · SKILLCORNER OPEN DATA',50,52,1180,30,15,accent,true);
+   text(s,c.title,50,112,1180,100,62,ink,true);
+   text(s,c.problem,50,240,520,150,34);
+   const bytes=await fs.readFile(path.join(root,'assets',c.image));
+   s.images.add({blob:bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),contentType:'image/png',alt:c.title,fit:'contain',position:{left:595,top:230,width:640,height:360}});
+   text(s,c.result,50,538,470,85,25,accent,true);
+ }else{
+   text(s,c.section||'TRACKING DATA APPLIED',48,29,1160,26,13,accent,true);
+   text(s,c.title,48,62,1184,75,38,ink,true);
+   text(s,'Problem',48,158,232,28,15,accent,true);
+   text(s,c.problem,48,190,232,136,22);
+   text(s,'Methods',48,348,232,28,15,accent,true);
+   text(s,c.methods,48,380,232,150,20);
+   if(c.status)text(s,c.status,48,547,232,65,13,'#65756d');
+   if(!c.image)throw new Error(`Missing result visual: ${c.title}`);
+   const bytes=await fs.readFile(path.join(root,'assets',c.image));
+   s.images.add({blob:bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),contentType:'image/png',alt:c.title,fit:'contain',position:{left:310,top:150,width:930,height:c.video?432:455}});
+   if(c.video)text(s,'▶ Click video to play',330,587,870,24,14,accent,true);
+   text(s,c.result||'',48,623,1184,40,22,accent,true);
+ }
+ if(c.cue)text(s,c.cue,730,675,460,27,13,accent,true);
+ c.sources.forEach((k,j)=>text(s,sources[k][0],48+j*(650/Math.max(1,c.sources.length)),675,630/Math.max(1,c.sources.length),30,10,'#51645c'));
+ text(s,`${i+1}`,1212,675,40,27,13,'#51645c');
  s.speakerNotes.text=c.notes+'\n\n'+(c.cue||'')+(c.notebook?'\nhttps://github.com/zcochran27/tracking-data-applied-workshop/blob/main/'+c.notebook:'')+(c.video?'\nEmbedded video (click to play): '+c.video+'\n'+(c.videoDescription||''):'')+'\n\nSources:\n'+c.sources.map(k=>sources[k].join('\n')).join('\n\n');
 }
 await fs.mkdir(path.join(root,'.build'),{recursive:true});

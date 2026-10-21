@@ -293,5 +293,18 @@
     "description": "GraphEPV target and general graph-classification pipeline attributed to PyData London 2025",
     "match_id": 1925299,
     "kind": "Independent teaching implementation / real tracking"
+  },
+  "result_redesign": {
+    "slides": 51,
+    "approach": "Problem / methods / dominant result; optional process inset",
+    "calculation_figures": "assets/results/result_provenance.json",
+    "space_model": "assets/results/space_result_provenance.json",
+    "xt_actions": "assets/results/xt_result_provenance.json",
+    "published_figures": [
+      "assets/references/bekkers/attribution.json",
+      "assets/references/research/attribution.json",
+      "assets/references/README.md"
+    ],
+    "video_manifest": "assets/videos/manifest.json"
   }
 }

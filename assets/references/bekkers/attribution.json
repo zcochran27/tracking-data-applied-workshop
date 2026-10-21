@@ -1,0 +1,38 @@
+[
+  {
+    "file": "assets/references/bekkers/graph-global-2.png",
+    "source": "https://raw.githubusercontent.com/UnravelSports/keynotes/main/img/pydata-ldn/graph-global-2.png",
+    "attribution": "Joris Bekkers, PyData London 2025; original image from linked keynote. Architecture credits Sahasrabudhe & Bekkers (2023).",
+    "presentation": "https://rawcdn.githack.com/UnravelSports/keynotes/main/html/20250607-PyData-London.html"
+  },
+  {
+    "file": "assets/references/bekkers/node-features-2.png",
+    "source": "https://raw.githubusercontent.com/UnravelSports/keynotes/main/img/pydata-ldn/node-features-2.png",
+    "attribution": "Joris Bekkers, PyData London 2025; original image from linked keynote. Architecture credits Sahasrabudhe & Bekkers (2023).",
+    "presentation": "https://rawcdn.githack.com/UnravelSports/keynotes/main/html/20250607-PyData-London.html"
+  },
+  {
+    "file": "assets/references/bekkers/node-features-2-global.png",
+    "source": "https://raw.githubusercontent.com/UnravelSports/keynotes/main/img/pydata-ldn/node-features-2-global.png",
+    "attribution": "Joris Bekkers, PyData London 2025; original image from linked keynote. Architecture credits Sahasrabudhe & Bekkers (2023).",
+    "presentation": "https://rawcdn.githack.com/UnravelSports/keynotes/main/html/20250607-PyData-London.html"
+  },
+  {
+    "file": "assets/references/bekkers/edge-features.png",
+    "source": "https://raw.githubusercontent.com/UnravelSports/keynotes/main/img/pydata-ldn/edge-features.png",
+    "attribution": "Joris Bekkers, PyData London 2025; original image from linked keynote. Architecture credits Sahasrabudhe & Bekkers (2023).",
+    "presentation": "https://rawcdn.githack.com/UnravelSports/keynotes/main/html/20250607-PyData-London.html"
+  },
+  {
+    "file": "assets/references/bekkers/adjmatrix-sort.png",
+    "source": "https://raw.githubusercontent.com/UnravelSports/keynotes/main/img/pydata-ldn/adjmatrix-sort.png",
+    "attribution": "Joris Bekkers, PyData London 2025; original image from linked keynote. Architecture credits Sahasrabudhe & Bekkers (2023).",
+    "presentation": "https://rawcdn.githack.com/UnravelSports/keynotes/main/html/20250607-PyData-London.html"
+  },
+  {
+    "file": "assets/references/bekkers/architecture.png",
+    "source": "https://raw.githubusercontent.com/UnravelSports/keynotes/main/img/rice/architecture.png",
+    "attribution": "Joris Bekkers, PyData London 2025; original image from linked keynote. Architecture credits Sahasrabudhe & Bekkers (2023).",
+    "presentation": "https://rawcdn.githack.com/UnravelSports/keynotes/main/html/20250607-PyData-London.html"
+  }
+]
