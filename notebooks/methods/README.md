@@ -31,3 +31,5 @@ Relevant methods include embedded MP4 playback beside the corresponding calculat
 The redesigned slide visuals are also available in the relevant notebooks: possession/pass physics in event detection, own raw/smoothed phase prediction playback in match segmentation, and a clearly separated published-model AS/DAS comparison in the space notebook. Newly added media assets are pinned to commit `62abf20cbf699df0118c289b91246a166f7bfd85`; method calculations remain inline.
 
 Phase segmentation now uses explicit priority rules and offline suppression of runs shorter than 1 s; its video and timeline contain our predictions only.
+
+The role notebook includes slide 11’s real-player spatial signatures: three teammate-only polar count curves and a 90° sector geometry panel, calculated and drawn inline before the synthetic classifier check.

@@ -24,8 +24,9 @@
   },
   {
     "notebook": "04_role_classification.ipynb",
-    "code_cells": 8,
-    "errors": 0
+    "code_cells": 9,
+    "errors": 0,
+    "validation": "Executed all cells top to bottom. Three real-player teammate signatures at 24 headings; translation-invariance and count-range assertions passed. Classifier optimizer remains a synthetic check."
   },
   {
     "notebook": "05_match_segmentation.ipynb",

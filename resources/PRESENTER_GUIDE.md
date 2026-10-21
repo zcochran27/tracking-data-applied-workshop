@@ -707,3 +707,5 @@ Slides 6–8 and notebook 02 now derive horizontal ball velocity and speed from 
 Notebook 03 reproduces the selected slide-10 normalization, one-to-one assignment, candidate RMS comparison and schematic role board from its own loaded tracking data. All calculations and drawing code remain inline.
 
 The phase notebook no longer downloads, joins or plots supplied phase labels. Its frame-level `outputs/methods/phase_predictions.csv` supplies the current video.
+
+The role notebook now reproduces the slide-11 spatial-signature comparison from its own tracking snapshot: RB, RDM and LW teammate counts at 24 headings, plus a sector geometry panel. Calculation and plotting code are inline. Metadata role labels identify the examples; the curves are not classifier predictions.
