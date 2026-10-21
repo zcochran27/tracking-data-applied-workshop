@@ -87,17 +87,6 @@
     "slide_numbers": []
   },
   {
-    "file": "assets/videos/phase_comparison.mp4",
-    "poster": "methods/video_phase_comparison.png",
-    "frames": 71,
-    "fps": 5,
-    "source": "SkillCorner match 1925299",
-    "description": "Rule estimates and provider labels use different taxonomies \u00b7 disagreement is not a measured classification error",
-    "slide_numbers": [
-      14
-    ]
-  },
-  {
     "file": "assets/videos/run_comparison.mp4",
     "poster": "methods/video_run_comparison.png",
     "frames": 58,
@@ -148,6 +137,17 @@
     "description": "Sustained low-speed control defines endpoints \u00b7 continuous ball travel links them \u00b7 heuristic candidate",
     "slide_numbers": [
       8
+    ]
+  },
+  {
+    "file": "assets/videos/phase_predictions.mp4",
+    "poster": "methods/video_phase_predictions.png",
+    "frames": 100,
+    "fps": 5,
+    "source": "SkillCorner match 1925299",
+    "description": "Offline: suppress runs <1 s within each possession \u00b7 preserve unknowns and gaps \u00b7 teaching rules",
+    "slide_numbers": [
+      14
     ]
   }
 ]

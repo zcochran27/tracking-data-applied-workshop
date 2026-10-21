@@ -13,7 +13,7 @@ The current deck embeds nine H.264 MP4 movies as native click-to-play objects. O
 | [graph_epv_possession.mp4](graph_epv_possession.mp4) | 44 | Actual frozen-model ten-second scoring predictions, synchronized with real tracking; independent workshop GNN, not Bekkers weights |
 | [possession_result.mp4](possession_result.mp4) | 7 | Offline heuristic result · proximity + ball-height gate + ≥0.3 s stable control · half-speed playback |
 | [pass_physics.mp4](pass_physics.mp4) | 8 | Actual tracking diagnostics · heuristic candidate, not verified ground truth · speed from consecutive 0.1 s intervals |
-| [phase_comparison.mp4](phase_comparison.mp4) | 14 | Rule estimates and provider labels use different taxonomies · disagreement is not a measured classification error |
+| [phase_predictions.mp4](phase_predictions.mp4) | 14 | Explicit phase rules with raw and smoothed predictions; offline 1 s minimum duration |
 | [run_comparison.mp4](run_comparison.mp4) | 36 | Selected low/high examples, not controlled counterfactuals · dashed lane is hypothetical · shorter run freezes at its end |
 | [dangerous_space_ball.mp4](dangerous_space_ball.mp4) | 35 | Actual published AS/DAS surfaces and value traces; not notebook proxies. |
 

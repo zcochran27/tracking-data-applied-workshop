@@ -240,49 +240,40 @@ def graph(fig,r,i):
     ax.set_title(f"Dynamic spatial graph · 20 m radius · frame {r['frame']}",fontsize=20)
 movie('dynamic_graph',GENERAL,graph,subtitle='Actual moving players · edges are recomputed each frame · topology illustration, not learned attention')
 
-# Compare the existing notebook's rule estimates with supplied provider phases.
-phase_rows=[];last_team=None;seg_start=None;last_x=None;past=[];pending=None;confirmed='unknown';pending_n=0;last_frame=None
-for r in VALID:
-    group=r['possession'].get('group');team=HOME if group=='home team' else (META['away_team']['id'] if group=='away team' else None)
-    new=team!=last_team or last_frame is None or r['frame']!=last_frame+1
-    sec=(r['frame']-10)/10;attack_x=r['ball_data']['x']*(-1 if team==HOME else 1)
-    if new:seg_start=sec;past=[];pending=None;pending_n=0;confirmed='unknown'
-    if not new and last_x is not None:past.append((attack_x-last_x)*10)
-    progress=np.mean(past[-10:]) if len(past)>=5 else np.nan
-    if team is None:label='unknown'
-    elif sec-seg_start<8 and progress>3:label='transition candidate'
-    elif attack_x<-17.5:label='deep circulation'
-    elif attack_x<17.5:label='middle progression'
-    else:label='advanced possession'
-    pending_n=pending_n+1 if label==pending else 1;pending=label
-    if pending_n>=3:confirmed=label
-    phase_rows.append(dict(frame=r['frame'],seconds=sec,team=team,phase=confirmed,provider='unlabeled'))
-    last_team=team;last_x=attack_x;last_frame=r['frame']
-phase_frame=pd.DataFrame(phase_rows)
-for row in pd.read_csv(ROOT/'data/1925299/1925299_phases_of_play.csv').itertuples():
-    mask=phase_frame.frame.between(row.frame_start,row.frame_end)&phase_frame.team.eq(row.team_in_possession_id)
-    if row.period==1:phase_frame.loc[mask,'provider']=row.team_in_possession_phase_type
-phase_by_frame=phase_frame.set_index('frame');candidates=phase_frame[phase_frame.phase.eq('transition candidate')&phase_frame.frame.gt(100)].frame
+# Render the notebook's own predictions; no external phase labels are loaded.
+phase_frame=pd.read_csv(ROOT/'outputs/methods/phase_predictions.csv')
+phase_frame=phase_frame[phase_frame.period_id.eq(1)].copy()
+phase_by_frame=phase_frame.set_index('frame_id')
+phase_colors={'unknown':'#d6d6d6','deep circulation':'#4575b4','middle progression':'#91bfdb','advanced possession':'#fc8d59','transition candidate':'#147d68'}
+# Choose a continuous real clip containing a removed short excursion.
+changed=phase_frame[phase_frame.raw_phase.ne(phase_frame.phase)&phase_frame.phase.ne('unknown')&phase_frame.raw_phase.ne('unknown')]
 phase_clip=None
-for f in candidates:
-    lo=max(10,int(f)-60);hi=int(f)+80
+for f in changed.frame_id:
+    lo=max(10,int(f)-60);hi=lo+199
     if all(k in BYFRAME for k in range(lo,hi+1)):
         phase_clip=[BYFRAME[k] for k in range(lo,hi+1,2)];break
-assert phase_clip
-phase_lo=phase_clip[0]['frame'];phase_hi=phase_clip[-1]['frame'];phase_sample=phase_frame[phase_frame.frame.between(phase_lo,phase_hi)]
-phase_names=list(dict.fromkeys(list(phase_sample.phase)+list(phase_sample.provider)));phase_colors={label:plt.get_cmap('tab20')(i) for i,label in enumerate(phase_names)}
-def phase_comparison(fig,r,i):
-    gs=fig.add_gridspec(3,1,height_ratios=[3.8,1,1]);ax=fig.add_subplot(gs[0]);pitch(ax);draw_players(ax,r,True);current=phase_by_frame.loc[r['frame']]
-    ax.set_title(f"Rule: {current.phase}  |  Supplied: {current.provider}",fontsize=16)
-    for j,(col,title) in enumerate([('phase','Rule-based estimate'),('provider','Supplied SkillCorner phase')],1):
-        trace=fig.add_subplot(gs[j]);
-        for row in phase_sample.itertuples():trace.broken_barh([((row.frame-phase_lo)/10,.1)],(0,1),facecolors=phase_colors[getattr(row,col)])
-        for label in dict.fromkeys(phase_sample[col]):
-            indices=phase_sample[phase_sample[col].eq(label)];trace.text(((indices.frame.iloc[0]+indices.frame.iloc[-1])/2-phase_lo)/10,.5,label.replace(' ','\n'),ha='center',va='center',fontsize=9)
-        trace.axvline((r['frame']-phase_lo)/10,c='black',lw=2);trace.set(xlim=(0,(phase_hi-phase_lo)/10+.1),yticks=[],title=title)
-        if j==2:trace.set_xlabel('Clip time (s)')
-    fig.suptitle('Where does one phase end and another begin?',fontsize=21)
-movie('phase_comparison',phase_clip,phase_comparison,fps=5,subtitle='Rule estimates and provider labels use different taxonomies · disagreement is not a measured classification error')
+if phase_clip is None:phase_clip=GENERAL[::2]
+phase_lo=phase_clip[0]['frame'];phase_hi=phase_clip[-1]['frame']
+phase_sample=phase_frame[phase_frame.frame_id.between(phase_lo,phase_hi)]
+
+def phase_predictions(fig,r,i):
+    gs=fig.add_gridspec(3,2,width_ratios=[1.1,1],height_ratios=[4.5,.65,.85],hspace=.62)
+    ax=fig.add_subplot(gs[0,0]);pitch(ax);draw_players(ax,r,True);current=phase_by_frame.loc[r['frame']]
+    ax.set_title('Predicted: '+current.phase,fontsize=17)
+    card=fig.add_subplot(gs[0,1]);card.axis('off');card.set_title('Phase rules, in priority order',fontsize=17,loc='left')
+    rules=[('Unknown','Missing ball position or possession team'),('Transition candidate','Age <8 s AND past 1 s forward speed >3 m/s'),('Deep circulation','Otherwise: attack-normalized ball x <−17.5 m'),('Middle progression','Otherwise: −17.5 m ≤ x <17.5 m'),('Advanced possession','Otherwise: x ≥17.5 m')]
+    for j,(name,rule) in enumerate(rules):
+        y=.93-j*.18;card.text(0,y,name,color=phase_colors[name.lower()] if name.lower()!='unknown' else '#65756d',weight='bold',fontsize=13,va='top');card.text(0,y-.075,rule,fontsize=11,va='top')
+    for j,(col,title) in enumerate([('raw_phase','Raw rule predictions'),('phase','Smoothed predictions: minimum 1 s')],1):
+        trace=fig.add_subplot(gs[j,:])
+        breaks=phase_sample[col].ne(phase_sample[col].shift())|phase_sample.frame_id.diff().ne(1)
+        runs=phase_sample.groupby(breaks.cumsum()).agg(start=('frame_id','first'),end=('frame_id','last'),label=(col,'first'))
+        for row in runs.itertuples():trace.broken_barh([((row.start-phase_lo)/10,(row.end-row.start+1)/10)],(0,1),facecolors=phase_colors[row.label],edgecolors='none')
+        trace.axvline((r['frame']-phase_lo)/10,c='black',lw=2);trace.set(xlim=(0,(phase_hi-phase_lo)/10+.1),ylim=(0,1),yticks=[],title=title)
+        if j==1:trace.tick_params(labelbottom=False)
+        else:trace.set_xlabel('Clip time (s)')
+    fig.suptitle('Phase prediction over time',fontsize=22)
+movie('phase_predictions',phase_clip,phase_predictions,fps=5,subtitle='Offline: suppress runs <1 s within each possession · preserve unknowns and gaps · teaching rules')
 
 # Two selected provider-valued runs, independently synchronized to their own run start.
 events=pd.read_csv(ROOT/'data/1925299/1925299_dynamic_events.csv')
