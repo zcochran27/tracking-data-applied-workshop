@@ -20,7 +20,7 @@ The figure contains actual dataframe values; velocity columns are derived after 
 
 ## 4. Tracking quality and visibility
 
-Red rings mark extrapolated players according to raw is_detected. Coordinates can exist without a direct camera observation. All subsequent models inherit this uncertainty.
+Actual SkillCorner frame 163. The green polygon connects top-left, bottom-left, bottom-right and top-right image_corners_projection in native metric coordinates; its fill is clipped to the pitch, while the boundary retains the actual projected corners. Green shading shows the camera footprint, gray pitch lies outside it. Player marker style comes directly from is_detected: filled detections, hollow extrapolations; orange Brisbane, purple Perth. This illustrative frame has 11 players inside/detected and 11 outside/extrapolated. Polygon membership is not substituted for detection status: occlusion or missed detections can occur inside the camera footprint. Coordinates outside camera coverage may still be supplied by extrapolation.
 
 [Open method notebook](../notebooks/methods/01_data_exploration.ipynb)
 

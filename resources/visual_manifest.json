@@ -10,9 +10,14 @@
     "kind": "derived from tracking / supplied events unless labeled schematic"
   },
   "quality": {
-    "description": "Raw is_detected flags for selected frame",
+    "description": "Actual projected broadcast-camera polygon, clipped pitch shading and raw per-player is_detected flags",
     "match_id": 1925299,
-    "kind": "derived from tracking / supplied events unless labeled schematic"
+    "kind": "derived from tracking / supplied events unless labeled schematic",
+    "frame_id": 163,
+    "inside_players": 11,
+    "outside_players": 11,
+    "detected_players": 11,
+    "extrapolated_players": 11
   },
   "animation": {
     "description": "Three real snapshots from the embedded animation",
@@ -55,7 +60,7 @@
     "kind": "derived from tracking / supplied events unless labeled schematic"
   },
   "zones": {
-    "description": "Real sample distances split using documented men\u2019s speed bands",
+    "description": "Real sample distances split using documented men’s speed bands",
     "match_id": 1925299,
     "kind": "derived from tracking / supplied events unless labeled schematic"
   },
