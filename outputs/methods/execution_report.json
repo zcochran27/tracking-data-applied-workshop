@@ -78,7 +78,7 @@
     "code_cells": 12,
     "errors": 0,
     "embedded_mp4_cells": 1,
-    "video_update": "Executed new/replaced playback cells only; retained prior method outputs. Media pinned to 62abf20cbf699df0118c289b91246a166f7bfd85"
+    "video_update": "Executed replacement playback cell with visible ball marker. Method outputs retained. Media pinned to bf39cdb76d2072a77b1e8e1b1f2289c0d9100e81."
   },
   {
     "notebook": "16_graph_epv.ipynb",
