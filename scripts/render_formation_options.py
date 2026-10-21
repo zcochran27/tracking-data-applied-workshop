@@ -54,13 +54,31 @@ for ax,fit in zip(axs.flat,fits):
     ax.set_xlabel('');ax.set_ylabel('');ax.tick_params(labelsize=9)
 axs[0,0].legend(fontsize=10,loc='lower left');save(fig,'B_template_comparison','Same centered medians and coordinate scales in every panel · lower assignment error ranks the fixed templates')
 
-# C: show only enough normalization process to support the result.
-fig=plt.figure(figsize=(14,7));gs=fig.add_gridspec(2,2,width_ratios=[1.25,1.35]);rawax=fig.add_subplot(gs[0,0]);centerax=fig.add_subplot(gs[1,0]);resultax=fig.add_subplot(gs[:,1]);palette=plt.get_cmap('tab10')
+# C: link frame centering to the assignment that chooses a formation.
+fig=plt.figure(figsize=(18,9));palette=plt.get_cmap('tab10')
+rawax=fig.add_axes([.035,.57,.255,.32]);centerax=fig.add_axes([.035,.15,.255,.32]);matchax=fig.add_axes([.365,.34,.28,.53]);scoreax=fig.add_axes([.365,.10,.28,.18]);resultax=fig.add_axes([.725,.13,.25,.76])
 for index,(pid,g) in enumerate(sample.groupby('player_id')):
     for ax,cols in [(rawax,['x','y']),(centerax,['cx','cy'])]:
-        q=-g[cols].to_numpy();mean=q.mean(0);cov=np.cov(q.T);eig,vec=np.linalg.eigh(cov);angle=np.degrees(np.arctan2(vec[1,-1],vec[0,-1]));ax.add_patch(Ellipse(mean,4*np.sqrt(max(eig[-1],0)),4*np.sqrt(max(eig[0],0)),angle=angle,fill=False,edgecolor=palette(index),lw=1.5));ax.scatter(*mean,s=20,c=[palette(index)])
-rawax.set(xlim=(-55,55),ylim=(-34,34),aspect='equal',title='Raw position distributions');centerax.set(xlim=(-35,35),ylim=(-34,34),aspect='equal',title='Team-centroid normalized');board(resultax);resultax.set_title('Assigned formation: '+label,fontsize=21,color=GREEN)
-save(fig,'C_normalization_and_result','Identical qualifying frames in both distribution panels · ellipses show dispersion, not confidence · board is schematic')
+        q=-g[cols].to_numpy();mean=q.mean(0);cov=np.cov(q.T);eig,vec=np.linalg.eigh(cov);angle=np.degrees(np.arctan2(vec[1,-1],vec[0,-1]));ax.add_patch(Ellipse(mean,4*np.sqrt(max(eig[-1],0)),4*np.sqrt(max(eig[0],0)),angle=angle,fill=False,edgecolor=palette(index),lw=1.5));ax.scatter(*mean,s=22,c=[palette(index)])
+rawax.set(xlim=(-55,55),ylim=(-34,34),aspect='equal',title='Raw positions')
+centerax.set(xlim=(-35,35),ylim=(-34,34),aspect='equal',title='Subtract team centroid each frame')
+pitch(matchax)
+for j,(pid,q,slot) in enumerate(zip(ids,points,cc)):
+    target=t[slot];matchax.plot([q[0],target[0]],[q[1],target[1]],c=GREEN,alpha=.5,lw=1.5)
+    matchax.scatter(*q,s=60,c=[palette(j)],zorder=4)
+matchax.scatter(*t.T,c=GREEN,marker='x',s=85,lw=2,zorder=5)
+matchax.set_title('Match centered medians to template',fontsize=15,color=INK)
+matchax.set_xlabel('Centered forward (m)',fontsize=11);matchax.set_ylabel('Centered lateral (m)',fontsize=11);matchax.tick_params(labelsize=10)
+from matplotlib.lines import Line2D
+matchax.legend(handles=[Line2D([],[],marker='o',ls='',color=ORANGE,label='Player median'),Line2D([],[],marker='x',ls='',color=GREEN,label='Template slot')],fontsize=10,loc='lower left')
+scoreax.axis('off');scoreax.text(0,1,'One player per slot, minimum total squared distance',fontsize=12,color=INK,va='top');scoreax.text(0,.72,'Compare optimized RMS error for each template',fontsize=12,color=INK,va='top')
+for k,f in enumerate(fits):
+    scoreax.text((k%2)*.53,.40-(k//2)*.27,f"{f['label']}: {f['rms']:.2f} m",fontsize=13,color=GREEN if k==0 else '#607066',weight='bold' if k==0 else 'normal')
+board(resultax);resultax.set_title('Assigned formation: '+label,fontsize=19,color=GREEN)
+for xy,xytext in [((.345,.49),(.30,.49)),((.71,.57),(.66,.57))]:
+    rawax.annotate('',xy=xy,xytext=xytext,xycoords=fig.transFigure,textcoords=fig.transFigure,arrowprops={'arrowstyle':'->','color':GREEN,'lw':2},annotation_clip=False)
+fig.text(.5,.025,'Same qualifying frames throughout. Ellipses show dispersion. Assignment uses coordinate-wise medians. Role board uses schematic slots.',ha='center',fontsize=11,color='#51645c')
+fig.savefig(OUT/'C_normalization_and_result.png',dpi=150);plt.close(fig)
 
 # D: keep the observed shape, but make model misfit visible instead of hiding it.
 fig,(ax,bar)=plt.subplots(1,2,figsize=(14,7),gridspec_kw={'width_ratios':[1.6,1]});pitch(ax);res=best['residuals'];im=ax.scatter(*points.T,c=res,cmap='YlOrRd',s=150,vmin=0,vmax=max(res),edgecolors='#51645c',zorder=4);ax.scatter(*t.T,marker='x',c=GREEN,s=90,zorder=3)
@@ -75,5 +93,5 @@ descriptions=[('A','Role board','A clean formation board emphasizes the assigned
 for letter,name,takeaway,file in descriptions:
     slide=dict(current);slide['section']=f'SLIDE 10 OPTION {letter} · {name.upper()}';slide['image']='formation-options/'+file+'.png';slide['result']=takeaway;slide['status']=f'Option {letter} · Same players and window';slide['notes']+=f' Alternative {letter}: {name}. Same team, qualifying window, four candidate templates and assignment algorithm as the main deck; only the visualization differs. Role-board coordinates are schematic where shown; residual plots use observed centered medians.';options.append(slide)
 (ROOT/'slides/formation-options.json').write_text(json.dumps(options,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-(OUT/'provenance.json').write_text(json.dumps({'match':1925299,'window_index':int(window),'window_seconds':[window*30,(window+1)*30],'player_ids':ids,'best_template':label,'scores':[{k:v for k,v in f.items() if k in ['label','rms']} for f in fits],'main_slide_10':'Unchanged until user selects an option'},indent=2)+'\n')
-print('Rendered four alternatives; main slide 10 remains unchanged.')
+(OUT/'provenance.json').write_text(json.dumps({'match':1925299,'window_index':int(window),'window_seconds':[window*30,(window+1)*30],'player_ids':ids,'best_template':label,'scores':[{k:v for k,v in f.items() if k in ['label','rms']} for f in fits],'main_slide_10':'Option C selected with centered-median matching and template RMS comparison'},indent=2)+'\n')
+print('Rendered formation visuals; slide content is managed in slides/content.json.')

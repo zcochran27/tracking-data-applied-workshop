@@ -176,16 +176,16 @@
     "section": "Formation and position identification",
     "title": "Which formation best fits this shape?",
     "problem": "Infer organization from positions rather than the team sheet.",
-    "methods": "Centroid normalization and minimum-cost template assignment.",
-    "result": "A best-fitting formation, assigned slots and competing scores.",
-    "image": "results/formation_result.png",
+    "methods": "Center each frame, match players to template slots, then compare RMS error.",
+    "result": "Minimum assignment error selects 4-2-3-1 from the four candidate templates.",
+    "image": "formation-options/C_normalization_and_result.png",
     "sources": [
       "formation",
       "efpi",
       "pleuler"
     ],
-    "status": "Fixed-template teaching baseline",
-    "notes": "Best residual example from defensive 30-second windows; ten outfield players, at least 50 qualifying frames each. Four fixed templates and Hungarian squared-distance assignment. Player labels are assigned template slots, not reviewed role truth. Raw versus centered covariance ellipses appear as a small inset. RMS error is not a formation probability; not elastic EFPI inference.",
+    "status": "Fixed-template estimate; roles are inferred.",
+    "notes": "Best residual example from defensive 30-second windows; ten outfield players, at least 50 qualifying frames each. Four fixed templates and Hungarian squared-distance assignment. Player labels are assigned template slots, not reviewed role truth. Raw versus centered covariance ellipses appear as a small inset. RMS error is not a formation probability; not elastic EFPI inference. Selected option C with explicit template matching. Subtract the ten outfield players’ team centroid separately in every qualifying frame, then orient attack consistently. Take coordinate-wise medians over the window. For each fixed template, the Hungarian algorithm finds a one-to-one assignment minimizing total squared Euclidean distance between the ten medians and ten template slots. Compare root mean squared assignment distance across all four candidates. Here 4-2-3-1 has 9.13 m RMS versus 10.37 m for 4-3-3. This is a geometric best fit among supplied candidates, not a validated formation label. The ellipses summarize dispersion; the dots used for matching are medians. The final board uses schematic role slots.",
     "cue": "Notebook: 03_formation_analysis.ipynb",
     "notebook": "notebooks/methods/03_formation_analysis.ipynb"
   },

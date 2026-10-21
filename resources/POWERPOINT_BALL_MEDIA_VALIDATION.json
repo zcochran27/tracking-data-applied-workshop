@@ -1,7 +1,7 @@
 {
   "status": "pass",
   "powerpoint_version": "16.0",
-  "deck_sha256": "e33b2fcac1985b7d942d8b75db879725f71603a7d4629dab0b82d052a7c91fe1",
+  "deck_sha256": "b5ddd5e7a18dca9f81ec367013abe55d79f369cc9350de87603f2d8e393e73c3",
   "movie_count": 9,
   "movies": [
     {
@@ -86,6 +86,5 @@
       "click_action": 12
     }
   ],
-  "scope": "Native PowerPoint recognizes embedded videos with nonzero duration. This check alone does not run slideshow playback.",
-  "deck": "slides/tracking-data-applied-updated.pptx"
+  "scope": "Native PowerPoint recognizes embedded videos with nonzero duration. This check alone does not run slideshow playback."
 }
