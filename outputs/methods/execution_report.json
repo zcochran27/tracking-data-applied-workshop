@@ -3,97 +3,154 @@
     "notebook": "01_data_exploration.ipynb",
     "code_cells": 10,
     "errors": 0,
-    "embedded_mp4_cells": 1,
-    "video_update": "Executed only added playback cells; retained prior method/model outputs."
+    "downloaded_video_cells": 0,
+    "html_export": false,
+    "animation_cells": 1,
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
+    "rendered_tracking_frames": 20,
+    "selection_style": "Descriptive variables in an editable example-selection cell"
   },
   {
     "notebook": "02_event_detection.ipynb",
     "code_cells": 11,
     "errors": 0,
-    "embedded_mp4_cells": 2,
-    "video_update": "Executed replacement playback cells. Low-speed control clips pinned to 57972403518bc1a240283985feac1be4ba3a4d7a.",
-    "validation": "Executed all code cells top to bottom after physics/formation revisions. Rule edge-case assertions and slide-10 fit checks passed."
+    "downloaded_video_cells": 0,
+    "html_export": false,
+    "animation_cells": 1,
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
+    "rendered_tracking_frames": 11,
+    "selection_style": "Descriptive variables in an editable example-selection cell"
   },
   {
     "notebook": "03_formation_analysis.ipynb",
     "code_cells": 14,
     "errors": 0,
-    "embedded_mp4_cells": 2,
-    "video_update": "Executed only added playback cells; retained prior method/model outputs.",
-    "validation": "Executed all code cells top to bottom after physics/formation revisions. Rule edge-case assertions and slide-10 fit checks passed."
+    "downloaded_video_cells": 0,
+    "html_export": false,
+    "animation_cells": 1,
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
+    "rendered_tracking_frames": 20,
+    "selection_style": "Descriptive variables in an editable example-selection cell"
   },
   {
     "notebook": "04_role_classification.ipynb",
-    "code_cells": 9,
+    "code_cells": 11,
     "errors": 0,
-    "validation": "Executed all cells top to bottom. Three real-player teammate signatures at 24 headings; translation-invariance and count-range assertions passed. Classifier optimizer remains a synthetic check."
+    "downloaded_video_cells": 0,
+    "html_export": false,
+    "animation_cells": 1,
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
+    "rendered_tracking_frames": 20,
+    "selection_style": "Descriptive variables in an editable example-selection cell"
   },
   {
     "notebook": "05_match_segmentation.ipynb",
-    "code_cells": 9,
+    "code_cells": 10,
     "errors": 0,
-    "embedded_mp4_cells": 1,
-    "video_update": "Executed replacement playback cell. Our own raw/smoothed phase clip pinned to 7740ab8209e84340907d46fea9863e6e92cb1877. No supplied phase comparison.",
-    "validation": "Executed all cells top to bottom. Synthetic 0.5 s excursion removed; sustained change and unknown boundaries preserved. Every known smoothed interval in 6153 frame predictions lasts at least 1 s.",
-    "smoothing": "Offline minimum raw-run duration 1 s, independently within uninterrupted possessions and known-data blocks.",
-    "external_phase_labels_used": false
+    "downloaded_video_cells": 0,
+    "html_export": false,
+    "animation_cells": 1,
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
+    "rendered_tracking_frames": 20,
+    "selection_style": "Descriptive variables in an editable example-selection cell"
   },
   {
     "notebook": "06_physical_metrics.ipynb",
-    "code_cells": 12,
-    "errors": 0
+    "code_cells": 14,
+    "errors": 0,
+    "downloaded_video_cells": 0,
+    "html_export": false,
+    "animation_cells": 1,
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
+    "rendered_tracking_frames": 20,
+    "selection_style": "Descriptive variables in an editable example-selection cell"
   },
   {
     "notebook": "07_expected_goals.ipynb",
-    "code_cells": 18,
-    "errors": 0
+    "code_cells": 20,
+    "errors": 0,
+    "downloaded_video_cells": 0,
+    "html_export": false,
+    "animation_cells": 0,
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
+    "rendered_tracking_frames": 0,
+    "selection_style": "Descriptive variables in an editable example-selection cell"
   },
   {
     "notebook": "08_expected_threat.ipynb",
-    "code_cells": 8,
-    "errors": 0
+    "code_cells": 10,
+    "errors": 0,
+    "downloaded_video_cells": 0,
+    "html_export": false,
+    "animation_cells": 1,
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
+    "rendered_tracking_frames": 20,
+    "selection_style": "Descriptive variables in an editable example-selection cell"
   },
   {
     "notebook": "09_voronoi_control.ipynb",
-    "code_cells": 8,
+    "code_cells": 9,
     "errors": 0,
-    "embedded_mp4_cells": 1,
-    "video_update": "Executed only added playback cells; retained prior method/model outputs."
+    "downloaded_video_cells": 0,
+    "html_export": false,
+    "animation_cells": 1,
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
+    "rendered_tracking_frames": 20,
+    "selection_style": "Descriptive variables in an editable example-selection cell"
   },
   {
     "notebook": "10_gaussian_control.ipynb",
-    "code_cells": 9,
+    "code_cells": 10,
     "errors": 0,
-    "embedded_mp4_cells": 1,
-    "video_update": "Executed only added playback cells; retained prior method/model outputs."
+    "downloaded_video_cells": 0,
+    "html_export": false,
+    "animation_cells": 1,
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
+    "rendered_tracking_frames": 20,
+    "selection_style": "Descriptive variables in an editable example-selection cell"
   },
   {
     "notebook": "11_arrival_time_control.ipynb",
-    "code_cells": 8,
+    "code_cells": 9,
     "errors": 0,
-    "embedded_mp4_cells": 1,
-    "video_update": "Executed only added playback cells; retained prior method/model outputs."
+    "downloaded_video_cells": 0,
+    "html_export": false,
+    "animation_cells": 1,
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
+    "rendered_tracking_frames": 20,
+    "selection_style": "Descriptive variables in an editable example-selection cell"
   },
   {
     "notebook": "12_pass_completion.ipynb",
-    "code_cells": 10,
+    "code_cells": 11,
     "errors": 0,
-    "embedded_mp4_cells": 1,
-    "validation": "Executed all method cells including real passing-option selection and defender probes; ten targets exclude the carrier, intermediate survival and two potential interceptors asserted. Executed added video playback cell.",
-    "video_update": "Media pinned to cf2de1679f5923d55bfb3d7ad14d50b69230da8b. Same model as slide 32."
+    "downloaded_video_cells": 0,
+    "html_export": false,
+    "animation_cells": 1,
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
+    "rendered_tracking_frames": 20,
+    "selection_style": "Descriptive variables in an editable example-selection cell"
   },
   {
     "notebook": "13_space_and_danger.ipynb",
-    "code_cells": 12,
+    "code_cells": 13,
     "errors": 0,
-    "embedded_mp4_cells": 1,
-    "video_update": "Executed replacement playback cell with visible ball marker. Method outputs retained. Media pinned to bf39cdb76d2072a77b1e8e1b1f2289c0d9100e81."
+    "downloaded_video_cells": 0,
+    "html_export": false,
+    "animation_cells": 1,
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
+    "rendered_tracking_frames": 20,
+    "selection_style": "Descriptive variables in an editable example-selection cell"
   },
   {
     "notebook": "16_graph_epv.ipynb",
-    "code_cells": 35,
+    "code_cells": 33,
     "errors": 0,
-    "embedded_mp4_cells": 2,
-    "video_update": "Executed only added playback cells; retained prior method/model outputs."
+    "downloaded_video_cells": 0,
+    "html_export": false,
+    "animation_cells": 1,
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
+    "rendered_tracking_frames": 77,
+    "selection_style": "Descriptive variables in an editable example-selection cell"
   }
 ]

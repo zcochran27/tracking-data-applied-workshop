@@ -12,7 +12,7 @@ Read each notebook from top to bottom: inputs and assumptions, helper functions,
 | [Possession and pass-event detection](02_event_detection.ipynb) | Player–ball vectors; proximity; stable possession; release/transit/reception; timing evaluation |
 | [Formation prediction and change detection](03_formation_analysis.ipynb) | Centroid distributions; exploratory line clustering; fixed-template assignment; persistence |
 | [Player-viewpoint role classification](04_role_classification.ipynb) | Relative bearings; sector membership; teammate/opponent counts; softmax training |
-| [Phase-of-play segmentation](05_match_segmentation.ipynb) | Features; rule gates; confirmation; interval construction; provider-label joins |
+| [Phase-of-play segmentation](05_match_segmentation.ipynb) | Features; priority rules; offline short-run suppression; phase intervals and timelines |
 | [Physical-metric calculation pipeline](06_physical_metrics.ipynb) | Smooth positions; velocity; acceleration; distance integration; intensity bands; efforts; crossing times; sample peaks |
 | [xG: location only versus goalkeeper/defender context](07_expected_goals.ipynb) | Real StatsBomb shots; two nested models; identical match-held-out folds; ROC/AUC for each; paired match-bootstrap intervals |
 | [Expected Threat: fitting and action valuation](08_expected_threat.ipynb) | Action counts; reward; transition matrix; iterative solution; endpoint gain |
@@ -26,10 +26,24 @@ Read each notebook from top to bottom: inputs and assumptions, helper functions,
 
 Teaching boundaries: fixed-template formation fitting does not reproduce elastic EFPI. Gaussian, arrival-time, AS/DAS and run-threat examples are explicit proxies/baselines. Synthetic checks verify derivatives; the graph notebook then trains a separate real-data teaching GNN and shows its held-out results. Its reconstructed labels, few matches and sparse positive states limit reliability. It is not Bekkers' released model or a production system.
 
-Relevant methods include embedded MP4 playback beside the corresponding calculations: tracking playback, pass candidates, formation centering/window candidates, moving control comparisons, dynamic graphs and actual held-out graph-EPV predictions. Saved notebook and HTML video outputs work without a live kernel. Playback cells use local MP4s when available and a checksum-verified public asset pinned to a repository commit otherwise; no Python helper module is required. Comparison videos clearly identify their illustrative parameters where these differ from the notebook calculations.
+## Example controls
 
-The redesigned slide visuals are also available in the relevant notebooks: possession/pass physics in event detection, own raw/smoothed phase prediction playback in match segmentation, and a clearly separated published-model AS/DAS comparison in the space notebook. Newly added media assets are pinned to commit `62abf20cbf699df0118c289b91246a166f7bfd85`; method calculations remain inline.
+Each notebook has an editable example-selection cell near the top. After the first complete run, edit and run its variables, then rerun the final exploration cell. All animation drawing and method-overlay calculations are inline; no downloaded MP4, local helper module, widget or separate HTML file is needed. The saved notebook embeds its default animation as generated image frames.
 
-Phase segmentation now uses explicit priority rules and offline suppression of runs shorter than 1 s; its video and timeline contain our predictions only.
+| Method | Relevant selections |
+|---|---|
+| Tracking and visibility | `FRAME_ID`, `POSSESSION_INDEX`, `EVENT_ID` |
+| Possession/pass detection | `PASS_INDEX`, frame or possession override |
+| Formation | `FORMATION_WINDOW` (qualifying defensive windows are listed) |
+| Player spatial signatures | `PLAYER_ID`, `FRAME_ID`, `FOV_DEGREES`, `HEADING_DEGREES` |
+| Phases | `POSSESSION_INDEX`, frame/event selection; raw and smoothed predictions |
+| Physical metrics | `PLAYER_ID`, `METRIC` (`speed`, `acceleration`, `distance`, `sprints`) |
+| xG | `SHOT_INDEX`: real StatsBomb freeze frame and held-out estimates; no continuous tracking exists for these shots |
+| xT | `EVENT_ID`: supplied completed-action ID, with actual tracking and the embedded licensed fitted grid |
+| Control and space | `FRAME_ID`, `TEAM_ID`, possession/event selection |
+| Pass survival | `FRAME_ID`, `RECEIVER_ID`; scores recomputed as players move |
+| Graph EPV | `SEQUENCE` (`goal`, `non_goal`, `sample`), frame or possession override, optional period/team |
 
-The role notebook includes slide 11’s real-player spatial signatures: three teammate-only polar count curves and a 90° sector geometry panel, calculated and drawn inline before the synthetic classifier check.
+`DURATION_S` limits continuous tracking clips; `FRAME_STRIDE=1` uses every native 10 Hz frame. Larger strides make rendering faster. Unknown states and missing coverage remain visible or stop the clip; no player trajectories are interpolated. `available_possessions` lists uninterrupted supplied team-possession spans, while the event-detection notebook independently infers player control. Supplied event IDs are strings such as `'8_4'`; use the catalog rather than converting them to integers.
+
+The explorer recomputes the notebook’s method rather than silently switching to another model. AS/DAS animations here show the independent area-integral proxies; the published outputs on the slides are a separate implementation. Pass-survival scores remain uncalibrated. Role examples use metadata labels, not validated frame-role truth.

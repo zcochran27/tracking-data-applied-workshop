@@ -707,3 +707,7 @@ Notebook 03 reproduces the selected slide-10 normalization, one-to-one assignmen
 The phase notebook no longer downloads, joins or plots supplied phase labels. Its frame-level `outputs/methods/phase_predictions.csv` supplies the current video.
 
 The role notebook now reproduces the slide-11 spatial-signature comparison from its own tracking snapshot: RB, RDM and LW teammate counts at 24 headings, plus a sector geometry panel. Calculation and plotting code are inline. Metadata role labels identify the examples; the curves are not classifier predictions.
+
+## Notebook-generated animations and selectable examples
+
+Notebook animations now render from tracking coordinates with the method’s overlays. They do not reload the slide MP4s. Each notebook has an editable example-selection cell near the top; change the relevant frame, possession, event, player, window, receiver or shot, then rerun. Default clips are embedded in saved notebook outputs. No widgets or separate notebook HTML exports are provided. xG uses selectable StatsBomb freeze frames, because continuous tracking is unavailable for those shots. See `notebooks/methods/README.md` for the selector map and data/method caveats.

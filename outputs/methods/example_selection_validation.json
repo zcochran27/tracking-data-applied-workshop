@@ -1,0 +1,177 @@
+{
+  "default_runs": 14,
+  "alternate_runs": [
+    {
+      "notebook": "01_data_exploration.ipynb",
+      "selection": {
+        "FRAME_ID": 181
+      },
+      "status": "pass"
+    },
+    {
+      "notebook": "02_event_detection.ipynb",
+      "selection": {
+        "PASS_INDEX": 1
+      },
+      "status": "pass"
+    },
+    {
+      "notebook": "03_formation_analysis.ipynb",
+      "selection": {
+        "FORMATION_WINDOW": 4
+      },
+      "status": "pass"
+    },
+    {
+      "notebook": "04_role_classification.ipynb",
+      "selection": {
+        "PLAYER_ID": "287934",
+        "HEADING_DEGREES": 90
+      },
+      "status": "pass"
+    },
+    {
+      "notebook": "05_match_segmentation.ipynb",
+      "selection": {
+        "POSSESSION_INDEX": 2
+      },
+      "status": "pass"
+    },
+    {
+      "notebook": "06_physical_metrics.ipynb",
+      "selection": {
+        "PLAYER_ID": "287934",
+        "METRIC": "distance"
+      },
+      "status": "pass"
+    },
+    {
+      "notebook": "07_expected_goals.ipynb",
+      "selection": {
+        "SHOT_INDEX": 1
+      },
+      "status": "pass"
+    },
+    {
+      "notebook": "08_expected_threat.ipynb",
+      "selection": {
+        "EVENT_ID": "8_4"
+      },
+      "status": "pass"
+    },
+    {
+      "notebook": "09_voronoi_control.ipynb",
+      "selection": {
+        "FRAME_ID": 181,
+        "TEAM_ID": 871
+      },
+      "status": "pass"
+    },
+    {
+      "notebook": "10_gaussian_control.ipynb",
+      "selection": {
+        "FRAME_ID": 181,
+        "TEAM_ID": 871
+      },
+      "status": "pass"
+    },
+    {
+      "notebook": "11_arrival_time_control.ipynb",
+      "selection": {
+        "FRAME_ID": 181,
+        "TEAM_ID": 871
+      },
+      "status": "pass"
+    },
+    {
+      "notebook": "12_pass_completion.ipynb",
+      "selection": {
+        "FRAME_ID": 1782,
+        "RECEIVER_ID": "287934"
+      },
+      "status": "pass"
+    },
+    {
+      "notebook": "13_space_and_danger.ipynb",
+      "selection": {
+        "FRAME_ID": 181,
+        "TEAM_ID": 871
+      },
+      "status": "pass"
+    },
+    {
+      "notebook": "16_graph_epv.ipynb",
+      "selection": {
+        "SEQUENCE": "non_goal"
+      },
+      "status": "pass"
+    }
+  ],
+  "downloaded_video_cells": 0,
+  "separate_html_exports": 0,
+  "animation_notebooks": 13,
+  "freeze_frame_notebooks": 1,
+  "renamed_selection_variables": true,
+  "note": "Controls use descriptive frame/event/possession/player names; all source code remains inline.",
+  "repeated_selection_checks": [
+    {
+      "notebook": "03_formation_analysis.ipynb",
+      "selections": [
+        {
+          "FORMATION_WINDOW": 4
+        },
+        {
+          "FORMATION_WINDOW": 16
+        }
+      ],
+      "status": "pass",
+      "training_rerun_between_selections": false
+    },
+    {
+      "notebook": "02_event_detection.ipynb",
+      "selections": [
+        {
+          "FRAME_ID": 1782
+        },
+        {
+          "FRAME_ID": null,
+          "PASS_INDEX": 1
+        }
+      ],
+      "status": "pass",
+      "training_rerun_between_selections": false
+    },
+    {
+      "notebook": "06_physical_metrics.ipynb",
+      "selections": [
+        {
+          "PLAYER_ID": "287934",
+          "METRIC": "distance"
+        },
+        {
+          "PLAYER_ID": null,
+          "METRIC": "sprints"
+        }
+      ],
+      "status": "pass",
+      "training_rerun_between_selections": false
+    },
+    {
+      "notebook": "16_graph_epv.ipynb",
+      "selections": [
+        {
+          "PERIOD": null,
+          "SEQUENCE": "non_goal"
+        },
+        {
+          "PERIOD": null,
+          "SEQUENCE": "goal"
+        }
+      ],
+      "status": "pass",
+      "training_rerun_between_selections": false
+    }
+  ],
+  "default_code_cells": 185,
+  "default_runs_after_descriptive_rename": 14
+}
