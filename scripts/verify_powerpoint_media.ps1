@@ -1,5 +1,5 @@
 param(
-    [string]$DeckPath = (Join-Path $PSScriptRoot '../slides/tracking-data-applied.pptx'),
+    [string]$DeckPath = (Join-Path $PSScriptRoot '../slides/tracking-data-applied-updated.pptx'),
     [string]$ReportPath = (Join-Path $PSScriptRoot '../.build/native-powerpoint-media.json')
 )
 # Read-only native check. Requires installed Windows Microsoft PowerPoint.
