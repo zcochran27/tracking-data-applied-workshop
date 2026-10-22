@@ -179,7 +179,7 @@
     "problem": "Infer organization from positions rather than the team sheet.",
     "methods": "Center each frame, match players to template slots, then compare RMS error.",
     "result": "Minimum assignment error selects 4-2-3-1 from the four candidate templates.",
-    "image": "formation-options/C_normalization_and_result.png",
+    "image": "results/formation_normalization.png",
     "sources": [
       "formation",
       "efpi",

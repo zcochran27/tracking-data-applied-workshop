@@ -1,12 +1,8 @@
-# Standalone notebooks by analytical method
+# Method notebooks
 
-A notebook covers a complete analytical question, not each helper operation. For example, graph features, adjacency, message passing, pooling, labels and training live together in the graph-EPV workflow. Formation centering, assignment and change detection likewise form one notebook.
+Explore soccer tracking analytics through calculations, plots and animations. Follow the [setup instructions](../../README.md#setup), open a notebook in JupyterLab and run its cells in order.
 
-Every notebook includes **all code inline**, including data loading and drawing helpers, and runs in a fresh kernel. No local `.py` imports or previous notebook session are required. Intermediate tables and staged plots explain each transformation. Set `DATA_ROOT` to reuse a SkillCorner cache; the xG comparison uses its own StatsBomb `CACHE`. Install the repository requirements before running.
-
-The code favors explicit loops, descriptive variable names and named intermediate results. Each notebook includes a short reading guide; the graph model also explains its matrix shapes. Dense comprehensions, anonymous functions and compact NumPy concatenation tricks have been expanded.
-
-Read each notebook from top to bottom: inputs and assumptions, helper functions, intermediate calculations and visuals, final results, then interpretation. Diagnostics appear at the point where the calculation is introduced. The final pipeline reuses the inspected helpers rather than adding a separate explanation after its output.
+## Methods
 
 | Notebook | Included stages |
 |---|---|
@@ -25,12 +21,9 @@ Read each notebook from top to bottom: inputs and assumptions, helper functions,
 | [Accessible and dangerous space proxies](13_space_and_danger.ipynb) | Control surface; grid-cell area; danger weight; per-cell contributions; totals |
 | [Graph-based EPV modeling pipeline](16_graph_epv.ipynb) | Real SkillCorner training; audited ten-second labels; match-level holdout; calibration; actual possession predictions; synchronized EPV animation |
 
+## Explore another example
 
-Teaching boundaries: fixed-template formation fitting does not reproduce elastic EFPI. Gaussian, arrival-time, AS/DAS and run-threat examples are explicit proxies/baselines. Synthetic checks verify derivatives; the graph notebook then trains a separate real-data teaching GNN and shows its held-out results. Its reconstructed labels, few matches and sparse positive states limit reliability. It is not Bekkers' released model or a production system.
-
-## Example controls
-
-Each notebook has an editable example-selection cell near the top. After the first complete run, edit and run its variables, then rerun the final exploration cell. All animation drawing and method-overlay calculations are inline; no downloaded MP4, local helper module, widget or separate HTML file is needed. The saved notebook embeds its default animation as generated image frames.
+After a complete run, edit the example-selection cell and run it again, then rerun the final exploration cell. Use the displayed catalogs to find valid identifiers.
 
 | Method | Relevant selections |
 |---|---|
@@ -46,6 +39,6 @@ Each notebook has an editable example-selection cell near the top. After the fir
 | Pass survival | `FRAME_ID`, `RECEIVER_ID`; scores recomputed as players move |
 | Graph EPV | `SEQUENCE` (`goal`, `non_goal`, `sample`), frame or possession override, optional period/team |
 
-`DURATION_S` limits continuous tracking clips; `FRAME_STRIDE=1` uses every native 10 Hz frame. Larger strides make rendering faster. Unknown states and missing coverage remain visible or stop the clip; no player trajectories are interpolated. `available_possessions` lists uninterrupted supplied team-possession spans, while the event-detection notebook independently infers player control. Supplied event IDs are strings such as `'8_4'`; use the catalog rather than converting them to integers.
+`DURATION_S` controls clip length. `FRAME_STRIDE = 1` uses every native 10 Hz frame; larger values render faster. Event IDs are strings, such as `'8_4'`. `DATA_ROOT` can point to an existing SkillCorner data cache; xG uses its StatsBomb `CACHE`.
 
-The explorer recomputes the notebook’s method rather than silently switching to another model. AS/DAS animations here show the independent area-integral proxies; the published outputs on the slides are a separate implementation. Pass-survival scores remain uncalibrated. Role examples use metadata labels, not validated frame-role truth.
+See each notebook's assumptions and interpretation notes before drawing conclusions. Pitch-control, pass-survival and space baselines include uncalibrated teaching estimates. Role metadata are not frame-level role ground truth. The graph model's small dataset and sparse goals limit its reliability.

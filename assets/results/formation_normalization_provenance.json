@@ -36,5 +36,5 @@
       "rms": 11.874171760590293
     }
   ],
-  "main_slide_10": "Option C selected, with explicit one-to-one matching of centered medians to candidate template slots."
+  "method": "One-to-one assignment of centroid-normalized player medians to candidate formation template positions."
 }

@@ -1,5 +1,7 @@
-# Derived results and execution records
+# Model results
 
-Open and run the standalone `.ipynb` files under `notebooks/methods/`. Separate notebook HTML exports have been removed. Saved notebook outputs include default animations generated directly from tracking coordinates and method overlays.
+- `graph_epv_real_results.json`: graph model data splits, held-out performance and possession predictions.
+- `xg_model_comparison.json`: location-only and contextual xG model results.
+- `phase_predictions.csv`: frame-level phase predictions.
 
-`execution_report.json` records the default top-to-bottom runs. `example_selection_validation.json` records alternate example selections. Other files here are derived model results or frame-level tables, not videos used by the notebooks.
+Run the corresponding [method notebook](../../notebooks/methods/README.md) to calculate and explore the results.
