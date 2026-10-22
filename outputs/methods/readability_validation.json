@@ -1,0 +1,114 @@
+{
+  "notebooks": [
+    {
+      "notebook": "01_data_exploration.ipynb",
+      "compact_comprehensions_or_lambdas": 0,
+      "reading_guide": true,
+      "local_helper_imports": false
+    },
+    {
+      "notebook": "02_event_detection.ipynb",
+      "compact_comprehensions_or_lambdas": 0,
+      "reading_guide": true,
+      "local_helper_imports": false
+    },
+    {
+      "notebook": "03_formation_analysis.ipynb",
+      "compact_comprehensions_or_lambdas": 0,
+      "reading_guide": true,
+      "local_helper_imports": false
+    },
+    {
+      "notebook": "04_role_classification.ipynb",
+      "compact_comprehensions_or_lambdas": 0,
+      "reading_guide": true,
+      "local_helper_imports": false
+    },
+    {
+      "notebook": "05_match_segmentation.ipynb",
+      "compact_comprehensions_or_lambdas": 0,
+      "reading_guide": true,
+      "local_helper_imports": false
+    },
+    {
+      "notebook": "06_physical_metrics.ipynb",
+      "compact_comprehensions_or_lambdas": 0,
+      "reading_guide": true,
+      "local_helper_imports": false
+    },
+    {
+      "notebook": "07_expected_goals.ipynb",
+      "compact_comprehensions_or_lambdas": 0,
+      "reading_guide": true,
+      "local_helper_imports": false
+    },
+    {
+      "notebook": "08_expected_threat.ipynb",
+      "compact_comprehensions_or_lambdas": 0,
+      "reading_guide": true,
+      "local_helper_imports": false
+    },
+    {
+      "notebook": "09_voronoi_control.ipynb",
+      "compact_comprehensions_or_lambdas": 0,
+      "reading_guide": true,
+      "local_helper_imports": false
+    },
+    {
+      "notebook": "10_gaussian_control.ipynb",
+      "compact_comprehensions_or_lambdas": 0,
+      "reading_guide": true,
+      "local_helper_imports": false
+    },
+    {
+      "notebook": "11_arrival_time_control.ipynb",
+      "compact_comprehensions_or_lambdas": 0,
+      "reading_guide": true,
+      "local_helper_imports": false
+    },
+    {
+      "notebook": "12_pass_completion.ipynb",
+      "compact_comprehensions_or_lambdas": 0,
+      "reading_guide": true,
+      "local_helper_imports": false
+    },
+    {
+      "notebook": "13_space_and_danger.ipynb",
+      "compact_comprehensions_or_lambdas": 0,
+      "reading_guide": true,
+      "local_helper_imports": false
+    },
+    {
+      "notebook": "16_graph_epv.ipynb",
+      "compact_comprehensions_or_lambdas": 0,
+      "reading_guide": true,
+      "local_helper_imports": false
+    }
+  ],
+  "numerical_equivalence": [
+    {
+      "method": "distances_to_players",
+      "matches_previous_calculation": true
+    },
+    {
+      "method": "arrival_surface",
+      "matches_previous_calculation": true
+    },
+    {
+      "method": "influence_components",
+      "matches_previous_calculation": true
+    },
+    {
+      "method": "interception_components",
+      "matches_previous_calculation": true
+    },
+    {
+      "method": "angular_counts",
+      "matches_previous_calculation": true
+    },
+    {
+      "method": "graph_model_forward_and_gradients",
+      "matches_previous_calculation": true
+    }
+  ]
+}

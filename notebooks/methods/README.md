@@ -4,6 +4,8 @@ A notebook covers a complete analytical question, not each helper operation. For
 
 Every notebook includes **all code inline**, including data loading and drawing helpers, and runs in a fresh kernel. No local `.py` imports or previous notebook session are required. Intermediate tables and staged plots explain each transformation. Set `DATA_ROOT` to reuse a SkillCorner cache; the xG comparison uses its own StatsBomb `CACHE`. Install the repository requirements before running.
 
+The code favors explicit loops, descriptive variable names and named intermediate results. Each notebook includes a short reading guide; the graph model also explains its matrix shapes. Dense comprehensions, anonymous functions and compact NumPy concatenation tricks have been expanded.
+
 Read each notebook from top to bottom: inputs and assumptions, helper functions, intermediate calculations and visuals, final results, then interpretation. Diagnostics appear at the point where the calculation is introduced. The final pipeline reuses the inspected helpers rather than adding a separate explanation after its output.
 
 | Notebook | Included stages |

@@ -21,3 +21,7 @@ Native-video repair: corrected the registered PowerPoint media-extension URI and
 ## Notebook example selection
 
 All fourteen notebooks have editable example selectors. Thirteen generate animations directly from real tracking and method overlays; xG selects real StatsBomb freeze frames and shows both held-out estimates. No notebook loads a packaged or downloaded movie. All method/helper code remains inline. Separate HTML exports were removed. Default runs and alternate selections are validated in `outputs/methods/execution_report.json` and `outputs/methods/example_selection_validation.json`.
+
+## Beginner-readable notebook code
+
+All fourteen notebooks use explicit loops, named intermediate calculations and expanded plotting statements instead of dense comprehensions or anonymous functions. Reading guides explain the common array operations; graph training includes matrix-shape notes. Numerical regression checks cover player distances, arrival times, Gaussian influence, interception risk, angular signatures, and graph forward/backward calculations. These agree with the previous calculations to floating-point tolerance; evidence is in `outputs/methods/readability_validation.json`.

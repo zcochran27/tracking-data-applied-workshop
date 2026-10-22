@@ -6,9 +6,7 @@
     "downloaded_video_cells": 0,
     "html_export": false,
     "animation_cells": 1,
-    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
-    "rendered_tracking_frames": 20,
-    "selection_style": "Descriptive variables in an editable example-selection cell"
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection."
   },
   {
     "notebook": "02_event_detection.ipynb",
@@ -17,9 +15,7 @@
     "downloaded_video_cells": 0,
     "html_export": false,
     "animation_cells": 1,
-    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
-    "rendered_tracking_frames": 11,
-    "selection_style": "Descriptive variables in an editable example-selection cell"
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection."
   },
   {
     "notebook": "03_formation_analysis.ipynb",
@@ -28,9 +24,7 @@
     "downloaded_video_cells": 0,
     "html_export": false,
     "animation_cells": 1,
-    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
-    "rendered_tracking_frames": 20,
-    "selection_style": "Descriptive variables in an editable example-selection cell"
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection."
   },
   {
     "notebook": "04_role_classification.ipynb",
@@ -39,9 +33,7 @@
     "downloaded_video_cells": 0,
     "html_export": false,
     "animation_cells": 1,
-    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
-    "rendered_tracking_frames": 20,
-    "selection_style": "Descriptive variables in an editable example-selection cell"
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection."
   },
   {
     "notebook": "05_match_segmentation.ipynb",
@@ -50,9 +42,7 @@
     "downloaded_video_cells": 0,
     "html_export": false,
     "animation_cells": 1,
-    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
-    "rendered_tracking_frames": 20,
-    "selection_style": "Descriptive variables in an editable example-selection cell"
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection."
   },
   {
     "notebook": "06_physical_metrics.ipynb",
@@ -61,9 +51,7 @@
     "downloaded_video_cells": 0,
     "html_export": false,
     "animation_cells": 1,
-    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
-    "rendered_tracking_frames": 20,
-    "selection_style": "Descriptive variables in an editable example-selection cell"
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection."
   },
   {
     "notebook": "07_expected_goals.ipynb",
@@ -72,9 +60,7 @@
     "downloaded_video_cells": 0,
     "html_export": false,
     "animation_cells": 0,
-    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
-    "rendered_tracking_frames": 0,
-    "selection_style": "Descriptive variables in an editable example-selection cell"
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection."
   },
   {
     "notebook": "08_expected_threat.ipynb",
@@ -83,9 +69,7 @@
     "downloaded_video_cells": 0,
     "html_export": false,
     "animation_cells": 1,
-    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
-    "rendered_tracking_frames": 20,
-    "selection_style": "Descriptive variables in an editable example-selection cell"
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection."
   },
   {
     "notebook": "09_voronoi_control.ipynb",
@@ -94,9 +78,7 @@
     "downloaded_video_cells": 0,
     "html_export": false,
     "animation_cells": 1,
-    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
-    "rendered_tracking_frames": 20,
-    "selection_style": "Descriptive variables in an editable example-selection cell"
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection."
   },
   {
     "notebook": "10_gaussian_control.ipynb",
@@ -105,9 +87,7 @@
     "downloaded_video_cells": 0,
     "html_export": false,
     "animation_cells": 1,
-    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
-    "rendered_tracking_frames": 20,
-    "selection_style": "Descriptive variables in an editable example-selection cell"
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection."
   },
   {
     "notebook": "11_arrival_time_control.ipynb",
@@ -116,9 +96,7 @@
     "downloaded_video_cells": 0,
     "html_export": false,
     "animation_cells": 1,
-    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
-    "rendered_tracking_frames": 20,
-    "selection_style": "Descriptive variables in an editable example-selection cell"
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection."
   },
   {
     "notebook": "12_pass_completion.ipynb",
@@ -127,9 +105,7 @@
     "downloaded_video_cells": 0,
     "html_export": false,
     "animation_cells": 1,
-    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
-    "rendered_tracking_frames": 20,
-    "selection_style": "Descriptive variables in an editable example-selection cell"
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection."
   },
   {
     "notebook": "13_space_and_danger.ipynb",
@@ -138,9 +114,7 @@
     "downloaded_video_cells": 0,
     "html_export": false,
     "animation_cells": 1,
-    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
-    "rendered_tracking_frames": 20,
-    "selection_style": "Descriptive variables in an editable example-selection cell"
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection."
   },
   {
     "notebook": "16_graph_epv.ipynb",
@@ -149,8 +123,6 @@
     "downloaded_video_cells": 0,
     "html_export": false,
     "animation_cells": 1,
-    "validation": "All code cells executed top to bottom, with inline recomputation and example selection.",
-    "rendered_tracking_frames": 77,
-    "selection_style": "Descriptive variables in an editable example-selection cell"
+    "validation": "All code cells executed top to bottom, with inline recomputation and example selection."
   }
 ]

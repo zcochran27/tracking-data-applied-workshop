@@ -51,17 +51,17 @@
     2007448
   ],
   "calibration": [
-    0.8969451447125867,
-    -0.24880945229957627
+    0.8969451438214413,
+    -0.24880945124370776
   ],
   "test_metrics": [
     {
       "model": "Real trained frame GNN",
       "ROC_AUC": 0.8425465838509316,
       "average_precision": 0.020142776812677992,
-      "log_loss": 0.02158324455262788,
-      "Brier_score": 0.003334554896689892,
-      "mean_prediction": 0.008584681729048338
+      "log_loss": 0.021583244581647464,
+      "Brier_score": 0.003334554893554202,
+      "mean_prediction": 0.008584681730159005
     },
     {
       "model": "Training-prevalence baseline",
@@ -78,13 +78,13 @@
       "case": "goal build-up",
       "frames": 231,
       "scored_frames": 207,
-      "peak_prediction": 0.04970665049940979
+      "peak_prediction": 0.049706650676082466
     },
     {
       "case": "non-goal possession",
       "frames": 287,
       "scored_frames": 237,
-      "peak_prediction": 0.0417676953339576
+      "peak_prediction": 0.04176769549090346
     }
   ]
 }
